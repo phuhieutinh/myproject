@@ -1,32 +1,3 @@
-<?php
-require_once '../dbconnect.php';
-
-$conn = connect_db();
-
-if (isset($_GET['id'])) {
-    
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM user where userID = '$id'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        
-        $row = mysqli_fetch_assoc($result);
-        $userID = $id;
-        $Name = $row['name'];
-        $username = $row['username'];
-        $phone = $row['phone'];
-        $pw = $row['pw'];
-        $email = $row['email'];
-        $role = $row['role'];
-        $picture = $row['picture'];
-    }
- else {
-    echo "0 results";
-    exit;
-}
-echo $userID . $username;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,10 +10,6 @@ echo $userID . $username;
 </head>
 
 <body>
-    <?php
-    session_start();
-    if(isset($_SESSION['admin_login'])){
-    ?>
     <ul>
         <img src="../picture/Logo alta.png" alt="logo" class="logo">
         <li><a href="" class="dashboard"><img src="../picture/component/dashboard.png" alt="dashboard">
@@ -70,7 +37,7 @@ echo $userID . $username;
             </ul>
         </li>
 
-        <li><a href="../logout.php" class="logout"><img src="../picture/component/logout.png" alt="logout">Đăng xuất</a>
+        <li><a href="../index.php" class="logout"><img src="../picture/component/logout.png" alt="logout">Đăng xuất</a>
         </li>
     </ul>
 
@@ -121,13 +88,6 @@ echo $userID . $username;
             </div>
         </div>
     </main>
-    <?php
-    }else if(isset($_SESSION['user_login'])){
-        header("location:index.php?id=$userID");
-    }else{
-        header("location:index.php");
-    }
-    ?>
     <script src="../js/dashboard.js"></script>
 </body>
 

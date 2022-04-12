@@ -1,44 +1,3 @@
-<?php
-require_once 'dbconnect.php';
-
-$conn = connect_db();
-
-session_start();
-
-if(isset($_POST["username"])&&isset($_POST["password"])){
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    
-    if($username && $password){
-        $sql = "SELECT * FROM user WHERE username = '$username' AND pw = '$password'";
-        
-        $query = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($query) == 0){
-            header("location: wrongpw.php");
-        }else{
-            while($row = mysqli_fetch_assoc($query)) {
-                $userID = $row['userID'];
-                $user_role = $row['user_role'];
-            }
-            switch($user_role){
-                case "admin";
-                $_SESSION["admin_login"] = $username;
-                header("location: dashboard/info.php?id=$userID"); 
-                break;
-                case "user";
-                $_SESSION["user_login"] = $username;
-                header("location: dashboard/info.php?id=$userID"); 
-                break;
-                default;
-                echo "wrong email or password or role";
-            }
-            // header("location: dashboard/info.php?id=$userID"); 
-        }
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +20,7 @@ if(isset($_POST["username"])&&isset($_POST["password"])){
         <p class="manage">Quản Lý Xếp Hàng</p>
 
     </div>
-    <form action="index.php" method="POST">
+    <form action="dashboard/info.php" method="">
         <div class="username">
             <label for="username" class="username">Tên Đăng Nhập *</label>
             <input type="text" name="username" class="username">
@@ -72,6 +31,7 @@ if(isset($_POST["username"])&&isset($_POST["password"])){
         </div>
         <button type="submit" name="login" class="login">Đăng nhập</button>
     </form>
+
     <a href="login/forget.php" class="forget">Quên mật khẩu?</a>
 
 </body>

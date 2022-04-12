@@ -17,13 +17,13 @@
     <div class="hello">
         <img src="../picture/Frame.png" alt="pic" class="pic">
     </div>
-    <form action="" method="">
+    <form action="updatepw.php" method="">
         <p class="pw">Đặt lại mật Khẩu</p>
         <label for="username" class="email">Vui lòng nhập email để đặt lại mật khẩu của bạn *</label>
         <input type="text" name="email" class="email">
+        <button type="submit" class="continue">Tiếp tục</button>
     </form>
-    <button class="cancel">Hủy</button>
-    <button type="submit" class="continue">Tiếp tục</button>
+    <a href="../index.php"><button class="cancel">Hủy</button></a>
 </body>
 
 </html>

@@ -17,7 +17,7 @@
     <div class="hello">
         <img src="../picture/Frame.png" alt="pic" class="pic">
     </div>
-    <form action="" method="">
+    <form action="../index.php" method="">
         <p class="updatepw">Đặt lại mật Khẩu mới</p>
         <label for="updatepassword" class="updatepassword">Mật Khẩu</label>
         <input type="password" name="updatepassword" class="updatepassword">
@@ -25,8 +25,8 @@
             <label for="comfirmpassword" class="comfirmpassword">Nhập lại mật khẩu</label>
             <input type="password" name="comfirmpassword" class="comfirmpassword">
         </div>
+        <button type="submit" class="comfirm">Xác nhận</button>
     </form>
-    <button type="submit" class="comfirm">Xác nhận</button>
 </body>
 
 </html>
