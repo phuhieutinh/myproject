@@ -1,1 +1,1 @@
-https://github.com/phuhieutinh/myproject.git
+https://github.com/phuhieutinh/queuing_system.git

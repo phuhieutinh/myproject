@@ -1,3 +1,28 @@
+<?php
+require_once 'dbconnect.php';
+
+$conn = connect_db();
+
+session_start();
+
+if (isset($_POST["username"]) && isset($_POST["password"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    echo $username . "</br>" . $password . "</br>";
+
+    if ($username && $password) {
+        $sql = "SELECT * FROM user WHERE username = '$username' AND pw = '$password'";
+        $query = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($query) == 0) {
+            header("location: wrongpw.php");
+        } else {
+            header("location: dashboard/info.php");
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

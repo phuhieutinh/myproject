@@ -1,3 +1,35 @@
+<?php
+require_once '../dbconnect.php';
+
+session_start();
+
+$conn = connect_db();
+
+if (isset($_SESSION['admin_login'])) {
+
+    if (isset($_SESSION['userID'])) {
+
+        $id = $_SESSION['userID'];
+        $sql = "SELECT * FROM user where userID = '$id'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+
+            $row = mysqli_fetch_assoc($result);
+            $userID = $id;
+            $name = $row['name'];
+            $username = $row['username'];
+            $phone = $row['phone'];
+            $pw = $row['pw'];
+            $email = $row['email'];
+            $role = $row['role'];
+            $picture = $row['picture'];
+        } else {
+            echo "0 results";
+            exit;
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,83 +43,102 @@
 
 <body>
     <ul>
+        <header>
+            <p class="topbar">Thông tin cá nhân</p>
+            <img src="../picture/component/nofication.png" alt="nofication" class="nofication">
+            <a href="info.php">
+                <div id="info">
+                    <p class="hello">xin chào</p>
+                    <p class="header username"><?php echo $name ?></p>
+                    <img src="../picture/myself.png" alt="smallpicture" class="picinfo">
+                </div>
+            </a>
+        </header>
+
         <img src="../picture/Logo alta.png" alt="logo" class="logo">
-        <li><a href="" class="dashboard"><img src="../picture/component/dashboard.png" alt="dashboard">
+        <li><a href="../dashboard/index.php" class="dashboard"><img src="../picture/component/dashboard.png"
+                    alt="dashboard">
                 Dashboard</a>
         </li>
-        <li><a href="" class="monitor"><img src="../picture/component/monitor.png" alt="monitor">Thiết bị</a></li>
-        <li><a href="" class="service"><img src="../picture/component/service.png" alt="service">Dịch vụ</a></li>
-        <li><a href="" class="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
+        <li><a href="../dashboard/monitor.php" class="monitor"><img src="../picture/component/monitor.png"
+                    alt="monitor">Thiết bị</a></li>
+        <li><a href="../dashboard/service.php" class="service"><img src="../picture/component/service.png"
+                    alt="service">Dịch vụ</a></li>
+        <li><a href="../dashboard/progression.php" class="progression"><img src="../picture/component/progression.png"
+                    alt="progression">Cấp
                 số</a>
         </li>
-        <li><a href="" class="report"><img src="../picture/component/report.png" alt="report">Báo cáo</a></li>
+        <li><a href="../dashboard/report.php" class="report"><img src="../picture/component/report.png" alt="report">Báo
+                cáo</a></li>
 
         <li><a href="" class="setting"><img src="../picture/component/setting.png" alt="setting">Cài đặt hệ
                 thống<img src="../picture/component/dropdown.png" alt="dropdown"></a>
             <ul class="submenu">
                 <li>
-                    <a href="#">Quản lý vai trò</a>
+                    <a href="../dashboard/submenu/mrole.php">
+                        <p class="submenu">Quản lý vai trò</p>
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Quản lý tài khoản</a>
+                    <a href="../dashboard/submenu/maccount.php">
+                        <p class="submenu">Quản lý tài khoản</p>
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Nhật ký người dùng</a>
+                    <a href="../dashboard/submenu/userlog.php">
+                        <p class="submenu">Nhật ký người dùng</p>
+                    </a>
                 </li>
             </ul>
         </li>
 
-        <li><a href="../index.php" class="logout"><img src="../picture/component/logout.png" alt="logout">Đăng xuất</a>
+        <li><a href="../logout.php" class="logout"><img src="../picture/component/logout.png" alt="logout">Đăng xuất</a>
         </li>
     </ul>
 
-    <header>
-        <p class="topbar">Thông tin cá nhân</p>
-        <img src="../picture/component/nofication.png" alt="nofication" class="nofication">
-        <a href="info.php">
-            <div id="info">
-                <p class="hello">xin chào</p>
-                <p class="header username">Lê Quỳnh Aí Vân</p>
-                <img src="../picture/myself.png" alt="smallpicture" class="picinfo">
-            </div>
-        </a>
-    </header>
-
     <main>
         <div id="pic">
+            <img src="<?php echo $picture ?>" alt="" class="bigpicture">
             <div>
                 <img src="../picture/component/camera.png" alt="iconcamera" class="iconcamera">
             </div>
-            <p class="main username">Lê Quỳnh Aí Vân</p>
+            <p class="main username"><?php echo $name ?></p>
         </div>
 
         <div id="detail">
             <div class="name">
                 <label for="name">Tên người dùng</label>
-                <input type="text" name="name" placeholder="Lê Quỳnh Aí Vân" class="fix" readonly>
+                <input type="text" name="name" class="fix" value="<?php echo $name ?>" readonly>
             </div>
             <div class="phone">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" name="phone" placeholder="0767375921" class="fix" readonly>
+                <input type="text" name="phone" value="<?php echo $phone ?>" class="fix" readonly>
             </div>
             <div class="email">
                 <label for="email">Email</label>
-                <input type="email" name="email" placeholder="adminSS01@domain.com" class="fix" readonly>
+                <input type="email" name="email" value="<?php echo $email ?>" class="fix" readonly>
             </div>
             <div class="username">
                 <label for="username">Tên đăng nhập</label>
-                <input type="text" name="username" placeholder="lequynhhaivan01" class="fix" readonly>
+                <input type="text" name="username" value="<?php echo $username ?>" class="fix" readonly>
             </div>
             <div class="password">
                 <label for="password">mật khẩu</label>
-                <input type="text" name="password" placeholder="123123" class="fix" readonly>
+                <input type="text" name="password" value="<?php echo $pw ?>" class="fix" readonly>
             </div>
             <div class="role">
                 <label for="role">vai trò</label>
-                <input type="text" name="role" placeholder="Kế Toán" class="fix" readonly>
+                <input type="text" name="role" value="<?php echo $role ?>" class="fix" readonly>
             </div>
         </div>
     </main>
+    <?php
+} else if (isset($_SESSION['user_login'])) {
+    header("location:../user/index.php");
+} else {
+    header("location:../index.php");
+}
+    ?>
     <script src="../js/dashboard.js"></script>
 </body>
 
