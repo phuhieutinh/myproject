@@ -17,7 +17,7 @@
     <div class="hello">
         <img src="../picture/Frame.png" alt="pic" class="pic">
     </div>
-    <form action="" method="">
+    <form action="../index.php" method="">
         <p class="updatepw">Đặt lại mật Khẩu mới</p>
         <label for="updatepassword" class="updatepassword">Mật Khẩu</label>
         <input type="password" name="updatepassword" class="updatepassword">
