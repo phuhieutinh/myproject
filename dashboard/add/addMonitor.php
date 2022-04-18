@@ -97,7 +97,7 @@ if (isset($_SESSION['admin_login'])) {
             <div class="type-monitor">
                 <label for="">Loại thiết bị<span class="required">*</span></label>
                 <select name="" id="type-monitor">
-                    <option disabled="disabled" value="" selected="selected">Chọn Loại thiết bị</option>
+                    <option disabled="disabled" class="deco" disabled selected>Chọn Loại thiết bị</option>
                     <option value="">Kiosk</option>
                     <option value="">Display counter</option>
                 </select>

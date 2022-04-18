@@ -2202,6 +2202,10 @@ div.progression.servicename p {
     color: #282739;
 }
 
+option.deco {
+    display: none;
+}
+
 div.progression.servicename select.servicename {
     display: flex;
     flex-direction: row;

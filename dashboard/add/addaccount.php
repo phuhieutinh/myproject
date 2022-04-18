@@ -111,7 +111,7 @@ if (isset($_SESSION['admin_login'])) {
             <div class="role">
                 <label for="">Vai trò<span class="required">*</span></label>
                 <select name="" id="">
-                    <option value="" selected="selected">chọn vai trò</option>
+                    <option value="" class="deco" disabled selected>chọn vai trò</option>
                     <option value="">Kế toán</option>
                     <option value="">Bác sĩ</option>
                 </select>
