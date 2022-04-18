@@ -1,3 +1,31 @@
+<?php
+require_once '../dbconnect.php';
+
+$conn = connect_db();
+
+session_start();
+
+
+if (
+    isset($_SESSION['userID'])
+    && isset($_POST['updatepassword'])
+    && isset($_POST['comfirmpassword'])
+) {
+    $id = $_SESSION['userID'];
+    $updatepassword = $_POST['updatepassword'];
+    $comfirmpassword = $_POST['comfirmpassword'];
+
+    if ($updatepassword !== $comfirmpassword) {
+        echo '<script>alert("mật khẩu không trùng khớp")</script>';
+    } else {
+        $sql = "UPDATE user SET pw='$comfirmpassword' WHERE userID=$id";
+        if (mysqli_query($conn, $sql)) {
+            header('location:../logout.php');
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +45,7 @@
     <div class="hello">
         <img src="../picture/Frame.png" alt="pic" class="pic">
     </div>
-    <form action="../index.php" method="">
+    <form action="updatepw.php" method="POST">
         <p class="updatepw">Đặt lại mật Khẩu mới</p>
         <label for="updatepassword" class="updatepassword">Mật Khẩu</label>
         <input type="password" name="updatepassword" class="updatepassword">

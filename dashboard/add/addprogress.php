@@ -33,14 +33,17 @@ if (isset($_SESSION['admin_login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/add/addprogress.css">
 </head>
 
 <body>
     <header>
-        <div id="maccounttopbar">
-            <p class="maccounttop">Cài đặt hệ thống</p>
+        <div id="add-page">
+            <p class="addtop-progress">Cấp số</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="topbar">Quản lý tài khoản</p>
+            <p class="addtop-page">Danh sách cấp số</p>
+            <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
+            <p class="topbar">cấp số mới</p>
         </div>
 
         <div>
@@ -70,27 +73,34 @@ if (isset($_SESSION['admin_login'])) {
     </header>
 
     <div>
-        <p class="maccounttext">Danh sách tài khoản</p>
-        <div class="activedropdown">
-            <p>Tên vai trò</p>
-            <select name="" id="activedropdown">
-                <option value="" selected="selected">Tất cả</option>
-                <option value="">Hoạt động</option>
-                <option value="">Ngưng hoạt động</option>
-            </select>
-        </div>
-
-        <div class="search">
-            <p>Từ khóa</p>
-            <input type="text" name="search" placeholder="Nhập từ khóa">
-            <img src="../../picture/component/search.png" alt="search">
-        </div>
-
-        <a href="../../dashboard/add/addaccount.php" class="add">
-            <img src="../../picture/component/add-square.png" alt="">
-            <p>Thêm tài khoản</p>
-        </a>
+        <p class="maccounttext">Quản lý cấp số</p>
     </div>
+
+    <main id="addprogress">
+        <h1 class="top">CẤP SỐ MỚI</h1>
+        <form action="" method="POST" id="addprogress">
+
+            <h2 class="top">Dịch vụ khách hàng lựa chọn</h2>
+
+            <select name="" id="addprogress-service">
+                <option value="" class="deco" disabled selected>Chọn Loại thiết bị</option>
+                <option value="">Kiosk</option>
+                <option value="">Display counter</option>
+            </select>
+
+            <div class="btn" onclick="addpopup()">
+                <input type="submit" class="submit" value="In số">
+                <a href="../../dashboard/submenu/maccount.php" class="cancel">Hủy bỏ</a>
+            </div>
+        </form>
+
+        <div class="progress-popup" onclick="addpopup()">
+            <input type="submit" class="test" value="In số" id="">
+            <span class="popuptext-progress" id="popupProgress">
+                <p class="progressTop"></p>
+            </span>
+        </div>
+    </main>
 
     <ul>
         <img src="../../picture/Logo alta.png" alt="logo" class="logo">
@@ -98,24 +108,26 @@ if (isset($_SESSION['admin_login'])) {
                     alt="dashboard">
                 Dashboard</a>
         </li>
-        <li class="monitor"><a href="../../dashboard/monitor.php" class="monitor"><img
-                    src="../../picture/component/monitor.png" alt="monitor">Thiết
+
+        <li><a href="../../dashboard/monitor.php" class="monitor"><img src="../../picture/component/monitor.png"
+                    alt="monitor">Thiết
                 bị</a></li>
+
         <li><a href="../../dashboard/service.php" class="service"><img src="../../picture/component/service.png"
                     alt="service">Dịch vụ</a></li>
-        <li><a href="../../dashboard/progression.php" class="progression"><img
-                    src="../../picture/component/progression.png" alt="progression">Cấp
+
+        <li><a href="" id="progression"><img src="../../picture/component/progression.png" alt="progression">Cấp
                 số</a>
         </li>
+
         <li><a href="../../dashboard/report.php" class="report"><img src="../../picture/component/report.png"
                     alt="report">Báo
                 cáo</a></li>
 
-        <li class="setting"><a href="" class="setting" id="setting"><img src="../../picture/component/setting.png"
-                    alt="setting">Cài
+        <li class="setting"><a href="" class="setting"><img src="../../picture/component/setting.png" alt="setting">Cài
                 đặt
                 hệ
-                thống<img src="../../picture/component/dropdown.png" alt="dropdown" id="icondropdown"></a>
+                thống<img src="../../picture/component/dropdown.png" alt="dropdown"></a>
             <ul class="submenu">
                 <li>
                     <a href="../../dashboard/submenu/mrole.php">
@@ -123,7 +135,7 @@ if (isset($_SESSION['admin_login'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="../../dashboard/submenu/maccount.php" id="maccount" class="maccount">
+                    <a href="../../dashboard/submenu/maccount.php">
                         Quản lý tài khoản
                     </a>
                 </li>
@@ -139,29 +151,6 @@ if (isset($_SESSION['admin_login'])) {
                 xuất</a>
         </li>
     </ul>
-
-    <main id="mainmonitor">
-        <table style="width:100%" class="tablemonitor">
-            <tr>
-                <th>Tên đăng Nhập</th>
-                <th>Họ tên</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Vai trò</th>
-                <th>Trạng thái Hoạt động</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Maria Anders</td>
-            </tr>
-        </table>
-    </main>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {

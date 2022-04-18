@@ -45,12 +45,30 @@ if (isset($_SESSION['admin_login'])) {
     <ul>
         <header>
             <p class="topbar">Thông tin cá nhân</p>
-            <img src="../picture/component/nofication.png" alt="nofication" class="nofication">
+
+            <div>
+                <div class="popup" onclick="myFunction()">
+                    <img src="../picture/component/nofication.png" alt="nofication" class="nofication"
+                        id="myNofication">
+                    <span class="popuptext" id="myPopup">
+                        <div class="popuptop">
+                            <p>Thông báo</p>
+                        </div>
+                        <a href="" class="popuptable">
+                            <div class="info">
+                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
+                                <p class="infotime">thời gian nhận số</p>
+                            </div>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
             <a href="info.php">
                 <div id="info">
                     <p class="hello">xin chào</p>
                     <p class="header username"><?php echo $name ?></p>
-                    <img src="../picture/myself.png" alt="smallpicture" class="picinfo">
+                    <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
                 </div>
             </a>
         </header>
@@ -76,17 +94,17 @@ if (isset($_SESSION['admin_login'])) {
             <ul class="submenu">
                 <li>
                     <a href="../dashboard/submenu/mrole.php">
-                        <p class="submenu">Quản lý vai trò</p>
+                        Quản lý vai trò
                     </a>
                 </li>
                 <li>
                     <a href="../dashboard/submenu/maccount.php">
-                        <p class="submenu">Quản lý tài khoản</p>
+                        Quản lý tài khoản
                     </a>
                 </li>
                 <li>
                     <a href="../dashboard/submenu/userlog.php">
-                        <p class="submenu">Nhật ký người dùng</p>
+                        Nhật ký người dùng
                     </a>
                 </li>
             </ul>
@@ -98,7 +116,7 @@ if (isset($_SESSION['admin_login'])) {
 
     <main>
         <div id="pic">
-            <img src="<?php echo $picture ?>" alt="" class="bigpicture">
+            <img src="<?php echo "../" . $picture ?>" alt="" class="bigpicture">
             <div>
                 <img src="../picture/component/camera.png" alt="iconcamera" class="iconcamera">
             </div>

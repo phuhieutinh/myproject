@@ -17,6 +17,7 @@ if (isset($_SESSION['admin_login'])) {
             $row = mysqli_fetch_assoc($result);
             $userID = $id;
             $name = $row['name'];
+            $picture = $row['picture'];
         } else {
             echo "0 results";
             exit;
@@ -37,24 +38,40 @@ if (isset($_SESSION['admin_login'])) {
 <body>
     <header class="monitor">
         <div id="topbar">
-            <p class="">Thiết bị</p>
+            <p class="text1">Thiết bị</p>
             <img src="../picture/component/u_angle-right.png" alt="" class="angle">
             <p class="topbar">Danh sách thiết bị</p>
         </div>
 
 
-        <img src="../picture/component/nofication.png" alt="nofication" class="nofication">
+        <div>
+            <div class="popup" onclick="myFunction()">
+                <img src="../picture/component/nofication.png" alt="nofication" class="nofication" id="myNofication">
+                <span class="popuptext" id="myPopup">
+                    <div class="popuptop">
+                        <p>Thông báo</p>
+                    </div>
+                    <a href="" class="popuptable">
+                        <div class="info">
+                            <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
+                            <p class="infotime">thời gian nhận số</p>
+                        </div>
+                    </a>
+                </span>
+            </div>
+        </div>
+
         <a href="info.php">
             <div id="info">
                 <p class="hello">xin chào</p>
                 <p class="header username"><?php echo $name ?></p>
-                <img src="../picture/myself.png" alt="smallpicture" class="picinfo">
+                <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
             </div>
         </a>
     </header>
 
     <div>
-        <p class="monitortext">Danh sách thiết bị</p>
+        <p class="managetext">Danh sách thiết bị</p>
         <div class="activedropdown">
             <p>Trạng thái hoạt động</p>
             <select name="" id="activedropdown">
@@ -79,7 +96,7 @@ if (isset($_SESSION['admin_login'])) {
             <img src="../picture/component/search.png" alt="search">
         </div>
 
-        <a href="" class="add">
+        <a href="../dashboard/add/addMonitor.php" class="add">
             <img src="../picture/component/add-square.png" alt="">
             <p>Thêm thiết bị</p>
         </a>
@@ -108,17 +125,17 @@ if (isset($_SESSION['admin_login'])) {
             <ul class="submenu">
                 <li>
                     <a href="../dashboard/submenu/mrole.php">
-                        <p class="submenu">Quản lý vai trò</p>
+                        Quản lý vai trò
                     </a>
                 </li>
                 <li>
                     <a href="../dashboard/submenu/maccount.php">
-                        <p class="submenu">Quản lý tài khoản</p>
+                        Quản lý tài khoản
                     </a>
                 </li>
                 <li>
                     <a href="../dashboard/submenu/userlog.php">
-                        <p class="submenu">Nhật ký người dùng</p>
+                        Nhật ký người dùng
                     </a>
                 </li>
             </ul>

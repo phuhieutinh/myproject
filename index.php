@@ -24,12 +24,12 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
                 case "admin";
                     $_SESSION["admin_login"] = $username;
                     $_SESSION["userID"] = $userID;
-                    header("location: ../dashboard/index.php");
+                    header("location: dashboard/index.php");
                     break;
                 case "user";
                     $_SESSION["user_login"] = $username;
                     $_SESSION["userID"] = $userID;
-                    header("location: ../user/index.php");
+                    header("location: user/index.php");
                     break;
                 default;
                     echo "wrong email or password or role";
@@ -38,12 +38,6 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         }
     }
 }
-
-if (isset($_SESSION['admin_login'])) {
-    header("location: dashboard/index.php");
-} else if (isset($_SESSION['user_login'])) {
-    header("location: user/index.php");
-} else {
 
 ?>
 
@@ -59,6 +53,13 @@ if (isset($_SESSION['admin_login'])) {
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['admin_login'])) {
+        header("location: dashboard/index.php");
+    } else if (isset($_SESSION['user_login'])) {
+        header("location: user/index.php");
+    } else {
+    ?>
     <img src="picture/Logo alta.png" alt="logo" class="logo">
     <main>
 
@@ -82,7 +83,7 @@ if (isset($_SESSION['admin_login'])) {
     </form>
     <a href="login/forget.php" class="forget">Quên mật khẩu?</a>
     <?php
-}
+    }
     ?>
 </body>
 

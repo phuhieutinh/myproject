@@ -33,14 +33,17 @@ if (isset($_SESSION['admin_login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/add/addrole.css">
 </head>
 
 <body>
     <header>
-        <div id="maccounttopbar">
-            <p class="maccounttop">Cài đặt hệ thống</p>
+        <div id="add-page">
+            <p class="addtop-page">Cài đặt hệ thống</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="topbar">Quản lý tài khoản</p>
+            <p class="addtop-page">Quản lý vai trò</p>
+            <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
+            <p class="topbar">Thêm vai trò</p>
         </div>
 
         <div>
@@ -70,27 +73,81 @@ if (isset($_SESSION['admin_login'])) {
     </header>
 
     <div>
-        <p class="maccounttext">Danh sách tài khoản</p>
-        <div class="activedropdown">
-            <p>Tên vai trò</p>
-            <select name="" id="activedropdown">
-                <option value="" selected="selected">Tất cả</option>
-                <option value="">Hoạt động</option>
-                <option value="">Ngưng hoạt động</option>
-            </select>
-        </div>
-
-        <div class="search">
-            <p>Từ khóa</p>
-            <input type="text" name="search" placeholder="Nhập từ khóa">
-            <img src="../../picture/component/search.png" alt="search">
-        </div>
-
-        <a href="../../dashboard/add/addaccount.php" class="add">
-            <img src="../../picture/component/add-square.png" alt="">
-            <p>Thêm tài khoản</p>
-        </a>
+        <p class="maccounttext">Danh sách vai trò</p>
     </div>
+
+    <main id="addrole">
+        <p class="top">Thông tin vai trò</p>
+        <form action="" id="addrole">
+            <div class="namerole">
+                <label for="namerole">Tên vai trò<span class="required">*</span></label>
+                <input type="text" name="namerole" placeholder="Nhập tên vai trò">
+            </div>
+
+            <div class="descriptive">
+                <label for="descriptive">Mô tả</label>
+                <input type="text" name="descriptive" placeholder="Nhập mô tả">
+            </div>
+
+            <label for="" class="function-group">Phân quyền chức năng<span class="required">*</span></label>
+
+            <div class="function-group">
+                <h1 class="functionA">Nhóm chức năng A</h1>
+                <div class="function1">
+                    <input type="checkbox" id="function1" name="function1" value="">
+                    <label for="function1"> Tất cả</label>
+                </div>
+
+                <div class="function2">
+                    <input type="checkbox" id="function2" name="function2" value="">
+                    <label for="function2"> Chức năng x</label>
+                </div>
+
+                <div class="function3">
+                    <input type="checkbox" id="function3" name="function3" value="">
+                    <label for="function3"> Chức năng y</label>
+                </div>
+
+                <div class="function4">
+                    <input type="checkbox" id="function4" name="function4" value="">
+                    <label for="function4"> Chức năng z</label>
+                </div>
+
+                <h1 class="functionB">Nhóm chức năng B</h1>
+
+                <div class="function5">
+                    <input type="checkbox" id="function5" name="function5" value="">
+                    <label for="function5"> Tất cả</label>
+                </div>
+
+                <div class="function6">
+                    <input type="checkbox" id="function6" name="function6" value="">
+                    <label for="function6"> Chức năng x</label>
+                </div>
+
+                <div class="function7">
+                    <input type="checkbox" id="function7" name="function7" value="">
+                    <label for="function7"> Chức năng y</label>
+                </div>
+
+                <div class="function8">
+                    <input type="checkbox" id="function8" name="function8" value="">
+                    <label for="function8"> Chức năng z</label>
+                </div>
+
+            </div>
+
+            <div class="btn">
+                <input type="submit" class="submit" value="Thêm">
+                <a href="../../dashboard/submenu/maccount.php" class="cancel">Hủy bỏ</a>
+            </div>
+        </form>
+
+        <div class="note">
+            <span class="required">*</span>
+            <p>Là trường thông tin bắt buộc</p>
+        </div>
+    </main>
 
     <ul>
         <img src="../../picture/Logo alta.png" alt="logo" class="logo">
@@ -118,12 +175,12 @@ if (isset($_SESSION['admin_login'])) {
                 thống<img src="../../picture/component/dropdown.png" alt="dropdown" id="icondropdown"></a>
             <ul class="submenu">
                 <li>
-                    <a href="../../dashboard/submenu/mrole.php">
+                    <a href="../../dashboard/submenu/mrole.php" id="mrole" class="managerole">
                         Quản lý vai trò
                     </a>
                 </li>
                 <li>
-                    <a href="../../dashboard/submenu/maccount.php" id="maccount" class="maccount">
+                    <a href="../../dashboard/submenu/maccount.php">
                         Quản lý tài khoản
                     </a>
                 </li>
@@ -139,29 +196,6 @@ if (isset($_SESSION['admin_login'])) {
                 xuất</a>
         </li>
     </ul>
-
-    <main id="mainmonitor">
-        <table style="width:100%" class="tablemonitor">
-            <tr>
-                <th>Tên đăng Nhập</th>
-                <th>Họ tên</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Vai trò</th>
-                <th>Trạng thái Hoạt động</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Maria Anders</td>
-            </tr>
-        </table>
-    </main>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {

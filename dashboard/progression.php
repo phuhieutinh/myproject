@@ -17,6 +17,7 @@ if (isset($_SESSION['admin_login'])) {
             $row = mysqli_fetch_assoc($result);
             $userID = $id;
             $name = $row['name'];
+            $picture = $row['picture'];
         } else {
             echo "0 results";
             exit;
@@ -37,22 +38,75 @@ if (isset($_SESSION['admin_login'])) {
 <body>
     <header>
         <div id="topbar">
-            <p class="">Cấp số</p>
+            <p class="text1">Cấp số</p>
             <img src="../picture/component/u_angle-right.png" alt="" class="angle">
             <p class="topbar">Danh sách cấp số</p>
         </div>
-        <img src="../picture/component/nofication.png" alt="nofication" class="nofication">
+
+        <div>
+            <div class="popup" onclick="myFunction()">
+                <img src="../picture/component/nofication.png" alt="nofication" class="nofication" id="myNofication">
+                <span class="popuptext" id="myPopup">
+                    <div class="popuptop">
+                        <p>Thông báo</p>
+                    </div>
+                    <a href="" class="popuptable">
+                        <div class="info">
+                            <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
+                            <p class="infotime">thời gian nhận số</p>
+                        </div>
+                    </a>
+                </span>
+            </div>
+        </div>
+
         <a href="info.php">
             <div id="info">
                 <p class="hello">xin chào</p>
                 <p class="header username"><?php echo $name ?></p>
-                <img src="../picture/myself.png" alt="smallpicture" class="picinfo">
+                <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
             </div>
         </a>
     </header>
 
     <div>
-        <p class="monitortext">Quản lý cấp số</p>
+        <p class="managetext">Quản lý cấp số</p>
+
+        <div class="progression servicename">
+            <p>Tên dịch vụ</p>
+            <select name="" class="servicename">
+                <option value="" selected="selected">Tất cả</option>
+                <option value="">Khám sản - Phụ Khoa</option>
+                <option value="">Khám răng hàm mặt</option>
+                <option value="">Khám tai muỗi họng</option>
+            </select>
+        </div>
+
+        <div class="progression status">
+            <p>Tình trạng</p>
+            <select name="" class="status">
+                <option value="" selected="selected">Tất cả</option>
+                <option value="">Đang chờ</option>
+                <option value="">Đã sử dụng</option>
+                <option value="">Bỏ qua</option>
+            </select>
+        </div>
+
+        <div class="progression supply">
+            <p>Nguồn cấp</p>
+            <select name="" class="supply">
+                <option value="" selected="selected">Tất cả</option>
+                <option value="">Kiosk</option>
+                <option value="">Hệ thống</option>
+            </select>
+        </div>
+
+        <div class="progression date">
+            <p>Chọn thời gian</p>
+            <input type="date" class="progression datestart">
+            <img src="../picture/component/arrow-right.png" alt="">
+            <input type="date" class="progression dateend">
+        </div>
 
         <div class="search">
             <p>Từ khóa</p>
@@ -60,7 +114,7 @@ if (isset($_SESSION['admin_login'])) {
             <img src="../picture/component/search.png" alt="search">
         </div>
 
-        <a href="" class="add">
+        <a href="../dashboard/add/addprogress.php" class="add">
             <img src="../picture/component/add-square.png" alt="">
             <p>Cấp số mới</p>
         </a>
@@ -89,17 +143,17 @@ if (isset($_SESSION['admin_login'])) {
             <ul class="submenu">
                 <li>
                     <a href="../dashboard/submenu/mrole.php">
-                        <p class="submenu">Quản lý vai trò</p>
+                        Quản lý vai trò
                     </a>
                 </li>
                 <li>
                     <a href="../dashboard/submenu/maccount.php">
-                        <p class="submenu">Quản lý tài khoản</p>
+                        Quản lý tài khoản
                     </a>
                 </li>
                 <li>
                     <a href="../dashboard/submenu/userlog.php">
-                        <p class="submenu">Nhật ký người dùng</p>
+                        Nhật ký người dùng
                     </a>
                 </li>
             </ul>

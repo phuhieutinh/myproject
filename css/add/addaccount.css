@@ -1,0 +1,357 @@
+main#addaccount {
+    position: absolute;
+    width: 1192px;
+    height: 534px;
+    left: 300px;
+    top: 168px;
+
+    /* White */
+
+    background: #FFFFFF;
+    /* Shadowbox */
+
+    box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
+    border-radius: 16px;
+}
+
+main#addaccount p.top {
+    position: absolute;
+    width: 181px;
+    height: 30px;
+    left: 24px;
+    top: 16px;
+
+    /* 20/20 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height, or 150% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+main#addaccount form#addaccount div.name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 24px;
+    top: 66px;
+}
+
+main#addaccount form#addaccount div.username {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 608px;
+    top: 66px;
+}
+
+main#addaccount form#addaccount div.phone {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 24px;
+    top: 158px;
+}
+
+main#addaccount form#addaccount div.password {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 608px;
+    top: 158px;
+}
+
+main#addaccount form#addaccount div.comfirmpw {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 608px;
+    top: 250px;
+}
+
+main#addaccount form#addaccount div.email {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 24px;
+    top: 250px;
+}
+
+main#addaccount form#addaccount div.role {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 24px;
+    top: 342px;
+}
+
+main#addaccount form#addaccount div.status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 560px;
+    height: 76px;
+    left: 608px;
+    top: 342px;
+}
+
+form#addaccount label {
+    position: static;
+
+    /* 16/16 Semi */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    display: flex;
+    align-items: center;
+
+    /* Gray/$-gray-500 */
+
+    color: #282739;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 4px;
+}
+
+form#addaccount input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px 10px 12px;
+
+    position: static;
+    width: 560px;
+    height: 44px;
+    left: 0px;
+    top: 32px;
+
+    /* white */
+
+    background: #FFFFFF;
+    /* Gray/$-gray-100 */
+
+    border: 1.5px solid #D4D4D7;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 8px 0px;
+}
+
+form#addaccount select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+
+    position: static;
+    width: 560px;
+    height: 44px;
+    left: 0px;
+    top: 32px;
+
+    /* white */
+
+    background: #FFFFFF;
+    /* Gray/$-gray-100 */
+
+    border: 1.5px solid #D4D4D7;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 8px 0px;
+}
+
+main#addaccount div.note {
+    position: absolute;
+    width: 232px;
+    height: 24px;
+    left: 24px;
+    top: 434px;
+}
+
+main#addaccount div.note p {
+    position: absolute;
+    width: 179px;
+    height: 21px;
+    left: 15px;
+    top: -18px;
+
+    /* 14/14 Reg */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height, or 150% */
+
+    display: flex;
+    align-items: center;
+
+    /* Gray/$-gray-300 */
+
+    color: #7E7D88;
+}
+
+main#addaccount form#addaccount div.btn {
+    position: absolute;
+    width: 326px;
+    height: 48px;
+    left: 411px;
+    top: 585px;
+}
+
+form#addaccount div.btn a.cancel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+
+    position: absolute;
+    width: 147px;
+    height: 48px;
+    left: 0px;
+    top: 0px;
+
+    /* Orange/$-Orange-50 */
+
+    background: #FFF2E7;
+    /* Orange/$-Orange-400 */
+
+    border: 1.5px solid #FF9138;
+    box-sizing: border-box;
+    /* down */
+
+    box-shadow: 0px 0px 6px #E7E9F2;
+    border-radius: 8px;
+    text-decoration: none;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+
+    /* Orange/$-Orange-400 */
+
+    color: #FF9138;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+}
+
+form#addaccount div.btn input.submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+
+    position: absolute;
+    width: 147px;
+    height: 48px;
+    left: 179px;
+    top: 0px;
+
+    /* Orange/$-Orange-400 */
+
+    background: #FF9138;
+    /* down */
+
+    box-shadow: 0px 0px 6px #E7E9F2;
+    border-radius: 8px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+
+    /* white */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+}

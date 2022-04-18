@@ -33,14 +33,17 @@ if (isset($_SESSION['admin_login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/add/addaccount.css">
 </head>
 
 <body>
     <header>
-        <div id="maccounttopbar">
-            <p class="maccounttop">Cài đặt hệ thống</p>
+        <div id="add-page">
+            <p class="addtop-page">Cài đặt hệ thống</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="topbar">Quản lý tài khoản</p>
+            <p class="addtop-page">Quản lý tài khoản</p>
+            <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
+            <p class="topbar">Thêm tài khoản</p>
         </div>
 
         <div>
@@ -70,27 +73,69 @@ if (isset($_SESSION['admin_login'])) {
     </header>
 
     <div>
-        <p class="maccounttext">Danh sách tài khoản</p>
-        <div class="activedropdown">
-            <p>Tên vai trò</p>
-            <select name="" id="activedropdown">
-                <option value="" selected="selected">Tất cả</option>
-                <option value="">Hoạt động</option>
-                <option value="">Ngưng hoạt động</option>
-            </select>
-        </div>
-
-        <div class="search">
-            <p>Từ khóa</p>
-            <input type="text" name="search" placeholder="Nhập từ khóa">
-            <img src="../../picture/component/search.png" alt="search">
-        </div>
-
-        <a href="../../dashboard/add/addaccount.php" class="add">
-            <img src="../../picture/component/add-square.png" alt="">
-            <p>Thêm tài khoản</p>
-        </a>
+        <p class="maccounttext">Quản lý tài khoản</p>
     </div>
+
+    <main id="addaccount">
+        <p class="top">Thông tin tài khoản</p>
+        <form action="" id="addaccount">
+            <div class="name">
+                <label for="name">Họ tên<span class="required">*</span></label>
+                <input type="text" name="name" placeholder="Nhập họ tên">
+            </div>
+
+            <div class="username">
+                <label for="username">Tên đăng nhập<span class="required">*</span></label>
+                <input type="text" name="username" placeholder="Nhập tên đăng nhập">
+            </div>
+
+            <div class="phone">
+                <label for="phone">Số điện thoại<span class="required">*</span></label>
+                <input type="text" name="phone" placeholder="Nhập số điện thoại">
+            </div>
+
+            <div class="password">
+                <label for="password">Mật khẩu<span class="required">*</span></label>
+                <input type="password" name="password" placeholder="Nhập mật khẩu">
+            </div>
+            <div class="comfirmpw">
+                <label for="comfirmpw">Nhập lại mật khẩu<span class="required">*</span></label>
+                <input type="password" name="comfirmpw" placeholder="Nhập lại mật khẩu">
+            </div>
+
+            <div class="email">
+                <label for="email">Email<span class="required">*</span></label>
+                <input type="text" name="email" placeholder="Nhập Email">
+            </div>
+
+            <div class="role">
+                <label for="">Vai trò<span class="required">*</span></label>
+                <select name="" id="">
+                    <option value="" selected="selected">chọn vai trò</option>
+                    <option value="">Kế toán</option>
+                    <option value="">Bác sĩ</option>
+                </select>
+            </div>
+
+            <div class="status">
+                <label for="">Tình trạng<span class="required">*</span></label>
+                <select name="" id="">
+                    <option value="" selected="selected">Hoạt động</option>
+                    <option value="">Ngưng hoạt động</option>
+                </select>
+            </div>
+
+            <div class="btn">
+                <input type="submit" class="submit" value="Thêm">
+                <a href="../../dashboard/submenu/maccount.php" class="cancel">Hủy bỏ</a>
+            </div>
+        </form>
+
+        <div class="note">
+            <span class="required">*</span>
+            <p>Là trường thông tin bắt buộc</p>
+        </div>
+    </main>
 
     <ul>
         <img src="../../picture/Logo alta.png" alt="logo" class="logo">
@@ -139,29 +184,6 @@ if (isset($_SESSION['admin_login'])) {
                 xuất</a>
         </li>
     </ul>
-
-    <main id="mainmonitor">
-        <table style="width:100%" class="tablemonitor">
-            <tr>
-                <th>Tên đăng Nhập</th>
-                <th>Họ tên</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Vai trò</th>
-                <th>Trạng thái Hoạt động</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Maria Anders</td>
-            </tr>
-        </table>
-    </main>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {
