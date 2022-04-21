@@ -19,7 +19,7 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../logout.php");
             exit;
         }
     }
@@ -122,18 +122,23 @@ if (isset($_SESSION['admin_login'])) {
 
     <ul>
         <img src="../picture/Logo alta.png" alt="logo" class="logo">
+
         <li><a href="../dashboard/index.php" class="dashboard"><img src="../picture/component/dashboard.png"
                     alt="dashboard">
                 Dashboard</a>
         </li>
+
         <li><a href="../dashboard/monitor.php" class="monitor"><img src="../picture/component/monitor.png"
                     alt="monitor">Thiết
                 bị</a></li>
+
         <li><a href="../dashboard/service.php" class="service"><img src="../picture/component/service.png"
                     alt="service">Dịch vụ</a></li>
+
         <li><a href="" id="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
                 số</a>
         </li>
+
         <li><a href="../dashboard/report.php" class="report"><img src="../picture/component/report.png" alt="report">Báo
                 cáo</a></li>
 
@@ -184,7 +189,7 @@ if (isset($_SESSION['admin_login'])) {
                 <td>Maria Anders</td>
                 <td>Germany</td>
                 <td>Maria Anders</td>
-                <td>Germany</td>
+                <td><a href="../dashboard/detail/progressDetail.php">Chi tiết</a></td>
             </tr>
         </table>
     </main>

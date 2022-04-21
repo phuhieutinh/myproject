@@ -19,7 +19,7 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../logout.php");
             exit;
         }
     }

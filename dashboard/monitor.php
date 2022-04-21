@@ -19,7 +19,7 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../logout.php");
             exit;
         }
     }
@@ -165,7 +165,7 @@ if (isset($_SESSION['admin_login'])) {
                 <td>Alfreds Futterkiste</td>
                 <td>Maria Anders</td>
                 <td>Germany</td>
-                <td>Maria Anders</td>
+                <td><a href="../dashboard/detail/monitorDetail.php">Chi tiết</a></td>
                 <td>Germany</td>
             </tr>
         </table>

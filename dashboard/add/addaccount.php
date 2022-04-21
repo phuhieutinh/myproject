@@ -19,9 +19,46 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../../logout.php");
             exit;
         }
+    }
+
+    $uid = "";
+    if (isset($_GET['id'])) {
+        $uid = $_GET['id'];
+    }
+    $userID = 'int';
+    $name = "";
+    $username = "";
+    $phone = "";
+    $password = "";
+    $email = "";
+    $roleName = "";
+    $status = "";
+    $isUpdated = 0;
+    if ($uid != "") {
+        $query = "SELECT * FROM user WHERE userID = $uid";
+        $rlquery = mysqli_query($conn, $query);
+        while ($data = mysqli_fetch_assoc($rlquery)) {
+            $userID = $data['userID'];
+            $name = $data['name'];
+            $username = $data['username'];
+            $phone = $data['phone'];
+            $password = $data['pw'];
+            $email = $data['email'];
+            $status = $data['status'];
+            $roleID = $data['roleID'];
+
+            $sql_role = "SELECT roleName FROM user, role WHERE user.roleID = role.roleID";
+            $query_role = mysqli_query($conn, $sql_role);
+            if (mysqli_num_rows($query_role) > 0) {
+                while ($row_role = mysqli_fetch_assoc($query_role)) {
+                    $roleName = $row_role['roleName'];
+                }
+            }
+        }
+        $isUpdated = 1;
     }
 ?>
 <!DOCTYPE html>
@@ -41,7 +78,8 @@ if (isset($_SESSION['admin_login'])) {
         <div id="add-page">
             <p class="addtop-page">Cài đặt hệ thống</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="addtop-page">Quản lý tài khoản</p>
+            <p class="addtop-page"><a href="../../dashboard/submenu/maccount.php"
+                    style="text-decoration: none; color: rgba(126, 125, 136, 1);">Quản lý tài khoản</a></p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
             <p class="topbar">Thêm tài khoản</p>
         </div>
@@ -78,55 +116,74 @@ if (isset($_SESSION['admin_login'])) {
 
     <main id="addaccount">
         <p class="top">Thông tin tài khoản</p>
-        <form action="" id="addaccount">
+        <form action="../../function/function_account.php" id="addaccount" method="POST">
+
+            <input type="hidden" name="controlUpdate" value="<?php echo $isUpdated ?>" />
+
+            <input type="hidden" name="accountID" value="<?php echo $userID ?>"
+                <?php if ($isUpdated == 1) echo "readonly"; ?>>
+
             <div class="name">
                 <label for="name">Họ tên<span class="required">*</span></label>
-                <input type="text" name="name" placeholder="Nhập họ tên">
+                <input type="text" name="name" value="<?php echo $name ?>" placeholder="Nhập họ tên">
             </div>
 
             <div class="username">
                 <label for="username">Tên đăng nhập<span class="required">*</span></label>
-                <input type="text" name="username" placeholder="Nhập tên đăng nhập">
+                <input type="text" name="username" value="<?php echo $username ?>" placeholder="Nhập tên đăng nhập">
             </div>
 
             <div class="phone">
                 <label for="phone">Số điện thoại<span class="required">*</span></label>
-                <input type="text" name="phone" placeholder="Nhập số điện thoại">
+                <input type="text" name="phone" value="<?php echo $phone ?>" placeholder="Nhập số điện thoại">
             </div>
 
             <div class="password">
                 <label for="password">Mật khẩu<span class="required">*</span></label>
-                <input type="password" name="password" placeholder="Nhập mật khẩu">
+                <input type="password" name="password" value="<?php echo $password ?>" placeholder="Nhập mật khẩu">
             </div>
             <div class="comfirmpw">
                 <label for="comfirmpw">Nhập lại mật khẩu<span class="required">*</span></label>
-                <input type="password" name="comfirmpw" placeholder="Nhập lại mật khẩu">
+                <input type="password" name="comfirmpw" value="<?php echo $password ?>" placeholder="Nhập lại mật khẩu">
             </div>
 
             <div class="email">
                 <label for="email">Email<span class="required">*</span></label>
-                <input type="text" name="email" placeholder="Nhập Email">
+                <input type="text" name="email" value="<?php echo $email ?>" placeholder="Nhập Email">
             </div>
 
             <div class="role">
-                <label for="">Vai trò<span class="required">*</span></label>
-                <select name="" id="">
-                    <option value="" class="deco" disabled selected>chọn vai trò</option>
-                    <option value="">Kế toán</option>
-                    <option value="">Bác sĩ</option>
+                <label for="roleID">Vai trò<span class="required">*</span></label>
+                <select name="roleID" id="">
+                    <option value="<?php echo ($roleID == "") ? "" : $roleID ?>" class="deco" selected>
+                        <?php echo ($roleName == "") ? "Chọn vai trò" : $roleName ?>
+                    </option>
+
+                    <?php
+                        $sql_roleall = "SELECT * FROM role";
+                        $query_roleall = mysqli_query($conn, $sql_roleall);
+
+                        while ($row_roleall = mysqli_fetch_assoc($query_roleall)) {
+                            $roleID_select = $row_roleall['roleID'];
+                            $roleName = $row_roleall['roleName'];
+
+                            echo "<option value='$roleID_select'>$roleName</option>";
+                        }
+                        ?>
                 </select>
             </div>
 
             <div class="status">
                 <label for="">Tình trạng<span class="required">*</span></label>
-                <select name="" id="">
-                    <option value="" selected="selected">Hoạt động</option>
-                    <option value="">Ngưng hoạt động</option>
+                <select name="status" id="">
+                    <option value="Hoạt động" selected="selected">
+                        <?php echo ($status !== "Hoạt động") ? "Hoạt động" : $status ?></option>
+                    <option value="Ngưng hoạt động">Ngưng hoạt động</option>
                 </select>
             </div>
 
             <div class="btn">
-                <input type="submit" class="submit" value="Thêm">
+                <input type="submit" name="submit" class="submit" value="Thêm">
                 <a href="../../dashboard/submenu/maccount.php" class="cancel">Hủy bỏ</a>
             </div>
         </form>

@@ -126,7 +126,7 @@ form#addmonitor div.type-monitor {
     top: 66px;
 }
 
-form#addmonitor select {
+form#addmonitor select#type-monitor {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -254,7 +254,7 @@ form#addmonitor label {
     margin: 0px 4px;
 }
 
-form#addmonitor input {
+form#addmonitor input#data {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -387,7 +387,7 @@ main#addmonitor div.note {
     width: 232px;
     height: 24px;
     left: 24px;
-    top: 434px;
+    top: 459px;
 }
 
 main#addmonitor div.note p {
@@ -412,4 +412,124 @@ main#addmonitor div.note p {
     /* Gray/$-gray-300 */
 
     color: #7E7D88;
+}
+
+select.chosen-select {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 270px 10px 12px;
+
+    position: static;
+    width: 1104px;
+    height: 44px;
+    left: 0px;
+    top: 32px;
+
+    /* white */
+
+    background: #FFFFFF;
+    /* Gray/$-gray-100 */
+
+    border: 1.5px solid #D4D4D7;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 8px 0px;
+}
+
+.chosen-container.chosen-container-multi {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 270px 10px 12px;
+
+    position: static;
+    width: 1104px;
+    height: 44px;
+    left: 0px;
+    top: 32px;
+
+    /* white */
+
+    background: #FFFFFF;
+    /* Gray/$-gray-100 */
+
+    border: 1.5px solid #D4D4D7;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 8px 0px;
+}
+
+ul.chosen-choices {
+    position: absolute;
+    width: 1105px !important;
+    height: 45px !important;
+    left: -13px !important;
+    top: 0px !important;
+
+    /* white */
+
+    background: #FFFFFF;
+    /* Gray/$-gray-100 */
+
+    border: 1.5px solid #D4D4D7;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 8px 0px;
+}
+
+.chosen-drop {
+    position: relative;
+    width: 1104px !important;
+    height: 109px !important;
+    left: 1px !important;
+    top: 79px !important;
+
+    /* White */
+
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+ul.chosen-results {
+    position: absolute;
+    width: 1104px;
+    height: 109px;
+    left: 0px;
+    top: 5px;
+}
+
+li.active-result.highlighted {
+    background: #FFF2E7 !important;
+    /* 16/16 Reg */
+
+    font-family: 'Nunito' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-500 */
+
+    color: #282739 !important;
 }

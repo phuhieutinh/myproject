@@ -2516,3 +2516,9 @@ div#add-page p.addtop-page {
     flex-grow: 0;
     margin: 0px 8px;
 }
+
+div.pagination {
+    position: absolute;
+    left: 1051px;
+    top: 791px;
+}

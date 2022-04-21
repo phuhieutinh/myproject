@@ -1,3 +1,11 @@
+div.container#blur {
+    position: relative;
+    width: 1515px;
+    height: 941px;
+    background: #F7F7F7;
+    border-radius: 16px;
+}
+
 div#add-page p.addtop-progress {
     /* Auto layout */
 
@@ -105,7 +113,15 @@ main#addprogress form#addprogress div.btn {
     top: 258px;
 }
 
-form#addprogress div.btn input.submit {
+main#addprogress form#addprogress div.btn div {
+    position: absolute;
+    width: 115px;
+    height: 48px;
+    left: 147px;
+    top: 0px;
+}
+
+form#addprogress div.btn div input.submit {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -113,9 +129,9 @@ form#addprogress div.btn input.submit {
     padding: 10px 24px;
 
     position: absolute;
-    width: 115px;
-    height: 48px;
-    left: 147px;
+    width: 65px;
+    height: 25px;
+    left: -9px;
     top: 0px;
 
     /* Orange/$-Orange-400 */
@@ -227,44 +243,270 @@ form#addprogress select#addprogress-service {
 
 
 /* The actual popup */
-.popuptext-progress::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-}
+.popuptext-progress::after {}
 
 .popuptext-progress.show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
     position: absolute;
-    width: 360px;
-    height: 526px;
-    left: 0px;
-    top: 59px;
-    overflow-y: scroll;
+    width: 469px;
+    height: 385px;
+    left: 531px;
+    top: 241px;
+
+    background: #FFFFFF;
+    border-radius: 24px;
 }
 
-p.progressTop {
+.container#blur.active {
+    filter: contrast(.8);
+    pointer-events: none;
+    user-select: none;
+}
+
+span.popuptext-progress {
+    display: none;
+    visibility: hidden;
+}
+
+span.popuptext-progress.show {
+    display: block;
+    visibility: visible;
+}
+
+span.popuptext-progress.show div.footer {
     position: absolute;
-    width: 101px;
-    height: 30px;
-    left: 22px;
-    top: -10px;
+    width: 469px;
+    height: 110px;
+    left: 0px;
+    top: 275px;
+
+    /* Orange/$-Orange-400 */
+
+    background: #FF9138;
+    border-radius: 24px;
+}
+
+span.popuptext-progress.show h1 {
+    position: absolute;
+    width: 279px;
+    height: 48px;
+    left: 95px;
+    top: 48px;
+
+    /* 32/32 Bold */
 
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 32px;
+    line-height: 48px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+span.popuptext-progress.show p {
+    position: absolute;
+    width: 236px;
+    height: 60px;
+    left: 125px;
+    top: 75px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 60px;
+    /* identical to box height, or 107% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+span.popuptext-progress.show h5 {
+    position: absolute;
+    width: 321px;
+    height: 27px;
+    left: 74px;
+    top: 204px;
+
+    /* 18/18 Reg */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-500 */
+
+    color: #282739;
+}
+
+span.popuptext-progress.show h4 {
+    position: absolute;
+    left: 279px;
+    top: 215px;
+}
+
+span.popuptext-progress.show a.iconx {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 16px;
+    top: 16px;
+
+}
+
+span.popuptext-progress.show div.footer div.order-time {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 335px;
+    height: 33px;
+    left: 67px;
+    top: 16px;
+}
+
+span.popuptext-progress.show div.footer div.order-time label {
+    position: static;
+    width: 143px;
+    height: 33px;
+    left: 0px;
+    top: 0px;
+    /* 22/22 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
     /* identical to box height, or 150% */
 
 
     /* White */
 
     color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+}
+
+span.popuptext-progress.show div.footer div.order-time p {
+    position: static;
+    width: 184px;
+    height: 33px;
+    left: 151px;
+    top: 0px;
+    /* 22/22 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    /* identical to box height, or 150% */
+
+
+    /* White */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 8px;
+}
+
+span.popuptext-progress.show div.footer div.use-time {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 335px;
+    height: 33px;
+    left: 61px;
+    top: 61px;
+}
+
+span.popuptext-progress.show div.footer div.use-time label {
+    position: static;
+    width: 135px;
+    height: 33px;
+    left: 0px;
+    top: 0px;
+
+    /* 22/22 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    /* identical to box height, or 150% */
+
+
+    /* White */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 16px;
+}
+
+span.popuptext-progress.show div.footer div.use-time p {
+    position: static;
+    width: 184px;
+    height: 33px;
+    left: 151px;
+    top: 0px;
+
+    /* 22/22 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    /* identical to box height, or 150% */
+
+
+    /* White */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 16px;
 }

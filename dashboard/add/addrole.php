@@ -19,9 +19,28 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../../logout.php");
             exit;
         }
+    }
+
+    $uid = "";
+    if (isset($_GET['id'])) {
+        $uid = $_GET['id'];
+    }
+    $roleID = 'int';
+    $roleName = "";
+    $descriptive = "";
+    $isUpdated = 0;
+    if ($uid != "") {
+        $query = "SELECT * FROM role WHERE roleID = $uid";
+        $rlquery = mysqli_query($conn, $query);
+        while ($data = mysqli_fetch_assoc($rlquery)) {
+            $roleID = $data['roleID'];
+            $roleName = $data['roleName'];
+            $descriptive = $data['descriptive'];
+        }
+        $isUpdated = 1;
     }
 ?>
 <!DOCTYPE html>
@@ -41,7 +60,8 @@ if (isset($_SESSION['admin_login'])) {
         <div id="add-page">
             <p class="addtop-page">Cài đặt hệ thống</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="addtop-page">Quản lý vai trò</p>
+            <p class="addtop-page"><a href="../../dashboard/submenu/mrole.php"
+                    style="text-decoration: none; color: rgba(126, 125, 136, 1);">Quản lý vai trò</a></p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
             <p class="topbar">Thêm vai trò</p>
         </div>
@@ -78,15 +98,21 @@ if (isset($_SESSION['admin_login'])) {
 
     <main id="addrole">
         <p class="top">Thông tin vai trò</p>
-        <form action="" id="addrole">
+        <form action="../../function/function_role.php" id="addrole" method="POST">
+
+            <input type="hidden" name="controlUpdate" value="<?php echo $isUpdated ?>" />
+
+            <input type="hidden" name="roleID" value="<?php echo $roleID ?>"
+                <?php if ($isUpdated == 1) echo "readonly"; ?>>
+
             <div class="namerole">
-                <label for="namerole">Tên vai trò<span class="required">*</span></label>
-                <input type="text" name="namerole" placeholder="Nhập tên vai trò">
+                <label for="roleName">Tên vai trò<span class="required">*</span></label>
+                <input type="text" name="roleName" value="<?php echo $roleName; ?>" placeholder="Nhập tên vai trò">
             </div>
 
             <div class="descriptive">
                 <label for="descriptive">Mô tả</label>
-                <input type="text" name="descriptive" placeholder="Nhập mô tả">
+                <input type="text" name="descriptive" placeholder="Nhập mô tả" value="<?php echo $descriptive; ?>">
             </div>
 
             <label for="" class="function-group">Phân quyền chức năng<span class="required">*</span></label>
@@ -138,8 +164,8 @@ if (isset($_SESSION['admin_login'])) {
             </div>
 
             <div class="btn">
-                <input type="submit" class="submit" value="Thêm">
-                <a href="../../dashboard/submenu/maccount.php" class="cancel">Hủy bỏ</a>
+                <input type="submit" class="submit" name="submit" value="Thêm">
+                <a href="../../dashboard/submenu/mrole.php" class="cancel">Hủy bỏ</a>
             </div>
         </form>
 

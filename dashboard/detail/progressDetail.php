@@ -33,22 +33,20 @@ if (isset($_SESSION['admin_login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/add/addmonitor.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/detail/progressDetail.css">
 </head>
 
 <body>
     <header>
         <div id="add-page">
-            <p class="addtop-monitor">Thiết bị</p>
+            <p class="addtop-progress">Thiết bị</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
+
             <p class="addtop-page"><a href="../../dashboard/monitor.php"
-                    style="text-decoration: none; color: rgba(126, 125, 136, 1);">Danh sách thiết bị</a></p>
+                    style="text-decoration: none; color: rgba(126, 125, 136, 1);">Danh sách cấp số</a></p>
+
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="topbar">Thêm thiết bị</p>
+            <p class="topbar">Chi tiết</p>
         </div>
 
         <div>
@@ -78,69 +76,59 @@ if (isset($_SESSION['admin_login'])) {
     </header>
 
     <div>
-        <p class="maccounttext">Quản lý thiết bị</p>
+        <p class="maccounttext">Quản lý cấp số</p>
+
+        <a href="../../dashboard/progression.php" class="back">
+            <img src="../../picture/component/back-square.png" alt="">
+            <p>Quay lại</p>
+        </a>
     </div>
 
-    <main id="addmonitor">
-        <p class="top">Thông tin thiết bị</p>
-        <form action="" id="addmonitor">
-            <div class="monitorcode">
-                <label for="monitorcode">Mã thiết bị<span class="required">*</span></label>
-                <input type="text" name="monitorcode" placeholder="Nhập mã thiết bị" id="data">
-            </div>
+    <main id="progressDetail">
+        <p class="top">Thông tin cấp số</p>
+        <div class="progressName">
+            <h1>Họ tên: </h1>
+            <p>hello</p>
+        </div>
 
-            <div class="monitorname">
-                <label for="monitorname">Tên thiết bị<span class="required">*</span></label>
-                <input type="text" name="monitorname" placeholder="Nhập tên thiết bị" id="data">
-            </div>
+        <div class="serviceName">
+            <h1>Tên dịch vụ: </h1>
+            <p>hello</p>
+        </div>
 
-            <div class="ipaddress">
-                <label for="ipaddress">Địa chỉ IP<span class="required">*</span></label>
-                <input type="text" name="ipaddress" placeholder="Nhập địa chỉ IP" id="data">
-            </div>
+        <div class="number-order">
+            <h1>Số thứ tự: </h1>
+            <p>hello</p>
+        </div>
 
-            <div class="type-monitor">
-                <label for="">Loại thiết bị<span class="required">*</span></label>
-                <select name="" id="type-monitor">
-                    <option disabled="disabled" class="deco" disabled selected>Chọn Loại thiết bị</option>
-                    <option value="">Kiosk</option>
-                    <option value="">Display counter</option>
-                </select>
-            </div>
+        <div class="order-date">
+            <h1>Thời gian cấp: </h1>
+            <p id="use-service">hello</p>
+        </div>
 
-            <div class="username">
-                <label for="username">Tên đăng nhập<span class="required">*</span></label>
-                <input type="text" name="username" placeholder="Nhập tài khoản" id="data">
-            </div>
+        <div class="use-date">
+            <h1>Hạn sử dụng: </h1>
+            <p>hello</p>
+        </div>
 
-            <div class="password">
-                <label for="password">Mật khẩu<span class="required">*</span></label>
-                <input type="password" name="password" placeholder="Nhập mật khẩu" id="data">
-            </div>
+        <div class="supply">
+            <h1>Nguồn cấp: </h1>
+            <p>hello</p>
+        </div>
 
-            <div class="useservice">
-                <label for="useservice">Dịch vụ sử dụng<span class="required">*</span></label>
+        <div class="statrus">
+            <h1>Trạng thái: </h1>
+            <p>hello</p>
+        </div>
 
-                <select name="states[]" multiple class="chosen-select">
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="AeL">asd</option>
-                    <option value="aWY">ggg</option>
-                    <option value="ALd">www</option>
-                    <option value="WYt">sss</option>
-                </select>
+        <div class="phone">
+            <h1>Số điện thoại: </h1>
+            <p>hello</p>
+        </div>
 
-            </div>
-
-            <div class="btn">
-                <input type="submit" class="submit" value="Thêm thiết bị">
-                <a href="../../dashboard/monitor.php" class="cancel">Hủy bỏ</a>
-            </div>
-        </form>
-
-        <div class="note">
-            <span class="required">*</span>
-            <p>Là trường thông tin bắt buộc</p>
+        <div class="Email">
+            <h1>Địa chỉ Email: </h1>
+            <p>hello</p>
         </div>
     </main>
 

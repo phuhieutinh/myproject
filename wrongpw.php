@@ -47,11 +47,11 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     </div>
     <form action="index.php" method="POST">
         <div class="username">
-            <label for="username" class="username">Tên Đăng Nhập *</label>
+            <label for="username" class="username">Tên Đăng Nhập <span class="required">*</span></label>
             <input type="text" name="username" class="namewrongpw">
         </div>
         <div class="pw">
-            <label for="password" class="pw">Mật Khẩu *</label>
+            <label for="password" class="pw">Mật Khẩu <span class="required">*</span></label>
             <input type="password" name="password" class="wrongpw">
         </div>
         <div class="wrongpw">

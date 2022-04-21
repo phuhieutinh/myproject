@@ -33,22 +33,20 @@ if (isset($_SESSION['admin_login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../../css/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/add/addmonitor.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/detail/serviceDetail.css">
 </head>
 
 <body>
     <header>
         <div id="add-page">
-            <p class="addtop-monitor">Thiết bị</p>
+            <p class="addtop-service">Dịch vụ</p>
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="addtop-page"><a href="../../dashboard/monitor.php"
-                    style="text-decoration: none; color: rgba(126, 125, 136, 1);">Danh sách thiết bị</a></p>
+
+            <p class="addtop-page"><a href="../../dashboard/service.php"
+                    style="text-decoration: none; color: rgba(126, 125, 136, 1);">Danh sách dịch vụ</a></p>
+
             <img src="../../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="topbar">Thêm thiết bị</p>
+            <p class="topbar">Chi tiết</p>
         </div>
 
         <div>
@@ -78,71 +76,97 @@ if (isset($_SESSION['admin_login'])) {
     </header>
 
     <div>
-        <p class="maccounttext">Quản lý thiết bị</p>
+        <p class="maccounttext">Quản lý dịch vụ</p>
+
+        <a href="../../dashboard/add/addservice.php" class="edit">
+            <img src="../../picture/component/edit-square.png" alt="">
+            <p>Cập nhật Danh sách</p>
+        </a>
+
+        <a href="../../dashboard/service.php" class="back">
+            <img src="../../picture/component/back-square.png" alt="">
+            <p>Quay lại</p>
+        </a>
     </div>
 
-    <main id="addmonitor">
-        <p class="top">Thông tin thiết bị</p>
-        <form action="" id="addmonitor">
-            <div class="monitorcode">
-                <label for="monitorcode">Mã thiết bị<span class="required">*</span></label>
-                <input type="text" name="monitorcode" placeholder="Nhập mã thiết bị" id="data">
+    <main id="serviceDetail">
+        <p class="top">Thông tin dịch vụ</p>
+        <div class="serviceCode">
+            <h1>Mã dịch vụ: </h1>
+            <p>hello</p>
+        </div>
+
+        <div class="serviceName">
+            <h1>Tên dịch vụ: </h1>
+            <p>hello</p>
+        </div>
+
+        <div class="descriptive">
+            <h1>Số thứ tự: </h1>
+            <p>hello</p>
+        </div>
+
+        <p class="text-rule">Quy tắc cắp số</p>
+
+        <div class="auto">
+            <label for="auto">Tăng tự động</label>
+            <div>
+                <input type="text" class="start" placeholder="0001" readonly />
+                <span>đến</span>
+                <input type="text" class="end" placeholder="9999" readonly />
             </div>
+        </div>
 
-            <div class="monitorname">
-                <label for="monitorname">Tên thiết bị<span class="required">*</span></label>
-                <input type="text" name="monitorname" placeholder="Nhập tên thiết bị" id="data">
-            </div>
+        <div class="prefix">
+            <label for="prefix">Prefix:</label>
+            <input type="text" placeholder="0001" readonly>
+        </div>
 
-            <div class="ipaddress">
-                <label for="ipaddress">Địa chỉ IP<span class="required">*</span></label>
-                <input type="text" name="ipaddress" placeholder="Nhập địa chỉ IP" id="data">
-            </div>
+        <div class="reset">
+            <label for="reset">Reset mỗi ngày</label>
+        </div>
 
-            <div class="type-monitor">
-                <label for="">Loại thiết bị<span class="required">*</span></label>
-                <select name="" id="type-monitor">
-                    <option disabled="disabled" class="deco" disabled selected>Chọn Loại thiết bị</option>
-                    <option value="">Kiosk</option>
-                    <option value="">Display counter</option>
-                </select>
-            </div>
+        <p class="example">Ví dụ: 201-2001</p>
+    </main>
 
-            <div class="username">
-                <label for="username">Tên đăng nhập<span class="required">*</span></label>
-                <input type="text" name="username" placeholder="Nhập tài khoản" id="data">
-            </div>
+    <div id="table">
+        <div class="activedropdown">
+            <p>Trạng thái</p>
+            <select name="" id="activedropdown">
+                <option value="" selected="selected">Tất cả</option>
+                <option value="">Đã hoàn thành</option>
+                <option value="">Đã thực hiện</option>
+                <option value="">Vắng</option>
+            </select>
+        </div>
 
-            <div class="password">
-                <label for="password">Mật khẩu<span class="required">*</span></label>
-                <input type="password" name="password" placeholder="Nhập mật khẩu" id="data">
-            </div>
+        <div class="dateservice">
+            <p>Chọn thời gian</p>
+            <input type="date" id="start">
+            <img src="../../picture/component/arrow-right.png" alt="">
+            <input type="date" id="end">
+        </div>
 
-            <div class="useservice">
-                <label for="useservice">Dịch vụ sử dụng<span class="required">*</span></label>
-
-                <select name="states[]" multiple class="chosen-select">
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="AeL">asd</option>
-                    <option value="aWY">ggg</option>
-                    <option value="ALd">www</option>
-                    <option value="WYt">sss</option>
-                </select>
-
-            </div>
-
-            <div class="btn">
-                <input type="submit" class="submit" value="Thêm thiết bị">
-                <a href="../../dashboard/monitor.php" class="cancel">Hủy bỏ</a>
-            </div>
+        <form class="search">
+            <label for="search">Từ khóa</label>
+            <input type="search" name="search" placeholder="Nhập từ khóa">
+            <button type="submit" name="save"><span class="icon_search"></span></button>
         </form>
 
-        <div class="note">
-            <span class="required">*</span>
-            <p>Là trường thông tin bắt buộc</p>
+        <div id="tableDetail">
+            <table class="table-serviceDetail" style="width: 100%">
+                <tr>
+                    <th style="width:50%">Số thứ tự</th>
+                    <th style="width:50%">Trạng thái</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                </tr>
+            </table>
         </div>
-    </main>
+
+    </div>
 
     <ul>
         <img src="../../picture/Logo alta.png" alt="logo" class="logo">
@@ -151,11 +175,11 @@ if (isset($_SESSION['admin_login'])) {
                 Dashboard</a>
         </li>
 
-        <li><a href="" id="monitor"><img src="../../picture/component/monitor.png" alt="monitor">Thiết
+        <li><a href="../../dashboard/monitor.php" class="monitor"><img src="../../picture/component/monitor.png"
+                    alt="monitor">Thiết
                 bị</a></li>
 
-        <li><a href="../../dashboard/service.php" class="service"><img src="../../picture/component/service.png"
-                    alt="service">Dịch vụ</a></li>
+        <li><a href="" id='service'><img src="../../picture/component/service.png" alt="service">Dịch vụ</a></li>
 
         <li><a href="../../dashboard/progression.php" class="progression"><img
                     src="../../picture/component/progression.png" alt="progression">Cấp

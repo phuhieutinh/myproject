@@ -19,150 +19,151 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../logout.php");
             exit;
         }
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="../css/dashboard.css" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <link href="../css/dashboard.css" rel="stylesheet">
+    </head>
 
-<body>
-    <header>
-        <div id="topbar">
-            <p class="text1">Dịch vụ</p>
-            <img src="../picture/component/u_angle-right.png" alt="" class="angle">
-            <p class="topbar">Danh sách dịch vụ</p>
-        </div>
+    <body>
+        <header>
+            <div id="topbar">
+                <p class="text1">Dịch vụ</p>
+                <img src="../picture/component/u_angle-right.png" alt="" class="angle">
+                <p class="topbar">Danh sách dịch vụ</p>
+            </div>
+
+            <div>
+                <div class="popup" onclick="myFunction()">
+                    <img src="../picture/component/nofication.png" alt="nofication" class="nofication" id="myNofication">
+                    <span class="popuptext" id="myPopup">
+                        <div class="popuptop">
+                            <p>Thông báo</p>
+                        </div>
+                        <a href="" class="popuptable">
+                            <div class="info">
+                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
+                                <p class="infotime">thời gian nhận số</p>
+                            </div>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+            <a href="info.php">
+                <div id="info">
+                    <p class="hello">xin chào</p>
+                    <p class="header username"><?php echo $name ?></p>
+                    <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
+                </div>
+            </a>
+        </header>
 
         <div>
-            <div class="popup" onclick="myFunction()">
-                <img src="../picture/component/nofication.png" alt="nofication" class="nofication" id="myNofication">
-                <span class="popuptext" id="myPopup">
-                    <div class="popuptop">
-                        <p>Thông báo</p>
-                    </div>
-                    <a href="" class="popuptable">
-                        <div class="info">
-                            <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
-                            <p class="infotime">thời gian nhận số</p>
-                        </div>
-                    </a>
-                </span>
+            <p class="managetext">Quản lý dịch vụ</p>
+            <div class="activedropdown">
+                <p>Trạng thái hoạt động</p>
+                <select name="" id="activedropdown">
+                    <option value="" selected="selected">Tất cả</option>
+                    <option value="">Hoạt động</option>
+                    <option value="">Ngưng hoạt động</option>
+                </select>
             </div>
-        </div>
 
-        <a href="info.php">
-            <div id="info">
-                <p class="hello">xin chào</p>
-                <p class="header username"><?php echo $name ?></p>
-                <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
+            <div class="dateservice">
+                <p>Chọn thời gian</p>
+                <input type="date" class="dateservice start">
+                <img src="../picture/component/arrow-right.png" alt="">
+                <input type="date" class="dateservice end">
             </div>
-        </a>
-    </header>
 
-    <div>
-        <p class="managetext">Quản lý dịch vụ</p>
-        <div class="activedropdown">
-            <p>Trạng thái hoạt động</p>
-            <select name="" id="activedropdown">
-                <option value="" selected="selected">Tất cả</option>
-                <option value="">Hoạt động</option>
-                <option value="">Ngưng hoạt động</option>
-            </select>
+            <div class="search">
+                <p>Từ khóa</p>
+                <input type="text" name="search" placeholder="Nhập từ khóa">
+                <img src="../picture/component/search.png" alt="search">
+            </div>
+
+            <a href="../dashboard/add/addservice.php" class="add">
+                <img src="../picture/component/add-square.png" alt="">
+                <p>Thêm dịch vụ</p>
+            </a>
         </div>
 
-        <div class="dateservice">
-            <p>Chọn thời gian</p>
-            <input type="date" class="dateservice start">
-            <img src="../picture/component/arrow-right.png" alt="">
-            <input type="date" class="dateservice end">
-        </div>
+        <ul>
+            <img src="../picture/Logo alta.png" alt="logo" class="logo">
+            <li><a href="../dashboard/index.php" class="dashboard"><img src="../picture/component/dashboard.png" alt="dashboard">
+                    Dashboard</a>
+            </li>
 
-        <div class="search">
-            <p>Từ khóa</p>
-            <input type="text" name="search" placeholder="Nhập từ khóa">
-            <img src="../picture/component/search.png" alt="search">
-        </div>
+            <li><a href="../dashboard/monitor.php" class="monitor"><img src="../picture/component/monitor.png" alt="monitor">Thiết
+                    bị</a></li>
 
-        <a href="../dashboard/add/addservice.php" class="add">
-            <img src="../picture/component/add-square.png" alt="">
-            <p>Thêm dịch vụ</p>
-        </a>
-    </div>
+            <li><a href="" id='service'><img src="../picture/component/service.png" alt="service">Dịch vụ</a></li>
 
-    <ul>
-        <img src="../picture/Logo alta.png" alt="logo" class="logo">
-        <li><a href="../dashboard/index.php" class="dashboard"><img src="../picture/component/dashboard.png"
-                    alt="dashboard">
-                Dashboard</a>
-        </li>
-        <li><a href="../dashboard/monitor.php" class="monitor"><img src="../picture/component/monitor.png"
-                    alt="monitor">Thiết
-                bị</a></li>
-        <li><a href="" id='service'><img src="../picture/component/service.png" alt="service">Dịch vụ</a></li>
-        <li><a href="../dashboard/progression.php" class="progression"><img src="../picture/component/progression.png"
-                    alt="progression">Cấp
-                số</a>
-        </li>
-        <li><a href="../dashboard/report.php" class="report"><img src="../picture/component/report.png" alt="report">Báo
-                cáo</a></li>
+            <li><a href="../dashboard/progression.php" class="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
+                    số</a>
+            </li>
 
-        <li class="setting"><a href="" class="setting"><img src="../picture/component/setting.png" alt="setting">Cài đặt
-                hệ
-                thống<img src="../picture/component/dropdown.png" alt="dropdown"></a>
-            <ul class="submenu">
-                <li>
-                    <a href="../dashboard/submenu/mrole.php">
-                        Quản lý vai trò
-                    </a>
-                </li>
-                <li>
-                    <a href="../dashboard/submenu/maccount.php">
-                        Quản lý tài khoản
-                    </a>
-                </li>
-                <li>
-                    <a href="../dashboard/submenu/userlog.php">
-                        Nhật ký người dùng
-                    </a>
-                </li>
-            </ul>
-        </li>
+            <li><a href="../dashboard/report.php" class="report"><img src="../picture/component/report.png" alt="report">Báo
+                    cáo</a></li>
 
-        <li><a href="../logout.php" class="logout"><img src="../picture/component/logout.png" alt="logout">Đăng
-                xuất</a>
-        </li>
-    </ul>
+            <li class="setting"><a href="" class="setting"><img src="../picture/component/setting.png" alt="setting">Cài đặt
+                    hệ
+                    thống<img src="../picture/component/dropdown.png" alt="dropdown"></a>
+                <ul class="submenu">
+                    <li>
+                        <a href="../dashboard/submenu/mrole.php">
+                            Quản lý vai trò
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../dashboard/submenu/maccount.php">
+                            Quản lý tài khoản
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../dashboard/submenu/userlog.php">
+                            Nhật ký người dùng
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-    <main id="mainmonitor">
-        <table style="width:100%" class="tablemonitor">
-            <tr>
-                <th>Mã dịch vụ</th>
-                <th>Tên dịch vụ</th>
-                <th>Mô tả</th>
-                <th>Trạng thái Hoạt động</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-            </tr>
-        </table>
-    </main>
+            <li><a href="../logout.php" class="logout"><img src="../picture/component/logout.png" alt="logout">Đăng
+                    xuất</a>
+            </li>
+        </ul>
+
+        <main id="mainmonitor">
+            <table style="width:100%" class="tablemonitor">
+                <tr>
+                    <th>Mã dịch vụ</th>
+                    <th>Tên dịch vụ</th>
+                    <th>Mô tả</th>
+                    <th>Trạng thái Hoạt động</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td><a href="../dashboard/detail/serviceDetail.php">Chi tiết</a></td>
+                    <td>Germany</td>
+                </tr>
+            </table>
+        </main>
     <?php
 } else if (isset($_SESSION['user_login'])) {
     header("location:../user/index.php");
@@ -171,6 +172,6 @@ if (isset($_SESSION['admin_login'])) {
 }
     ?>
     <script src="../js/dashboard.js"></script>
-</body>
+    </body>
 
-</html>
+    </html>

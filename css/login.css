@@ -753,3 +753,7 @@ img.wrongpw {
     top: 0%;
     bottom: 0%;
 }
+
+.required {
+    color: red;
+}

@@ -19,10 +19,11 @@ if (isset($_SESSION['admin_login'])) {
             $name = $row['name'];
             $picture = $row['picture'];
         } else {
-            echo "0 results";
+            header("location:../../logout.php");
             exit;
         }
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,15 +73,15 @@ if (isset($_SESSION['admin_login'])) {
     <div>
         <p class="maccounttext">Danh sách tài khoản</p>
         <div class="activedropdown">
-            <p>Tên vai trò</p>
-            <select name="" id="activedropdown">
-                <option value="" selected="selected">Tất cả</option>
+            <p>Trạng thái</p>
+            <select name="" onchange="location = this.value;" id="activedropdown">
+                <option value="maccount.php">Tất cả</option>
                 <option value="">Hoạt động</option>
                 <option value="">Ngưng hoạt động</option>
             </select>
         </div>
 
-        <div class="search">
+        <div class=" search">
             <p>Từ khóa</p>
             <input type="text" name="search" placeholder="Nhập từ khóa">
             <img src="../../picture/component/search.png" alt="search">
@@ -151,17 +152,85 @@ if (isset($_SESSION['admin_login'])) {
                 <th>Trạng thái Hoạt động</th>
                 <th></th>
             </tr>
+            <?php
+                $sql_pagination = 'SELECT count(userID) as total from user';
+                $result_pagination = mysqli_query($conn, $sql_pagination);
+                $row_pagination = mysqli_fetch_assoc($result_pagination);
+                $total_records = $row_pagination['total'];
+
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $limit = 8;
+
+                $total_page = ceil($total_records / $limit);
+                if ($current_page > $total_page) {
+                    $current_page = $total_page;
+                } else if ($current_page < 1) {
+                    $current_page = 1;
+                }
+                $start = ($current_page - 1) * $limit;
+
+                $query = "SELECT * FROM user LIMIT $start, $limit";
+                $result_list = mysqli_query($conn, $query);
+
+
+                $query = "SELECT * FROM user";
+                $data = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result_list) > 0) {
+                    while ($row = mysqli_fetch_assoc($result_list)) {
+                        $userid = $row['userID'];
+                        $Name = $row['name'];
+                        $username = $row['username'];
+                        $phone = $row['phone'];
+                        $email = $row['email'];
+                        $roleID = $row['roleID'];
+                        $status = $row['status'];
+
+                        $active = '<img src="../../picture/component/EllipseGreen.png" alt="active">';
+
+                        $stopActive = '<img src="../../picture/component/EllipseRed.png" alt="active">';
+
+                        $sql_role = "SELECT roleName FROM user, role WHERE $roleID = role.roleID";
+                        $query_role = mysqli_query($conn, $sql_role);
+                        while ($row_role = mysqli_fetch_assoc($query_role)) {
+                            $roleName = $row_role['roleName'];
+                        }
+                ?>
+
             <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Maria Anders</td>
+                <td><?php echo $username; ?></td>
+                <td><?php echo $Name; ?></td>
+                <td><?php echo $phone; ?></td>
+                <td><?php echo $email; ?></td>
+                <td><?php echo $roleName; ?></td>
+                <td><?php echo ($status == "Hoạt động") ? $active . $status : $stopActive . $status; ?></td>
+                <td><a href="../../dashboard/add/addaccount.php?id=<?php echo $userid; ?>">Cập nhật</a></td>
             </tr>
+            <?php }
+                }
+                ?>
         </table>
+
     </main>
+
+    <div class="pagination">
+        <?php
+            if ($current_page > 1 && $total_page > 1) {
+                echo '<a href="maccount.php?page=' . ($current_page - 1) . '">Prev</a> | ';
+            }
+
+            for ($i = 1; $i <= $total_page; $i++) {
+                if ($i == $current_page) {
+                    echo '<span>' . $i . '</span> | ';
+                } else {
+                    echo '<a href="maccount.php?page=' . $i . '">' . $i . '</a> | ';
+                }
+            }
+
+            if ($current_page < $total_page && $total_page > 1) {
+                echo '<a href="maccount.php?page=' . ($current_page + 1) . '">Next</a> | ';
+            }
+            ?>
+    </div>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {
