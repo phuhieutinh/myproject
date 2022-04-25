@@ -128,7 +128,7 @@ if (isset($_SESSION['admin_login'])) {
             </li>
         </ul>
 
-        <main id="mainmrole">
+        <main id="mainmrole" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
                     <th>Tên vai trò</th>

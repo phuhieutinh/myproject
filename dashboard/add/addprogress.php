@@ -23,7 +23,33 @@ if (isset($_SESSION['admin_login'])) {
             exit;
         }
     }
+
+    // add progress
+    $progressID_form = 'SELECT max(id) + 1 FROM progression';
+
+    if (isset($_POST['submit'])) {
+        $progress_ID = $_POST['progressID'];
+        $serviceID = $_POST['progress_service'];
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $sell_date = date('Y-m-d H:i:s');
+        $use_date = date('Y-m-d 17:30:00');
+
+        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date')";
+
+        if (mysqli_query($conn, $sql)) {
 ?>
+
+            <body onload="addpopup()">
+
+            </body>
+    <?php
+        } else {
+            error_reporting(-1);
+            echo '<script>alert("Bạn chưa chọn dịch vụ")</script>';
+        }
+    }
+
+    ?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -79,23 +105,37 @@ if (isset($_SESSION['admin_login'])) {
 
             <main id="addprogress">
                 <h1 class="top">CẤP SỐ MỚI</h1>
-                <form action="" method="POST" id="addprogress">
+                <form action="addprogress.php" method="POST" id="addprogress">
 
                     <h2 class="top">Dịch vụ khách hàng lựa chọn</h2>
 
-                    <select name="" id="addprogress-service">
-                        <option value="" class="deco" disabled selected>Chọn Loại thiết bị</option>
-                        <option value="">Kiosk</option>
-                        <option value="">Display counter</option>
+                    <input type="hidden" name="progressID" value="<?php echo $progressID_form ?>" ?>
+
+                    <select name="progress_service" id="addprogress-service">
+                        <option value="" class="deco" disabled selected>Chọn dịch vụ</option>
+                        <?php
+                        $sql_service = "SELECT * FROM service";
+                        $query_service = mysqli_query($conn, $sql_service);
+
+                        while ($row_service = mysqli_fetch_assoc($query_service)) {
+                            $serviceID_select = $row_service['serviceID'];
+                            $serviceName = $row_service['serviceName'];
+
+                            echo "<option value='$serviceID_select'>$serviceName</option>";
+                        }
+                        ?>
                     </select>
 
                     <div class="btn">
-                        <div onclick="addpopup()">
-                            <input type=" submit" class="submit" value="In số">
-                        </div>
+                        <input type="submit" class="submit" value="In số" name="submit">
+
+
                         <a href="../../dashboard/progression.php" class="cancel">Hủy bỏ</a>
                     </div>
+
                 </form>
+
+
 
             </main>
 
@@ -146,21 +186,42 @@ if (isset($_SESSION['admin_login'])) {
             </ul>
         </div>
 
+        <?php
+        $sql_popup = "SELECT * FROM progression";
+        $query_popup = mysqli_query($conn, $sql_popup);
+        while ($row_popup = mysqli_fetch_assoc($query_popup)) {
+            $serviceID_popup = $row_popup['serviceID'];
+            $progressID_popup = $row_popup['progressID'];
+
+            $sell_date_popup = date_create($row_popup['sellDate']);
+            $sell_date_format = date_format($sell_date_popup, "H:i d/m/Y");
+
+            $use_date_popup = date_create($row_popup['useDate']);
+            $use_date_format = date_format($use_date_popup, "H:i d/m/Y");
+
+            $sql_service_popup = "SELECT serviceName FROM progression, service WHERE $serviceID_popup = service.serviceID";
+            $query_service_popup = mysqli_query($conn, $sql_service_popup);
+            while ($row_service_popup = mysqli_fetch_assoc($query_service_popup)) {
+                $serviceName_popup = $row_service_popup['serviceName'];
+            }
+        }
+        ?>
+
         <span class="popuptext-progress" id="popupProgress">
             <a href="addprogress.php" class="iconx"><img src="../../picture/component/fi_x.png" alt=""></a>
             <h1>Số thứ tự được cấp</h1>
-            <p>2001201</p>
-            <h5>DV: Khám răng hàm mặt <h4>(tại quầy số 1)</h4>
+            <p><?php echo $progressID_popup ?></p>
+            <h5>DV: <?php echo $serviceName_popup; ?> <h4>(tại quầy số 1)</h4>
             </h5>
             <div class="footer">
                 <div class="order-time">
                     <label>Thời gian cấp: </label>
-                    <p>09:30 11/10/2021</p>
+                    <p><?php echo $sell_date_format; ?></p>
                 </div>
 
                 <div class="use-time">
                     <label>Hạn sử dụng: </label>
-                    <p>17:30 11/10/2021</p>
+                    <p><?php echo $use_date_format; ?></p>
                 </div>
             </div>
         </span>

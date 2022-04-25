@@ -1,7 +1,8 @@
 function myFunction() {
   var popup = document.getElementById("myPopup");
-  var nofication = document.getElementById("myNofication");
   popup.classList.toggle("show");
+
+  var nofication = document.getElementById("myNofication");
   nofication.classList.toggle("show");
 }
 

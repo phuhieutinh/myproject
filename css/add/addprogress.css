@@ -113,7 +113,7 @@ main#addprogress form#addprogress div.btn {
     top: 258px;
 }
 
-main#addprogress form#addprogress div.btn div {
+main#addprogress form#addprogress div {
     position: absolute;
     width: 115px;
     height: 48px;
@@ -121,7 +121,7 @@ main#addprogress form#addprogress div.btn div {
     top: 0px;
 }
 
-form#addprogress div.btn div input.submit {
+form#addprogress div.btn input.submit {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -129,9 +129,9 @@ form#addprogress div.btn div input.submit {
     padding: 10px 24px;
 
     position: absolute;
-    width: 65px;
-    height: 25px;
-    left: -9px;
+    width: 115px;
+    height: 48px;
+    left: 161px;
     top: 0px;
 
     /* Orange/$-Orange-400 */
@@ -322,6 +322,7 @@ span.popuptext-progress.show p {
     font-weight: 800;
     font-size: 56px;
     line-height: 60px;
+    text-align: center;
     /* identical to box height, or 107% */
 
 

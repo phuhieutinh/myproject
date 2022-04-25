@@ -258,6 +258,26 @@ a.progression {
     margin: 0px 8px;
 }
 
+main#report_page {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 1129px;
+    height: 565px;
+    left: 271px;
+    top: 199px;
+
+    /* Shadowbox */
+
+    filter: drop-shadow(2px 2px 8px rgba(232, 239, 244, 0.8));
+    border-radius: 12px;
+}
+
 li a.report {
     position: absolute;
     width: 200px;
@@ -581,7 +601,21 @@ header {
     top: 20px;
 }
 
-main {
+main.importance {
+    position: absolute;
+    width: 1112px;
+    height: 397px;
+    left: 300px;
+    top: 168px;
+
+    /* White */
+
+    background: #FFFFFF;
+    box-shadow: 0px 2px 6px rgba(219, 219, 219, 0.5);
+    border-radius: 12px;
+}
+
+main#info {
     position: absolute;
     width: 1112px;
     height: 397px;
@@ -949,14 +983,6 @@ header p.username {
     top: 40px;
 
     border-radius: 318px;
-}
-
-img.iconcamera {
-    position: absolute;
-    width: 45px;
-    height: 45px;
-    left: 200px;
-    top: 220px;
 }
 
 main p.username {
@@ -1650,6 +1676,26 @@ a#maccount {
     order: 0;
     flex-grow: 0;
     margin: 0px 8px;
+}
+
+main#userlog {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 1129px;
+    height: 565px;
+    left: 271px;
+    top: 199px;
+
+    /* Shadowbox */
+
+    filter: drop-shadow(2px 2px 8px rgba(232, 239, 244, 0.8));
+    border-radius: 12px;
 }
 
 a#userlog {
@@ -2518,7 +2564,219 @@ div#add-page p.addtop-page {
 }
 
 div.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
     position: absolute;
+    width: 288px;
+    height: 32px;
     left: 1051px;
     top: 791px;
+}
+
+div.pagination span,
+a.pagination-box {
+    position: static;
+    width: 32px;
+    height: 32px;
+    left: 0px;
+    top: 0px;
+
+    border-radius: 4px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 31px;
+    text-align: center;
+    /* identical to box height */
+
+
+    /* gray blue/gray 4 - place holder */
+
+    color: #7E7D88;
+    text-decoration: none;
+}
+
+div.pagination a.pagination-box img.pagination-img {
+    position: static;
+    width: 32px;
+    height: 32px;
+    left: 0px;
+    top: 0px;
+}
+
+div.pagination span.pagination-active {
+    /* Orange/$-Orange-500 */
+
+    background: #FF7506;
+    color: #FFFFFF;
+}
+
+input#upload {
+    position: absolute;
+    width: 49px;
+    height: 49px;
+    left: 205px;
+    top: 231px;
+}
+
+span.img_file {
+    content: url("../picture/component/camera.png");
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    left: 200px;
+    top: 220px;
+}
+
+main#main_dashboard {}
+
+div.chart_canvas {
+    position: absolute;
+    height: 484px;
+    width: 791px;
+    left: 267px;
+    top: 321px;
+
+    background: #FFFFFF;
+    border-radius: 12px;
+}
+
+canvas#myChart {
+    position: absolute;
+    display: block;
+    height: 401px !important;
+    width: 791px !important;
+    top: 85px;
+}
+
+div.chart_canvas h1 {
+    position: absolute;
+    left: 3.03%;
+    right: 67.64%;
+    top: 1%;
+    bottom: 88.84%;
+
+    /* 20/20 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-500 */
+
+    color: #282739;
+}
+
+div.chart_canvas p {
+    position: absolute;
+    left: 3.03%;
+    right: 84.45%;
+    top: 5.99%;
+    bottom: 83.68%;
+
+    /* 14/14 Reg */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-200 placeholder */
+
+    color: #A9A9B0;
+}
+
+div.chart_canvas div.date_chart {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+
+    position: absolute;
+    left: 73.7%;
+    right: 3.03%;
+    top: 4.96%;
+    bottom: 86.36%;
+}
+
+div.chart_canvas div.date_chart p {
+
+    position: static;
+    width: 70px;
+    height: 24px;
+    left: 0px;
+    top: 9px;
+    /* 16/16 Semi */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-500 */
+
+    color: #282739;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+}
+
+div.chart_canvas div.date_chart select#date_chart {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+
+    position: static;
+    left: 42.39%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    /* white */
+
+    background: #FFFFFF;
+    /* Gray/$-gray-100 */
+
+    border: 1.5px solid #D4D4D7;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 8px;
 }

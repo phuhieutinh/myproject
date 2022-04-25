@@ -21,12 +21,27 @@ if (isset($_SESSION['admin_login'])) {
             $phone = $row['phone'];
             $pw = $row['pw'];
             $email = $row['email'];
-            $role = $row['role'];
+            $roleID = $row['roleID'];
             $picture = $row['picture'];
+
+            $sql_role = "SELECT roleName FROM user, role WHERE $roleID = role.roleID";
+            $query_role = mysqli_query($conn, $sql_role);
+            while ($row_role = mysqli_fetch_assoc($query_role)) {
+                $roleName = $row_role['roleName'];
+            }
         } else {
             header("location:../logout.php");
             exit;
         }
+    }
+
+    if (isset($_POST['submit'])) {
+        // move the file to the server
+        $file_tmp = $_FILES['fileName']['tmp_name'];
+        $name_file = $_FILES['fileName']['name'];
+        // move the file to the server
+        move_uploaded_file($file_tmp, '/user/' . $name_file);
+        // header("location:../dashboard/info.php");
     }
 
 ?>
@@ -109,11 +124,19 @@ if (isset($_SESSION['admin_login'])) {
             </li>
         </ul>
 
-        <main>
+        <main id="info">
             <div id="pic">
                 <img src="<?php echo "../" . $picture ?>" alt="" class="bigpicture">
                 <div>
-                    <img src="../picture/component/camera.png" alt="iconcamera" class="iconcamera">
+                    <form action="../function/upload_file.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="userid" value="<?php echo $userID ?>">
+
+                        <label for="upload">
+                            <span class="img_file" aria-hidden="true"></span>
+                            <input type="file" id="upload" style="display:none" name="fileupload">
+                        </label>
+                        <input type="submit" name="submit" value="Upload">
+                    </form>
                 </div>
                 <p class="main username"><?php echo $name ?></p>
             </div>
@@ -136,12 +159,12 @@ if (isset($_SESSION['admin_login'])) {
                     <input type="text" name="username" value="<?php echo $username ?>" class="fix" readonly>
                 </div>
                 <div class="password">
-                    <label for="password">mật khẩu</label>
-                    <input type="text" name="password" value="<?php echo $pw ?>" class="fix" readonly>
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" name="password" value="<?php echo $pw ?>" class="fix" readonly>
                 </div>
                 <div class="role">
-                    <label for="role">vai trò</label>
-                    <input type="text" name="role" value="<?php echo $role ?>" class="fix" readonly>
+                    <label for="role">Vai trò</label>
+                    <input type="text" name="role" value="<?php echo $roleName ?>" class="fix" readonly>
                 </div>
             </div>
         </main>

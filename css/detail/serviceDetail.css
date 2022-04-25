@@ -221,7 +221,7 @@ main#serviceDetail div.serviceName {
     width: 221px;
     height: 24px;
     left: 16px;
-    top: 94px;
+    top: 91px;
 }
 
 main#serviceDetail div.descriptive {
@@ -259,7 +259,7 @@ main#serviceDetail div h1 {
 
 main#serviceDetail div p {
     position: absolute;
-    width: 29px;
+    width: 209px;
     height: 24px;
     left: 125px;
     top: 19px;

@@ -144,7 +144,7 @@ if (isset($_SESSION['admin_login'])) {
             </li>
         </ul>
 
-        <main id="mainmonitor">
+        <main id="mainmonitor" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
                     <th>Mã dịch vụ</th>
@@ -154,16 +154,73 @@ if (isset($_SESSION['admin_login'])) {
                     <th></th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td><a href="../dashboard/detail/serviceDetail.php">Chi tiết</a></td>
-                    <td>Germany</td>
-                </tr>
+
+                <?php
+                $sql_pagination = 'SELECT count(serviceID) as total from service';
+                $result_pagination = mysqli_query($conn, $sql_pagination);
+                $row_pagination = mysqli_fetch_assoc($result_pagination);
+                $total_records = $row_pagination['total'];
+
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $limit = 8;
+
+                $total_page = ceil($total_records / $limit);
+                if ($current_page > $total_page) {
+                    $current_page = $total_page;
+                } else if ($current_page < 1) {
+                    $current_page = 1;
+                }
+                $start = ($current_page - 1) * $limit;
+
+                $query = "SELECT * FROM service LIMIT $start, $limit";
+                $result_list = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result_list) > 0) {
+                    while ($row = mysqli_fetch_assoc($result_list)) {
+                        $serviceID = $row['serviceID'];
+                        $serviceName = $row['serviceName'];
+                        $descriptive = $row['descriptive'];
+                        $serviceStatus = $row['serviceStatus'];
+
+                        $active = '<img src="../picture/component/EllipseGreen.png" alt="active">';
+
+                        $stopActive = '<img src="../picture/component/EllipseRed.png" alt="active">';
+                ?>
+                        <tr>
+                            <td><?php echo $serviceID; ?></td>
+                            <td><?php echo $serviceName; ?></td>
+                            <td><?php echo $descriptive; ?></td>
+                            <td><?php echo ($serviceStatus == "Hoạt động") ? $active . $serviceStatus : $stopActive . $serviceStatus; ?>
+                            </td>
+                            <td><a href="../dashboard/detail/serviceDetail.php?id=<?php echo $serviceID ?>">Chi tiết</a></td>
+                            <td><a href="../dashboard/add/addservice.php?id=<?php echo $serviceID; ?>">Cập nhật</a></td>
+                        </tr>
+                <?php }
+                }
+                ?>
             </table>
         </main>
+
+        <div class="pagination">
+            <?php
+            if ($current_page > 1 && $total_page > 1) {
+                echo '<a class="pagination-box" href="service.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../picture/component/fi_left.png" alt="left"></a>';
+            }
+
+            for ($i = 1; $i <= $total_page; $i++) {
+                if ($i == $current_page) {
+                    echo '<span class="pagination-active">' . $i . '</span> ';
+                } else {
+                    echo '<a class="pagination-box" href="service.php?page=' . $i . '">' . $i . '</a> ';
+                }
+            }
+
+            if ($current_page < $total_page && $total_page > 1) {
+                echo '<a class="pagination-box" href="service.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../picture/component/fi_right.png" alt="right"></a>';
+            }
+            ?>
+        </div>
+
     <?php
 } else if (isset($_SESSION['user_login'])) {
     header("location:../user/index.php");
