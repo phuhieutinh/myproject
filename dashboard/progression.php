@@ -110,8 +110,10 @@ if (isset($_SESSION['admin_login'])) {
 
             <div class="search">
                 <p>Từ khóa</p>
-                <input type="text" name="search" placeholder="Nhập từ khóa">
-                <img src="../picture/component/search.png" alt="search">
+                <form action="progression.php" method="POST">
+                    <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
+                    <button type="submit" id="submit" name="submit_search" class=""><img src="../picture/component/search.png" alt="search"></button>
+                </form>
             </div>
 
             <a href="../dashboard/add/addprogress.php" class="add">
@@ -196,7 +198,17 @@ if (isset($_SESSION['admin_login'])) {
                 }
                 $start = ($current_page - 1) * $limit;
 
-                $query = "SELECT * FROM progression LIMIT $start, $limit";
+                if (isset($_POST['submit_search'])) {
+                    $search = addslashes($_POST['search']);
+                    if (empty($search)) {
+                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR serviceName LIKE '%$search%' LIMIT $start, $limit";
+                    }
+                } else {
+                    $query = "SELECT * FROM progression LIMIT $start, $limit";
+                }
+
                 $result_list = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result_list) > 0) {
@@ -220,9 +232,19 @@ if (isset($_SESSION['admin_login'])) {
                             $serviceName = $row_service['serviceName'];
                         }
 
-                        $active = '<img src="../picture/component/EllipseGreen.png" alt="active">';
+                        $waiting = '<img src="../picture/component/EllipseBlue.png" alt="active">';
 
-                        $stopActive = '<img src="../picture/component/EllipseRed.png" alt="active">';
+                        $done = '<img src="../picture/component/EllipseGray.png" alt="active">';
+
+                        $pass = '<img src="../picture/component/EllipseRed.png" alt="active">';
+
+                        if ($status == "Đang chờ") {
+                            $status_master = $waiting . $status;
+                        } elseif ($status == "Đã sử dụng") {
+                            $status_master = $done . $status;
+                        } else {
+                            $status_master = $pass . $status;
+                        }
                 ?>
 
                         <tr>
@@ -231,7 +253,7 @@ if (isset($_SESSION['admin_login'])) {
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $sell_date_format; ?></td>
                             <td><?php echo $use_date_format; ?></td>
-                            <td><?php echo $status; ?></td>
+                            <td><?php echo $status_master ?></td>
                             <td><?php echo $supply; ?></td>
                             <td><a href="../dashboard/detail/progressDetail.php?id=<?php echo $progressID ?>">Chi tiết</a></td>
                         </tr>

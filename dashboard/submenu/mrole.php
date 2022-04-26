@@ -75,8 +75,11 @@ if (isset($_SESSION['admin_login'])) {
 
         <div id="mrolesearch" class="search">
             <p>Từ khóa</p>
-            <input type="text" name="search" placeholder="Nhập từ khóa">
-            <img src="../../picture/component/search.png" alt="search">
+            <form action="mrole.php" method="POST">
+                <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
+                <button type="submit" id="submit" name="submit_search" class=""><img src="../../picture/component/search.png" alt="search"></button>
+            </form>
+
         </div>
 
         <a href="../../dashboard/add/addrole.php" class="add">
@@ -137,10 +140,35 @@ if (isset($_SESSION['admin_login'])) {
                     <th></th>
                 </tr>
                 <?php
-                $query = "SELECT * FROM role";
-                $data = mysqli_query($conn, $query);
-                if (mysqli_num_rows($data) > 0) {
-                    while ($row = mysqli_fetch_assoc($data)) {
+                $sql_pagination = 'SELECT count(roleID) as total from role';
+                $result_pagination = mysqli_query($conn, $sql_pagination);
+                $row_pagination = mysqli_fetch_assoc($result_pagination);
+                $total_records = $row_pagination['total'];
+
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $limit = 5;
+
+                $total_page = ceil($total_records / $limit);
+                if ($current_page > $total_page) {
+                    $current_page = $total_page;
+                } else if ($current_page < 1) {
+                    $current_page = 1;
+                }
+                $start = ($current_page - 1) * $limit;
+
+                if (isset($_POST['submit_search'])) {
+                    $search = $_POST['search'];
+                    if (empty($search)) {
+                        $query = "SELECT * FROM role LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM role WHERE roleName LIKE '%$search%' LIMIT $start, $limit";
+                    }
+                } else {
+                    $query = "SELECT * FROM role LIMIT $start, $limit";
+                }
+                $result_list = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result_list) > 0) {
+                    while ($row = mysqli_fetch_assoc($result_list)) {
                         $roleID = $row['roleID'];
                         $roleName = $row['roleName'];
                         $quantity = $row['quantity'];
@@ -157,6 +185,26 @@ if (isset($_SESSION['admin_login'])) {
                 ?>
             </table>
         </main>
+
+        <div class="pagination mrole">
+            <?php
+            if ($current_page > 1 && $total_page > 1) {
+                echo '<a class="pagination-box" href="mrole.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
+            }
+
+            for ($i = 1; $i <= $total_page; $i++) {
+                if ($i == $current_page) {
+                    echo '<span class="pagination-active">' . $i . '</span> ';
+                } else {
+                    echo '<a class="pagination-box" href="mrole.php?page=' . $i . '">' . $i . '</a> ';
+                }
+            }
+
+            if ($current_page < $total_page && $total_page > 1) {
+                echo '<a class="pagination-box" href="mrole.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';
+            }
+            ?>
+        </div>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {

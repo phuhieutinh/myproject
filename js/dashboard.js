@@ -17,3 +17,8 @@ function addpopup() {
 $(".chosen-select").chosen({
   no_results_text: "Oops, nothing found!",
 });
+
+function popup_info() {
+  var progress = document.getElementById("popupInfo");
+  progress.classList.toggle("show");
+}

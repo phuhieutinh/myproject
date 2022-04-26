@@ -177,10 +177,54 @@ if (isset($_SESSION['admin_login'])) {
                         <th style="width:50%">Số thứ tự</th>
                         <th style="width:50%">Trạng thái</th>
                     </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                    </tr>
+
+                    <?php
+                    $sql_pagination = "SELECT count(progressID) as total from progression WHERE serviceID = $serviceID";
+                    $result_pagination = mysqli_query($conn, $sql_pagination);
+                    $row_pagination = mysqli_fetch_assoc($result_pagination);
+                    $total_records = $row_pagination['total'];
+
+                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                    $limit = 7;
+
+                    $total_page = ceil($total_records / $limit);
+                    if ($current_page > $total_page) {
+                        $current_page = $total_page;
+                    } else if ($current_page < 1) {
+                        $current_page = 1;
+                    }
+                    $start = ($current_page - 1) * $limit;
+
+                    $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                    $result_list = mysqli_query($conn, $query);
+
+                    if (mysqli_num_rows($result_list) > 0) {
+                        while ($row_progress = mysqli_fetch_assoc($result_list)) {
+                            $progressID = $row_progress['progressID'];
+                            $status = $row_progress['status'];
+
+                            $waiting = '<img src="../../picture/component/EllipseBlue.png" alt="active">';
+
+                            $done = '<img src="../../picture/component/EllipseGray.png" alt="active">';
+
+                            $pass = '<img src="../../picture/component/EllipseRed.png" alt="active">';
+
+                            if ($status == "Đang chờ") {
+                                $status_master = $waiting . $status;
+                            } elseif ($status == "Đã sử dụng") {
+                                $status_master = $done . $status;
+                            } else {
+                                $status_master = $pass . $status;
+                            }
+                    ?>
+
+                            <tr>
+                                <td><?php echo $progressID; ?></td>
+                                <td><?php echo $status_master ?></td>
+                            </tr>
+                    <?php }
+                    }
+                    ?>
                 </table>
             </div>
 
@@ -251,6 +295,26 @@ if (isset($_SESSION['admin_login'])) {
                     xuất</a>
             </li>
         </ul>
+
+        <div class="pagination">
+            <?php
+            if ($current_page > 1 && $total_page > 1) {
+                echo '<a class="pagination-box" href="serviceDetail.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
+            }
+
+            for ($i = 1; $i <= $total_page; $i++) {
+                if ($i == $current_page) {
+                    echo '<span class="pagination-active">' . $i . '</span> ';
+                } else {
+                    echo '<a class="pagination-box" href="serviceDetail.php?page=' . $i . '">' . $i . '</a> ';
+                }
+            }
+
+            if ($current_page < $total_page && $total_page > 1) {
+                echo '<a class="pagination-box" href="serviceDetail.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';
+            }
+            ?>
+        </div>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {

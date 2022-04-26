@@ -55,22 +55,6 @@ if (isset($_SESSION['admin_login'])) {
     <body>
         <header>
             <p class="topbar">Dashboard</p>
-            <div>
-                <div class="popup" onclick="myFunction()">
-                    <img src="../picture/component/nofication.png" alt="nofication" class="nofication" id="myNofication">
-                    <span class="popuptext" id="myPopup">
-                        <div class="popuptop">
-                            <p>Thông báo</p>
-                        </div>
-                        <a href="" class="popuptable">
-                            <div class="info">
-                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
-                                <p class="infotime">thời gian nhận số</p>
-                            </div>
-                        </a>
-                    </span>
-                </div>
-            </div>
 
             <a href="info.php">
                 <div id="info">

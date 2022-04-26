@@ -173,16 +173,26 @@ if (isset($_SESSION['admin_login'])) {
                             $serviceName = $row_service['serviceName'];
                         }
 
-                        $active = '<img src="../picture/component/EllipseGreen.png" alt="active">';
+                        $waiting = '<img src="../picture/component/EllipseBlue.png" alt="active">';
 
-                        $stopActive = '<img src="../picture/component/EllipseRed.png" alt="active">';
+                        $done = '<img src="../picture/component/EllipseGray.png" alt="active">';
+
+                        $pass = '<img src="../picture/component/EllipseRed.png" alt="active">';
+
+                        if ($status == "Đang chờ") {
+                            $status_master = $waiting . $status;
+                        } elseif ($status == "Đã sử dụng") {
+                            $status_master = $done . $status;
+                        } else {
+                            $status_master = $pass . $status;
+                        }
                 ?>
 
                         <tr>
                             <td><?php echo $progressID; ?></td>
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $sell_date_format; ?></td>
-                            <td><?php echo $status; ?></td>
+                            <td><?php echo $status_master; ?></td>
                             <td><?php echo $supply; ?></td>
                         </tr>
 

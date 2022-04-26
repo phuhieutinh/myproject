@@ -39,9 +39,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (mysqli_query($conn, $sql)) {
-        // header('location:../dashboard/monitor.php');
-        echo "update successfully <a href=''>Back to page</a>";
-        echo $array_newdata;
+        header('location:../dashboard/monitor.php');
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

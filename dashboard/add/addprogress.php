@@ -33,8 +33,9 @@ if (isset($_SESSION['admin_login'])) {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $sell_date = date('Y-m-d H:i:s');
         $use_date = date('Y-m-d 17:30:00');
+        $status = "Đang chờ";
 
-        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date')";
+        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate, status) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date', '$status')";
 
         if (mysqli_query($conn, $sql)) {
 ?>

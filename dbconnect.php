@@ -12,6 +12,7 @@ function connect_db()
     // check conection
     if (!$conn) {
         die("Connection failed" . mysqli_connect_error());
+    } else {
+        return $conn;
     }
-    return $conn;
 }
