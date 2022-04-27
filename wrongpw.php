@@ -8,15 +8,42 @@ session_start();
 if (isset($_POST["username"]) && isset($_POST["password"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    echo $username . "</br>" . $password . "</br>";
 
     if ($username && $password) {
         $sql = "SELECT * FROM user WHERE username = '$username' AND pw = '$password'";
+
         $query = mysqli_query($conn, $sql);
         if (mysqli_num_rows($query) == 0) {
             header("location: wrongpw.php");
         } else {
-            header("location: dashboard/info.php");
+            while ($row = mysqli_fetch_assoc($query)) {
+                $userID = $row['userID'];
+                $roleID = $row['roleID'];
+            }
+            $sql_role = "SELECT roleName FROM user, role WHERE $roleID = role.roleID";
+            $query_role = mysqli_query($conn, $sql_role);
+            while ($row_role = mysqli_fetch_assoc($query_role)) {
+                $roleName = $row_role['roleName'];
+            }
+            switch ($roleName) {
+                case "Kế Toán";
+                case "Lễ Tân";
+                case "Bác sĩ";
+                case "Quản lý";
+                case "Admin";
+                    $_SESSION["admin_login"] = $username;
+                    $_SESSION["userID"] = $userID;
+                    header("location: dashboard/index.php");
+                    break;
+                case "User";
+                    $_SESSION["user_login"] = $username;
+                    $_SESSION["userID"] = $userID;
+                    header("location: user/index.php");
+                    break;
+                default;
+                    echo "wrong email or password or role";
+                    break;
+            }
         }
     }
 }

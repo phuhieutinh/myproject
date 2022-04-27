@@ -18,15 +18,24 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         } else {
             while ($row = mysqli_fetch_assoc($query)) {
                 $userID = $row['userID'];
-                $user_role = $row['user_role'];
+                $roleID = $row['roleID'];
             }
-            switch ($user_role) {
-                case "admin";
+            $sql_role = "SELECT roleName FROM user, role WHERE $roleID = role.roleID";
+            $query_role = mysqli_query($conn, $sql_role);
+            while ($row_role = mysqli_fetch_assoc($query_role)) {
+                $roleName = $row_role['roleName'];
+            }
+            switch ($roleName) {
+                case "Kế Toán";
+                case "Lễ Tân";
+                case "Bác sĩ";
+                case "Quản lý";
+                case "Admin";
                     $_SESSION["admin_login"] = $username;
                     $_SESSION["userID"] = $userID;
                     header("location: dashboard/index.php");
                     break;
-                case "user";
+                case "User";
                     $_SESSION["user_login"] = $username;
                     $_SESSION["userID"] = $userID;
                     header("location: user/index.php");
@@ -60,28 +69,28 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         header("location: user/index.php");
     } else {
     ?>
-    <img src="picture/Logo alta.png" alt="logo" class="logo">
-    <main>
+        <img src="picture/Logo alta.png" alt="logo" class="logo">
+        <main>
 
-    </main>
-    <div class="login">
-        <img src="picture/Group 341.png" alt="pic" class="pic">
-        <p class="system">Hệ Thống</p>
-        <p class="manage">Quản Lý Xếp Hàng</p>
+        </main>
+        <div class="login">
+            <img src="picture/Group 341.png" alt="pic" class="pic">
+            <p class="system">Hệ Thống</p>
+            <p class="manage">Quản Lý Xếp Hàng</p>
 
-    </div>
-    <form action="index.php" method="POST">
-        <div class="username">
-            <label for="username" class="username">Tên Đăng Nhập <span class="required">*</span></label>
-            <input type="text" name="username" class="username">
         </div>
-        <div class="pw">
-            <label for="password" class="pw">Mật Khẩu <span class="required">*</span></label>
-            <input type="password" name="password" class="pw">
-        </div>
-        <button type="submit" name="login" class="login">Đăng nhập</button>
-    </form>
-    <a href="login/forget.php" class="forget">Quên mật khẩu?</a>
+        <form action="index.php" method="POST">
+            <div class="username">
+                <label for="username" class="username">Tên Đăng Nhập <span class="required">*</span></label>
+                <input type="text" name="username" class="username">
+            </div>
+            <div class="pw">
+                <label for="password" class="pw">Mật Khẩu <span class="required">*</span></label>
+                <input type="password" name="password" class="pw">
+            </div>
+            <button type="submit" name="login" class="login">Đăng nhập</button>
+        </form>
+        <a href="login/forget.php" class="forget">Quên mật khẩu?</a>
     <?php
     }
     ?>

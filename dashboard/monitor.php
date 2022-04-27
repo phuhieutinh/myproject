@@ -1,5 +1,6 @@
 <?php
 require_once '../dbconnect.php';
+require '../function/function_nofication.php';
 
 session_start();
 
@@ -51,11 +52,7 @@ if (isset($_SESSION['admin_login'])) {
                         <div class="popuptop">
                             <p>Thông báo</p>
                         </div>
-                        <a href="" class="popuptable">
-                            <div class="info">
-                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
-                                <p class="infotime">thời gian nhận số</p>
-                            </div>
+                        <?php $nofication = nofication(); ?>div>
                         </a>
                     </span>
                 </div>
@@ -65,7 +62,7 @@ if (isset($_SESSION['admin_login'])) {
                 <div id="info">
                     <p class="hello">xin chào</p>
                     <p class="header username"><?php echo $name ?></p>
-                    <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
+                    <img src="<?php echo "../picture/avatar/" . $picture ?>" alt="smallpicture" class="picinfo">
                 </div>
             </a>
         </header>
@@ -74,26 +71,34 @@ if (isset($_SESSION['admin_login'])) {
             <p class="managetext">Danh sách thiết bị</p>
             <div class="activedropdown">
                 <p>Trạng thái hoạt động</p>
-                <select name="" id="activedropdown">
-                    <option value="" selected="selected">Tất cả</option>
-                    <option value="">Hoạt động</option>
-                    <option value="">Ngưng hoạt động</option>
-                </select>
+                <form action="monitor.php" method="POST">
+                    <select name="search_select" id="activedropdown" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                    </select>
+                </form>
             </div>
 
             <div class="connectdropdown">
                 <p>Trạng thái kết nối</p>
-                <select name="" id="connectdropdown">
-                    <option value="" selected="selected">Tất cả</option>
-                    <option value="">Kết nối</option>
-                    <option value="">Mất Kết nối</option>
-                </select>
+                <form action="monitor.php" method="POST">
+                    <select name="search_select" id="connectdropdown" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+                        <option value="Kết nối">Kết nối</option>
+                        <option value="Mất Kết nối">Mất Kết nối</option>
+                    </select>
+                </form>
             </div>
 
             <div class="search">
                 <p>Từ khóa</p>
-                <input type="text" name="search" placeholder="Nhập từ khóa">
-                <img src="../picture/component/search.png" alt="search">
+                <form action="monitor.php" method="POST">
+                    <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
+                    <button type="submit" id="submit" name="submit_search" class=""><img src="../picture/component/search.png" alt="search"></button>
+                </form>
             </div>
 
             <a href="../dashboard/add/addMonitor.php" class="add">
@@ -172,7 +177,26 @@ if (isset($_SESSION['admin_login'])) {
                 }
                 $start = ($current_page - 1) * $limit;
 
-                $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                if (isset($_POST['submit_search'])) {
+                    $search = addslashes($_POST['search']);
+                    if (empty($search)) {
+                        $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM monitor WHERE monitorName LIKE '%$search%' OR nameService LIKE '%$search%' LIMIT $start, $limit";
+                    }
+                } elseif (isset($_POST['search_select'])) {
+                    $search_select = addslashes($_POST['search_select']);
+                    if (empty($search_select)) {
+                        $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                    } elseif ($search_select == 'All') {
+                        $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM monitor WHERE monitorStatus LIKE '$search_select' OR statusConnect LIKE '$search_select' LIMIT $start, $limit";
+                    }
+                } else {
+                    $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                }
+
                 $result_list = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result_list) > 0) {
@@ -193,8 +217,8 @@ if (isset($_SESSION['admin_login'])) {
                             <td><?php echo $monitorCode; ?></td>
                             <td><?php echo $monitorName; ?></td>
                             <td><?php echo $ipaddress; ?></td>
-                            <td><?php echo $status_active; ?></td>
-                            <td><?php echo $status_connect; ?></td>
+                            <td><?php echo ($status_active == "Hoạt động") ? $active . $status_active : $stopActive . $status_active; ?></td>
+                            <td><?php echo ($status_connect == "Kết nối") ? $active . $status_connect : $stopActive . $status_connect; ?></td>
                             <td><?php echo $nameService; ?></td>
                             <td><a href="../dashboard/detail/monitorDetail.php?id=<?php echo $monitorID ?>">Chi tiết</a></td>
                             <td><a href="../dashboard/add/addMonitor.php?id=<?php echo $monitorID; ?>">Cập nhật</a></td>

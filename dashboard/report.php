@@ -1,5 +1,6 @@
 <?php
 require_once '../dbconnect.php';
+require '../function/function_nofication.php';
 
 session_start();
 
@@ -50,12 +51,7 @@ if (isset($_SESSION['admin_login'])) {
                         <div class="popuptop">
                             <p>Thông báo</p>
                         </div>
-                        <a href="" class="popuptable">
-                            <div class="info">
-                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
-                                <p class="infotime">thời gian nhận số</p>
-                            </div>
-                        </a>
+                        <?php $nofication = nofication(); ?>
                     </span>
                 </div>
             </div>
@@ -64,7 +60,7 @@ if (isset($_SESSION['admin_login'])) {
                 <div id="info">
                     <p class="hello">xin chào</p>
                     <p class="header username"><?php echo $name ?></p>
-                    <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
+                    <img src="<?php echo "../picture/avatar/" . $picture ?>" alt="smallpicture" class="picinfo">
                 </div>
             </a>
         </header>

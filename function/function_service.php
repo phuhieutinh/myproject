@@ -8,11 +8,12 @@ if (isset($_POST['submit'])) {
     $serviceID = $_POST['serviceID'];
     $serviceName = $_POST['servicename'];
     $descriptive = $_POST['descriptive'];
+    $serviceStatus = "Hoạt động";
 
     if ($update == 1) {
         $sql = "UPDATE service SET serviceName='$serviceName', descriptive='$descriptive' WHERE serviceID=$serviceID";
     } else {
-        $sql = "INSERT INTO service(serviceID ,serviceName, descriptive) VALUES('$serviceID', '$serviceName', '$descriptive')";
+        $sql = "INSERT INTO service(serviceID ,serviceName, descriptive, serviceStatus) VALUES('$serviceID', '$serviceName', '$descriptive', '$serviceStatus')";
     }
     echo 'hello';
 

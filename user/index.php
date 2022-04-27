@@ -35,8 +35,9 @@ if (isset($_SESSION['user_login'])) {
         $customerPhone = $_POST['customerPhone'];
         $email = $_POST['email'];
         $status = "Đang chờ";
+        $supply = "Kiosk";
 
-        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate, status, phone, email, customerName) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date', '$status', '$customerPhone', '$email', '$customerName')";
+        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate, status, phone, email, customerName, supply) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date', '$status', '$customerPhone', '$email', '$customerName', '$supply')";
 
         if (mysqli_query($conn, $sql)) {
 ?>

@@ -1,5 +1,6 @@
 <?php
 require_once '../../dbconnect.php';
+require '../../function/function_nofication.php';
 
 session_start();
 
@@ -51,12 +52,7 @@ if (isset($_SESSION['admin_login'])) {
                         <div class="popuptop">
                             <p>Thông báo</p>
                         </div>
-                        <a href="" class="popuptable">
-                            <div class="info">
-                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
-                                <p class="infotime">thời gian nhận số</p>
-                            </div>
-                        </a>
+                        <?php $nofication = nofication_sub(); ?>
                     </span>
                 </div>
             </div>
@@ -65,27 +61,33 @@ if (isset($_SESSION['admin_login'])) {
                 <div id="info">
                     <p class="hello">xin chào</p>
                     <p class="header username"><?php echo $name ?></p>
-                    <img src="<?php echo "../../" . $picture ?>" alt="smallpicture" class="picinfo">
+                    <img src="<?php echo "../../picture/avatar/" . $picture ?>" alt="smallpicture" class="picinfo">
                 </div>
             </a>
         </header>
 
         <div>
+
             <p class="maccounttext">Danh sách tài khoản</p>
             <div class="activedropdown">
                 <p>Trạng thái</p>
-                <select name="" onchange="location = this.value;" id="activedropdown">
-                    <option value="maccount.php">Tất cả</option>
-                    <option value="">Hoạt động</option>
-                    <option value="">Ngưng hoạt động</option>
-                </select>
+                <form action="maccount.php" method="POST">
+                    <select name="search_select" id="activedropdown" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                    </select>
+                </form>
             </div>
 
-            <div class=" search">
-                <p>Từ khóa</p>
-                <input type="text" name="search" placeholder="Nhập từ khóa">
-                <img src="../../picture/component/search.png" alt="search">
-            </div>
+            <form action="maccount.php" method="POST">
+                <div class=" search">
+                    <p>Từ khóa</p>
+                    <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
+                    <button type="submit" id="submit" name="submit_search" class=""><img src="../../picture/component/search.png" alt="search"></button>
+                </div>
+            </form>
 
             <a href="../../dashboard/add/addaccount.php" class="add">
                 <img src="../../picture/component/add-square.png" alt="">
@@ -153,7 +155,7 @@ if (isset($_SESSION['admin_login'])) {
                 $total_records = $row_pagination['total'];
 
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                $limit = 8;
+                $limit = 9;
 
                 $total_page = ceil($total_records / $limit);
                 if ($current_page > $total_page) {
@@ -163,12 +165,28 @@ if (isset($_SESSION['admin_login'])) {
                 }
                 $start = ($current_page - 1) * $limit;
 
-                $query = "SELECT * FROM user LIMIT $start, $limit";
+                if (isset($_POST['submit_search'])) {
+                    $search = addslashes($_POST['search']);
+
+                    if (empty($search)) {
+                        $query = "SELECT * FROM user LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM user WHERE name LIKE '$search' OR email LIKE '$search' OR username = '$search'  LIMIT $start, $limit";
+                    }
+                } elseif (isset($_POST['search_select'])) {
+                    $search_select = addslashes($_POST['search_select']);
+                    if (empty($search_select)) {
+                        $query = "SELECT * FROM user LIMIT $start, $limit";
+                    } elseif ($search_select == 'All') {
+                        $query = "SELECT * FROM user LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM user WHERE status LIKE '$search_select' LIMIT $start, $limit";
+                    }
+                } else {
+                    $query = "SELECT * FROM user LIMIT $start, $limit";
+                }
+
                 $result_list = mysqli_query($conn, $query);
-
-
-                // $query = "SELECT * FROM user";
-                // $data = mysqli_query($conn, $query);
                 if (mysqli_num_rows($result_list) > 0) {
                     while ($row = mysqli_fetch_assoc($result_list)) {
                         $userid = $row['userID'];

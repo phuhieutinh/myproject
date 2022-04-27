@@ -13,6 +13,8 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $monitorPassword = $_POST['monitorPassword'];
     $serviceID = $_POST['states'];
+    $status_active = "Hoạt động";
+    $status_connect = "Kết nối";
 
     $array_data = implode(",", $serviceID);
 
@@ -35,7 +37,7 @@ if (isset($_POST['submit'])) {
     if ($update == 1) {
         $sql = "UPDATE monitor SET monitorCode='$monitorcode', monitorName='$monitorname', ipaddress='$ipaddress', monitorType='$monitortype', username='$username', monitorPassword='$monitorPassword', serviceID='1', nameService='$array_newdata' WHERE monitorID=$monitorID";
     } else {
-        $sql = "INSERT INTO monitor(monitorID, monitorCode ,monitorName, ipaddress, monitorType, username, monitorPassword, serviceID, nameService) VALUES('$monitorID', '$monitorcode','$monitorname', '$ipaddress', '$monitortype', '$username', '$monitorPassword', '1', '$array_newdata')";
+        $sql = "INSERT INTO monitor(monitorID, monitorCode ,monitorName, ipaddress, monitorType, username, monitorPassword, serviceID, nameService, monitorStatus, statusConnect) VALUES('$monitorID', '$monitorcode','$monitorname', '$ipaddress', '$monitortype', '$username', '$monitorPassword', '1', '$array_newdata', '$status_active', '$status_connect')";
     }
 
     if (mysqli_query($conn, $sql)) {

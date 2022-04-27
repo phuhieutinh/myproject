@@ -837,12 +837,31 @@ a.popuptable {
     align-items: flex-start;
     padding: 0px;
 
-    position: absolute;
+    position: relative;
     width: 360px;
-    height: 880px;
+    height: 81px;
     left: 0px;
-    top: 48px;
+    top: 41px;
     text-decoration: none;
+}
+
+a.popuptable:hover {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 12px;
+
+    /* Orange/$-Orange-50 */
+
+    background: #FFF2E7;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 2px 0px;
 }
 
 a.popuptable div.info {
@@ -1804,7 +1823,7 @@ main#mainmonitor {
 
     position: absolute;
     width: 1112px;
-    height: 490px;
+    height: 525px;
     left: 270px;
     top: 244px;
 

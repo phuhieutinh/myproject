@@ -1,5 +1,6 @@
 <?php
 require_once '../dbconnect.php';
+require '../function/function_nofication.php';
 
 session_start();
 
@@ -50,12 +51,7 @@ if (isset($_SESSION['admin_login'])) {
                         <div class="popuptop">
                             <p>Thông báo</p>
                         </div>
-                        <a href="" class="popuptable">
-                            <div class="info">
-                                <p class="infoname">Người dùng Nguyễn Thị Thùy Dung</p>
-                                <p class="infotime">thời gian nhận số</p>
-                            </div>
-                        </a>
+                        <?php $nofication = nofication(); ?>
                     </span>
                 </div>
             </div>
@@ -64,7 +60,7 @@ if (isset($_SESSION['admin_login'])) {
                 <div id="info">
                     <p class="hello">xin chào</p>
                     <p class="header username"><?php echo $name ?></p>
-                    <img src="<?php echo "../" . $picture ?>" alt="smallpicture" class="picinfo">
+                    <img src="<?php echo "../picture/avatar/" . $picture ?>" alt="smallpicture" class="picinfo">
                 </div>
             </a>
         </header>
@@ -74,31 +70,49 @@ if (isset($_SESSION['admin_login'])) {
 
             <div class="progression servicename">
                 <p>Tên dịch vụ</p>
-                <select name="" class="servicename">
-                    <option value="" selected="selected">Tất cả</option>
-                    <option value="">Khám sản - Phụ Khoa</option>
-                    <option value="">Khám răng hàm mặt</option>
-                    <option value="">Khám tai muỗi họng</option>
-                </select>
+                <form action="progression.php" method="POST">
+                    <select name="search_select" class="servicename" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+
+                        <?php
+                        $sql_service = "SELECT * FROM service";
+                        $query_service = mysqli_query($conn, $sql_service);
+
+                        while ($row_service = mysqli_fetch_assoc($query_service)) {
+                            $serviceID_select = $row_service['serviceID'];
+                            $serviceName = $row_service['serviceName'];
+
+                            echo "<option value='$serviceID_select'>$serviceName</option>";
+                        }
+                        ?>
+                    </select>
+                </form>
             </div>
 
             <div class="progression status">
                 <p>Tình trạng</p>
-                <select name="" class="status">
-                    <option value="" selected="selected">Tất cả</option>
-                    <option value="">Đang chờ</option>
-                    <option value="">Đã sử dụng</option>
-                    <option value="">Bỏ qua</option>
-                </select>
+                <form action="progression.php" method="POST">
+                    <select name="search_select" class="status" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+                        <option value="Đang chờ">Đang chờ</option>
+                        <option value="Đã sử dụng">Đã sử dụng</option>
+                        <option value="Bỏ qua">Bỏ qua</option>
+                    </select>
+                </form>
             </div>
 
             <div class="progression supply">
                 <p>Nguồn cấp</p>
-                <select name="" class="supply">
-                    <option value="" selected="selected">Tất cả</option>
-                    <option value="">Kiosk</option>
-                    <option value="">Hệ thống</option>
-                </select>
+                <form action="progression.php" method="POST">
+                    <select name="search_select" class="supply" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+                        <option value="Kiosk">Kiosk</option>
+                        <option value="Hệ thống">Hệ thống</option>
+                    </select>
+                </form>
             </div>
 
             <div class="progression date">
@@ -188,7 +202,7 @@ if (isset($_SESSION['admin_login'])) {
                 $total_records = $row_pagination['total'];
 
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                $limit = 8;
+                $limit = 9;
 
                 $total_page = ceil($total_records / $limit);
                 if ($current_page > $total_page) {
@@ -203,7 +217,16 @@ if (isset($_SESSION['admin_login'])) {
                     if (empty($search)) {
                         $query = "SELECT * FROM progression LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR serviceName LIKE '%$search%' LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR service.serviceID = progression.serviceID AND serviceName LIKE '%$search%' LIMIT $start, $limit";
+                    }
+                } elseif (isset($_POST['search_select'])) {
+                    $search_select = addslashes($_POST['search_select']);
+                    if (empty($search_select)) {
+                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    } elseif ($search_select == "All") {
+                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM progression WHERE status LIKE '$search_select' OR supply LIKE '$search_select' OR serviceID LIKE '$search_select' LIMIT $start, $limit";
                     }
                 } else {
                     $query = "SELECT * FROM progression LIMIT $start, $limit";
@@ -226,11 +249,11 @@ if (isset($_SESSION['admin_login'])) {
                         $supply = $row_progress['supply'];
                         $serviceID = $row_progress['serviceID'];
 
-                        $sql_service = "SELECT serviceName FROM progression, service WHERE $serviceID = service.serviceID";
+                        $sql_service = "SELECT serviceName FROM progression, service WHERE $serviceID = service.serviceID AND $progressID = progression.progressID";
                         $query_service = mysqli_query($conn, $sql_service);
-                        while ($row_service = mysqli_fetch_assoc($query_service)) {
-                            $serviceName = $row_service['serviceName'];
-                        }
+                        $row_service = mysqli_fetch_assoc($query_service);
+                        $serviceName = $row_service['serviceName'];
+
 
                         $waiting = '<img src="../picture/component/EllipseBlue.png" alt="active">';
 
