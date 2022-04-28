@@ -146,12 +146,15 @@ if (isset($_SESSION['admin_login'])) {
         <div id="table">
             <div class="activedropdown">
                 <p>Trạng thái</p>
-                <select name="" id="activedropdown">
-                    <option value="" selected="selected">Tất cả</option>
-                    <option value="">Đã hoàn thành</option>
-                    <option value="">Đã thực hiện</option>
-                    <option value="">Vắng</option>
-                </select>
+                <form action="" method="POST">
+                    <select name="search_select" id="activedropdown" onchange="form.submit()">
+                        <option value="" disabled selected style="display: none;">Tất cả</option>
+                        <option value="All">Tất cả</option>
+                        <option value="Đang chờ">Đang chờ</option>
+                        <option value="Đã sử dụng">Đã sử dụng</option>
+                        <option value="Bỏ qua">Bỏ qua</option>
+                    </select>
+                </form>
             </div>
 
             <div class="dateservice">
@@ -161,10 +164,12 @@ if (isset($_SESSION['admin_login'])) {
                 <input type="date" id="end">
             </div>
 
-            <form class="search">
+            <form action="" method="POST" class="search">
                 <label for="search">Từ khóa</label>
-                <input type="search" name="search" placeholder="Nhập từ khóa">
-                <button type="submit" name="save"><span class="icon_search"></span></button>
+
+                <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off" onchange="form.submit()">
+                <img src="../../picture/component/search.png" alt="search" class="imgsearch_serviceDetail">
+                <!-- <button type=" submit" id="submit" name="submit_search" class=""></button> -->
             </form>
 
             <div id="tableDetail">
@@ -191,7 +196,26 @@ if (isset($_SESSION['admin_login'])) {
                     }
                     $start = ($current_page - 1) * $limit;
 
-                    $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                    if (isset($_POST['search'])) {
+                        $search = addslashes($_POST['search']);
+                        if (empty($search)) {
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                        } else {
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID AND progressID LIKE '$search' OR serviceID = $serviceID AND customerName LIKE '%$search%' LIMIT $start, $limit";
+                        }
+                    } elseif (isset($_POST['search_select'])) {
+                        $search_select = addslashes($_POST['search_select']);
+                        if (empty($search_select)) {
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                        } elseif ($search_select == "All") {
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                        } else {
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID AND status LIKE '$search_select' LIMIT $start, $limit";
+                        }
+                    } else {
+                        $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                    }
+
                     $result_list = mysqli_query($conn, $query);
 
                     if (mysqli_num_rows($result_list) > 0) {

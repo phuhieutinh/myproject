@@ -1,5 +1,5 @@
 body {
-    position: relative;
+    position: relative !important;
     width: 1440px;
     height: 810px;
 
@@ -7,6 +7,844 @@ body {
 
     background: #F7F7F7;
     border-radius: 16px;
+}
+
+div#dashboard_index h1 {
+    position: absolute;
+    width: 162px;
+    height: 36px;
+    left: 255px;
+    top: 104px;
+
+    /* 24/24 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height, or 150% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+div#dashboard_index div.quantity_progress_id {
+    position: absolute;
+    width: 186px;
+    height: 120px;
+    left: 255px;
+    top: 171px;
+
+    /* White */
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+div#dashboard_index div.quantity_progress_id img {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: 12px;
+    top: 8px;
+}
+
+div#dashboard_index div.quantity_progress_id p {
+    position: absolute;
+    width: 60px;
+    height: 36px;
+    left: 75px;
+    top: 0px;
+
+    /* 14/14 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* or 129% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_id span {
+    position: absolute;
+    width: 108px;
+    height: 45px;
+    left: 12px;
+    top: 68px;
+
+    /* 30/30 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_id small {
+    position: absolute;
+    width: 48px;
+    height: 14.98px;
+    left: 130.3px;
+    top: 85.53px;
+
+    background: rgba(255, 149, 1, 0.15);
+    border-radius: 7.18115px;
+}
+
+div#dashboard_index div.quantity_progress_id small img {
+    position: static;
+    width: 12px;
+    height: 12px;
+
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+div#dashboard_index div.quantity_progress_id small p {
+    position: absolute;
+    width: 29px;
+    height: 12px;
+    left: 21.8px;
+    top: -6px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 12px;
+    /* identical to box height, or 150% */
+
+
+    /* Orange/$-Orange-400 */
+
+    color: #FF9138;
+}
+
+div#dashboard_index div.quantity_progress_use {
+    position: absolute;
+    width: 186px;
+    height: 120px;
+    left: 455px;
+    top: 171px;
+
+    /* White */
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+div#dashboard_index div.quantity_progress_use img {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: 11.75px;
+    top: 8px;
+}
+
+div#dashboard_index div.quantity_progress_use p {
+    position: absolute;
+    width: 72px;
+    height: 36px;
+    left: 75px;
+    top: 0px;
+
+    /* 14/14 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* or 129% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_use span {
+    position: absolute;
+    width: 108px;
+    height: 45px;
+    left: 12px;
+    top: 68px;
+
+    /* 30/30 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_use small {
+    position: absolute;
+    width: 48px;
+    height: 14.98px;
+    left: 130.3px;
+    top: 85.53px;
+
+    background: rgba(231, 63, 63, 0.15);
+    border-radius: 7.18115px;
+}
+
+div#dashboard_index div.quantity_progress_use small img {
+    position: static;
+    width: 12px;
+    height: 12px;
+
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+div#dashboard_index div.quantity_progress_use small p {
+    position: absolute;
+    width: 29px;
+    height: 12px;
+    left: 21.8px;
+    top: -6px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 12px;
+    /* identical to box height, or 150% */
+
+
+    /* Red */
+
+    color: #E73F3F;
+}
+
+div#dashboard_index div.quantity_progress_waiting {
+    position: absolute;
+    width: 186px;
+    height: 120px;
+    left: 655px;
+    top: 171px;
+
+    /* White */
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+div#dashboard_index div.quantity_progress_waiting img {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: 12.25px;
+    top: 8px;
+}
+
+div#dashboard_index div.quantity_progress_waiting p {
+    position: absolute;
+    width: 60px;
+    height: 36px;
+    left: 75px;
+    top: 0px;
+
+    /* 14/14 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* or 129% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_waiting span {
+    position: absolute;
+    width: 108px;
+    height: 45px;
+    left: 12px;
+    top: 68px;
+
+    /* 30/30 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+    /* identical to box height, or 150% */
+
+    text-align: center;
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_waiting small {
+    position: absolute;
+    width: 48px;
+    height: 14.98px;
+    left: 130.3px;
+    top: 85.53px;
+
+    background: rgba(255, 149, 1, 0.15);
+    border-radius: 7.18115px;
+}
+
+div#dashboard_index div.quantity_progress_waiting small img {
+    position: static;
+    width: 12px;
+    height: 12px;
+
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+div#dashboard_index div.quantity_progress_waiting small p {
+    position: absolute;
+    width: 29px;
+    height: 12px;
+    left: 21.8px;
+    top: -6px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 12px;
+    /* identical to box height, or 150% */
+
+
+    /* Orange/$-Orange-400 */
+
+    color: #FF9138;
+}
+
+div#dashboard_index div.quantity_progress_pass {
+    position: absolute;
+    width: 186px;
+    height: 120px;
+    left: 855px;
+    top: 171px;
+
+    /* White */
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+div#dashboard_index div.quantity_progress_pass img {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: 12.5px;
+    top: 8px;
+}
+
+div#dashboard_index div.quantity_progress_pass p {
+    position: absolute;
+    width: 65px;
+    height: 36px;
+    left: 75px;
+    top: 0px;
+
+    /* 14/14 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* or 129% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_pass span {
+    position: absolute;
+    width: 108px;
+    height: 45px;
+    left: 12px;
+    top: 68px;
+
+    /* 30/30 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+div#dashboard_index div.quantity_progress_pass small {
+    position: absolute;
+    width: 48px;
+    height: 14.98px;
+    left: 130.3px;
+    top: 85.53px;
+
+    background: rgba(231, 63, 63, 0.15);
+    border-radius: 7.18115px;
+}
+
+div#dashboard_index div.quantity_progress_pass small p {
+    position: absolute;
+    width: 29px;
+    height: 12px;
+    left: 21.8px;
+    top: -6px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 12px;
+    /* identical to box height, or 150% */
+
+
+    /* Red */
+
+    color: #E73F3F;
+
+}
+
+div#dashboard_index div.quantity_progress_pass small img {
+    position: static;
+    width: 12px;
+    height: 12px;
+
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+footer#dashboard_generality {
+    position: absolute;
+    width: 461px;
+    height: 810px;
+    left: 1049px;
+    top: 15px;
+
+    /* White */
+
+    background: #FFFFFF;
+    z-index: 0;
+    /* Dropdown */
+
+    box-shadow: 0px 4px 6px rgba(219, 219, 219, 0.5);
+    border-radius: 8px 0px 0px 8px;
+}
+
+footer#dashboard_generality h1 {
+    position: absolute;
+    width: 118px;
+    height: 36px;
+    left: 24px;
+    top: 104px;
+
+    /* 24/24 Bold */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height, or 150% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+footer#dashboard_generality div#monitor_percentage {
+    position: absolute;
+    width: 353px;
+    height: 83px;
+    left: 24px;
+    top: 156px;
+
+    /* White */
+
+    background: #FFFFFF;
+    box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+    border-radius: 12px;
+}
+
+footer#dashboard_generality div#monitor_percentage h2 {
+    position: absolute;
+    width: 64px;
+    height: 36px;
+    left: 79px;
+    top: -9px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+footer#dashboard_generality div#monitor_percentage h1 {
+    position: absolute;
+    width: 99px;
+    height: 21px;
+    left: 69px;
+    top: 39px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height, or 150% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+footer#dashboard_generality div#monitor_percentage div.top {
+    position: absolute;
+    width: 145px;
+    height: 21px;
+    left: 171px;
+    top: 5px;
+}
+
+footer#dashboard_generality div#monitor_percentage div.bottom {
+    position: absolute;
+    width: 133px;
+    height: 21px;
+    left: 171px;
+    top: 31px;
+}
+
+footer#dashboard_generality div#monitor_percentage div.top span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 135px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+footer#dashboard_generality div#monitor_percentage div.bottom span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 135px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+}
+
+footer#dashboard_generality div#service_percentage {
+    position: absolute;
+    width: 353px;
+    height: 83px;
+    left: 24px;
+    top: 251px;
+
+    /* White */
+
+    background: #FFFFFF;
+    box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+    border-radius: 12px;
+}
+
+footer#dashboard_generality div#service_percentage h2 {
+    position: absolute;
+    width: 44px;
+    height: 36px;
+    left: 79px;
+    top: -5px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+footer#dashboard_generality div#service_percentage h1 {
+    position: absolute;
+    width: 95px;
+    height: 21px;
+    left: 71px;
+    top: 45px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height, or 150% */
+
+
+    /* Blue */
+
+    color: #4277FF;
+}
+
+footer#dashboard_generality div#service_percentage div.top {
+    position: absolute;
+    width: 133px;
+    height: 21px;
+    left: 171px;
+    top: 5px;
+}
+
+footer#dashboard_generality div#service_percentage div.bottom {
+    position: absolute;
+    width: 133px;
+    height: 21px;
+    left: 171px;
+    top: 31px;
+}
+
+footer#dashboard_generality div#service_percentage div.top span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 135px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Blue */
+
+    color: #4277FF;
+}
+
+footer#dashboard_generality div#service_percentage div.bottom span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 135px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Blue */
+
+    color: #4277FF;
+}
+
+footer#dashboard_generality div#progress_percentage {
+    position: absolute;
+    width: 353px;
+    height: 83px;
+    left: 24px;
+    top: 346px;
+
+    /* White */
+
+    background: #FFFFFF;
+    box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+    border-radius: 12px;
+}
+
+footer#dashboard_generality div#progress_percentage h2 {
+    position: absolute;
+    width: 44px;
+    height: 36px;
+    left: 79px;
+    top: -5px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+}
+
+footer#dashboard_generality div#progress_percentage h1 {
+    position: absolute;
+    width: 95px;
+    height: 21px;
+    left: 71px;
+    top: 45px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height, or 150% */
+
+
+    /* Blue */
+
+    color: #35C75A;
+
+}
+
+footer#dashboard_generality div#progress_percentage div.top {
+    position: absolute;
+    width: 145px;
+    height: 21px;
+    left: 175px;
+    top: 1px;
+}
+
+footer#dashboard_generality div#progress_percentage div.middle {
+    position: absolute;
+    width: 145px;
+    height: 21px;
+    left: 175px;
+    top: 21px;
+}
+
+footer#dashboard_generality div#progress_percentage div.bottom {
+    position: absolute;
+    width: 145px;
+    height: 21px;
+    left: 175px;
+    top: 41px;
+}
+
+footer#dashboard_generality div#progress_percentage div.top span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 131px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Green */
+
+    color: #35C75A;
+}
+
+footer#dashboard_generality div#progress_percentage div.middle span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 131px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Green */
+
+    color: #35C75A;
+}
+
+footer#dashboard_generality div#progress_percentage div.bottom span {
+    position: absolute;
+    width: 38px;
+    height: 18px;
+    left: 131px;
+    top: 17px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+
+
+    /* Green */
+
+    color: #35C75A;
 }
 
 ul {
@@ -599,6 +1437,7 @@ header {
     height: 88px;
     left: 250px;
     top: 20px;
+    z-index: 3;
 }
 
 main.importance {
@@ -2677,8 +3516,8 @@ main#main_dashboard {}
 div.chart_canvas {
     position: absolute;
     height: 484px;
-    width: 791px;
-    left: 267px;
+    width: 785px;
+    left: 255px;
     top: 321px;
 
     background: #FFFFFF;
@@ -2811,4 +3650,234 @@ div.chart_canvas div.date_chart select#date_chart {
     order: 1;
     flex-grow: 0;
     margin: 0px 8px;
+}
+
+div#inline_cal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    width: 353px;
+    height: 336px;
+    left: 24px;
+    top: 445px;
+
+    background: #FFFFFF;
+    /* Pink shadow */
+
+    box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+    border-radius: 12px;
+}
+
+.rd-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    width: 335px;
+    height: 341px;
+    left: 0px;
+    top: 0px;
+
+    background: #FFFFFF;
+    /* Pink shadow */
+
+    box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+    border-radius: 12px;
+}
+
+button.rd-back,
+button.rd-next,
+.rd-month-label,
+thead.rd-days-head {
+    color: #FF7506;
+    ;
+}
+
+td.rd-day-body.rd-day-selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+
+    /* Orange/$-Orange-500 */
+
+    background: #FF7506;
+    border-radius: 8px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    /* White */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 10px 0px;
+}
+
+div.circle_monitor {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 16px;
+    top: 11px;
+}
+
+.monitor_circle {
+    width: 60px;
+    height: 60px;
+    line-height: 150px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+
+.monitor_circle:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: -19px !important;
+    top: -9px !important;
+    border-radius: 50%;
+    border: 9px solid orange;
+    position: absolute;
+}
+
+.monitor_circle .monitor-value {
+    position: absolute;
+    width: 31px;
+    height: 24px;
+    left: 1px;
+    top: 19px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+
+}
+
+div.circle_service {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 16px;
+    top: 11px;
+}
+
+.service_circle {
+    width: 60px;
+    height: 60px;
+    line-height: 150px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+
+.service_circle:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: -19px !important;
+    top: -9px !important;
+    border-radius: 50%;
+    border: 9px solid #4277FF;
+    position: absolute;
+}
+
+.service_circle .service-value {
+    position: absolute;
+    width: 31px;
+    height: 24px;
+    left: 1px;
+    top: 19px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+
+}
+
+
+div.circle_progress {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 16px;
+    top: 11px;
+}
+
+.progress_circle {
+    width: 60px;
+    height: 60px;
+    line-height: 150px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+
+.progress_circle:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: -19px !important;
+    top: -9px !important;
+    border-radius: 50%;
+    border: 9px solid #35C75A;
+    position: absolute;
+}
+
+.progress_circle .progress-value {
+    position: absolute;
+    width: 31px;
+    height: 24px;
+    left: 1px;
+    top: 19px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+
 }
