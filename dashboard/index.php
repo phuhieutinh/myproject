@@ -279,9 +279,9 @@ if (isset($_SESSION['admin_login'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha384-i+dHPTzZw7YVZOx9lbH5l6lP74sLRtMtwN2XjVqjf3uAGAREAF4LMIUDTWEVs4LI" crossorigin="anonymous"></script>
     <script src="../js/chart/dashboard.js"></script>
 
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/rome.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/calendars/jquery-3.3.1.min.js"></script>
+    <script src="../js/calendars/rome.js"></script>
+    <script src="../js/calendars/main.js"></script>
     </body>
 
     </html>

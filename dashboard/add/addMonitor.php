@@ -177,7 +177,7 @@ if (isset($_SESSION['admin_login'])) {
 
                 <div class="btn">
 
-                    <input type="submit" class="submit" value="Thêm thiết bị" name="submit">
+                    <input type="submit" class="submit" name="submit" value="<?php echo ($isUpdated !== 1) ? "Thêm thiết bị" : "Cập nhật" ?>">
 
                     <a href="../../dashboard/monitor.php" class="cancel">Hủy bỏ</a>
                 </div>
