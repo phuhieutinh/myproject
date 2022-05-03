@@ -32,6 +32,7 @@ if (isset($_SESSION['admin_login'])) {
     $roleID = 'SELECT max(id) + 1 FROM role';
     $roleName = "";
     $descriptive = "";
+    $array = [];
     $isUpdated = 0;
     if ($uid != "") {
         $query = "SELECT * FROM role WHERE roleID = $uid";
@@ -40,6 +41,8 @@ if (isset($_SESSION['admin_login'])) {
             $roleID = $data['roleID'];
             $roleName = $data['roleName'];
             $descriptive = $data['descriptive'];
+            $function = $data['function'];
+            $array = explode(",", $function);
         }
         $isUpdated = 1;
     }
@@ -93,7 +96,7 @@ if (isset($_SESSION['admin_login'])) {
 
         <main id="addrole">
             <p class="top">Thông tin vai trò</p>
-            <form action="../../function/function_role.php" id="addrole" method="POST">
+            <form action="../../function/function_role.php" id="addrole" method="POST" enctype="multipart/form-data">
 
                 <input type="hidden" name="controlUpdate" value="<?php echo $isUpdated ?>" />
 
@@ -112,47 +115,86 @@ if (isset($_SESSION['admin_login'])) {
                 <label for="" class="function-group">Phân quyền chức năng<span class="required">*</span></label>
 
                 <div class="function-group">
-                    <h1 class="functionA">Nhóm chức năng A</h1>
-                    <div class="function1">
-                        <input type="checkbox" id="function1" name="function1" value="">
-                        <label for="function1"> Tất cả</label>
+                    <h1 class="functionA">Nhóm chức năng Dashboard</h1>
+
+                    <div class="function">
+                        <input type="checkbox" id="function" name="functionA[]" value="X,Y,Z" <?php
+                                                                                                $array_all = array("X", "Y", "Z");
+                                                                                                if ($array == $array_all) {
+                                                                                                    echo "checked";
+                                                                                                }
+                                                                                                ?>>
+
+                        <label for="functionA[]"> Tất cả</label>
                     </div>
 
-                    <div class="function2">
-                        <input type="checkbox" id="function2" name="function2" value="">
-                        <label for="function2"> Chức năng x</label>
+                    <div class="function">
+                        <input type="checkbox" id="function" name="functionA[]" value="X" <?php
+                                                                                            if (in_array("X", $array)) {
+                                                                                                echo "checked";
+                                                                                            }
+                                                                                            ?>>
+                        <label for="functionA[]"> Chức năng x</label>
                     </div>
 
-                    <div class="function3">
-                        <input type="checkbox" id="function3" name="function3" value="">
-                        <label for="function3"> Chức năng y</label>
+                    <div class="function">
+                        <input type="checkbox" id="function" name="functionA[]" value="Y" <?php
+                                                                                            if (in_array("Y", $array)) {
+                                                                                                echo "checked";
+                                                                                            }
+                                                                                            ?>>
+
+                        <label for="functionA[]"> Chức năng y</label>
                     </div>
 
-                    <div class="function4">
-                        <input type="checkbox" id="function4" name="function4" value="">
-                        <label for="function4"> Chức năng z</label>
+                    <div class="function">
+                        <input type="checkbox" id="function" name="functionA[]" value="Z" <?php
+                                                                                            if (in_array("Z", $array)) {
+                                                                                                echo "checked";
+                                                                                            }
+                                                                                            ?>>
+                        <label for="functionA[]"> Chức năng z</label>
                     </div>
 
-                    <h1 class="functionB">Nhóm chức năng B</h1>
+                    <h1 class="functionB">Nhóm chức năng User</h1>
 
-                    <div class="function5">
-                        <input type="checkbox" id="function5" name="function5" value="">
-                        <label for="function5"> Tất cả</label>
+                    <div class="function_user">
+                        <input type="checkbox" id="function_user" name="functionA[]" value="A,B,C" <?php
+                                                                                                    $array_all = array("A", "B", "C");
+                                                                                                    if ($array == $array_all) {
+                                                                                                        echo "checked";
+                                                                                                    }
+                                                                                                    ?>>
+
+                        <label for="functionA[]"> Tất cả</label>
                     </div>
 
-                    <div class="function6">
-                        <input type="checkbox" id="function6" name="function6" value="">
-                        <label for="function6"> Chức năng x</label>
+                    <div class="function_user">
+                        <input type="checkbox" id="function_user" name="functionA[]" value="A" <?php
+                                                                                                if (in_array("A", $array)) {
+                                                                                                    echo "checked";
+                                                                                                }
+                                                                                                ?>>
+                        <label for="functionA[]"> Chức năng A</label>
                     </div>
 
-                    <div class="function7">
-                        <input type="checkbox" id="function7" name="function7" value="">
-                        <label for="function7"> Chức năng y</label>
+                    <div class="function_user">
+                        <input type="checkbox" id="function_user" name="functionA[]" value="B" <?php
+                                                                                                if (in_array("B", $array)) {
+                                                                                                    echo "checked";
+                                                                                                }
+                                                                                                ?>>
+
+                        <label for="functionA[]"> Chức năng B</label>
                     </div>
 
-                    <div class="function8">
-                        <input type="checkbox" id="function8" name="function8" value="">
-                        <label for="function8"> Chức năng z</label>
+                    <div class="function_user">
+                        <input type="checkbox" id="function_user" name="functionA[]" value="C" <?php
+                                                                                                if (in_array("C", $array)) {
+                                                                                                    echo "checked";
+                                                                                                }
+                                                                                                ?>>
+                        <label for="functionA[]"> Chức năng C</label>
                     </div>
 
                 </div>

@@ -35,6 +35,7 @@ if (isset($_SESSION['admin_login'])) {
     $serviceID = "$result_addID";
     $serviceName = "";
     $descriptive = "";
+    $serviceStatus = "Hoạt động";
     $isUpdated = 0;
     if ($uid != "") {
         $query = "SELECT * FROM service WHERE serviceID = $uid";
@@ -43,6 +44,7 @@ if (isset($_SESSION['admin_login'])) {
             $serviceID = $data['serviceID'];
             $serviceName = $data['serviceName'];
             $descriptive = $data['descriptive'];
+            $serviceStatus = $data['serviceStatus'];
         }
         $isUpdated = 1;
     }
@@ -143,6 +145,18 @@ if (isset($_SESSION['admin_login'])) {
                 <div class="reset">
                     <input type="checkbox" id="reset" name="reset" value="">
                     <label for="reset">Reset mỗi ngày</label>
+                </div>
+
+                <div class="status">
+                    <label for="status">Trạng thái hoạt động<span class="required">*</span></label>
+                    <select name="status" id="">
+                        <option value="<?php echo ($serviceStatus == "") ? $serviceStatus : $serviceStatus ?>" class="deco" selected>
+                            <?php echo ($serviceStatus == "") ? $serviceStatus : $serviceStatus ?>
+                        </option>
+
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                    </select>
                 </div>
 
                 <div class="btn">

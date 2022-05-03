@@ -1,5 +1,8 @@
 <?php
 require_once '../dbconnect.php';
+include '../function/function_userlog.php';
+
+session_start();
 
 $conn = connect_db();
 
@@ -13,8 +16,8 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $monitorPassword = $_POST['monitorPassword'];
     $serviceID = $_POST['states'];
-    $status_active = "Hoạt động";
-    $status_connect = "Kết nối";
+    $status_active = $_POST['status'];
+    $status_connect = $_POST['status_connect'];
 
     $array_data = implode(",", $serviceID);
 
@@ -30,18 +33,30 @@ if (isset($_POST['submit'])) {
             }
             array_push($newarray, $serviceName);
         }
+        $insert_serviceid = $value;
     }
+
 
     $array_newdata = implode(", ", $newarray);
 
     if ($update == 1) {
-        $sql = "UPDATE monitor SET monitorCode='$monitorcode', monitorName='$monitorname', ipaddress='$ipaddress', monitorType='$monitortype', username='$username', monitorPassword='$monitorPassword', serviceID='1', nameService='$array_newdata' WHERE monitorID=$monitorID";
+        $sql = "UPDATE monitor SET monitorCode='$monitorcode', monitorName='$monitorname', ipaddress='$ipaddress', monitorType='$monitortype', username='$username', monitorPassword='$monitorPassword', serviceID='$insert_serviceid', nameService='$array_newdata', monitorStatus='$status_active', statusConnect='$status_connect' WHERE monitorID=$monitorID";
+
+        $log = "Update monitor Name success monitor Name is $monitorname";
+        $update_userlog = userlog($log);
     } else {
-        $sql = "INSERT INTO monitor(monitorID, monitorCode ,monitorName, ipaddress, monitorType, username, monitorPassword, serviceID, nameService, monitorStatus, statusConnect) VALUES('$monitorID', '$monitorcode','$monitorname', '$ipaddress', '$monitortype', '$username', '$monitorPassword', '1', '$array_newdata', '$status_active', '$status_connect')";
+        $sql = "INSERT INTO monitor(monitorID, monitorCode ,monitorName, ipaddress, monitorType, username, monitorPassword, serviceID, nameService, monitorStatus, statusConnect) VALUES('$monitorID', '$monitorcode','$monitorname', '$ipaddress', '$monitortype', '$username', '$monitorPassword', '$insert_serviceid', '$array_newdata', '$status_active', '$status_connect')";
+
+        $log = "Add monitor Name success monitor Name is $monitorname";
+        $update_userlog = userlog($log);
     }
 
     if (mysqli_query($conn, $sql)) {
-        header('location:../dashboard/monitor.php');
+        $message = "ADD OR UPDATE SUCCESSFUL !!!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        echo "<script type='text/javascript'>
+        window.location = '../dashboard/monitor.php';
+        </script>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

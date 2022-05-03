@@ -133,8 +133,14 @@ if (isset($_SESSION['admin_login'])) {
 
                 <div class="quantity_progress_id">
                     <img src="../picture/component/dashboard/dashboard_id.png" alt="">
+
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(progressID) AS sum_progressID FROM progression');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_progressID = $row['sum_progressID'];
+                    ?>
                     <p>Số thứ tự đã cấp</p>
-                    <span>4.221</span>
+                    <span><?php echo $sum_progressID ?></span>
                     <small>
                         <img src="../picture/component/progress_up.png" alt="">
                         <p>22,44%</p>
@@ -144,7 +150,13 @@ if (isset($_SESSION['admin_login'])) {
                 <div class="quantity_progress_use">
                     <img src="../picture/component/dashboard/dashboard_use.png" alt="">
                     <p>Số thứ tự đã sử dụng</p>
-                    <span>3.721</span>
+
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(status LIKE "Đã sử dụng") AS sum_status_used FROM progression');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_status_used = $row['sum_status_used'];
+                    ?>
+                    <span><?php echo $sum_status_used ?></span>
                     <small>
                         <img src="../picture/component/progress_low.png" alt="">
                         <p>22,44%</p>
@@ -154,7 +166,13 @@ if (isset($_SESSION['admin_login'])) {
                 <div class="quantity_progress_waiting">
                     <img src="../picture/component/dashboard/dashboard_waiting.png" alt="">
                     <p>Số thứ tự đang chờ</p>
-                    <span>468</span>
+
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(status LIKE "Đang chờ") AS sum_status_wait FROM progression');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_status_wait = $row['sum_status_wait'];
+                    ?>
+                    <span><?php echo $sum_status_wait ?></span>
                     <small>
                         <img src="../picture/component/progress_up.png" alt="">
                         <p>22,44%</p>
@@ -164,7 +182,13 @@ if (isset($_SESSION['admin_login'])) {
                 <div class="quantity_progress_pass">
                     <img src="../picture/component/dashboard/dashboard_pass.png" alt="">
                     <p>Số thứ tự đã bỏ qua</p>
-                    <span>32</span>
+
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(status LIKE "Bỏ qua") AS sum_status_pass FROM progression');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_status_pass = $row['sum_status_pass'];
+                    ?>
+                    <span><?php echo $sum_status_pass ?></span>
                     <small>
                         <img src="../picture/component/progress_low.png" alt="">
                         <p>22,44%</p>
@@ -200,17 +224,32 @@ if (isset($_SESSION['admin_login'])) {
                     </div>
                 </div>
 
-                <h2>4.221</h2>
+                <?php
+                $result = mysqli_query($conn, 'SELECT SUM(monitorID) AS sum_monitorID FROM monitor');
+                $row = mysqli_fetch_assoc($result);
+                $sum_monitorID = $row['sum_monitorID'];
+                ?>
+                <h2><?php echo $sum_monitorID ?></h2>
                 <h1><img src="../picture/component/dashboard/dashboard_monitor.png" alt=""> Thiết bị</h1>
 
                 <div class="top">
                     <p><img src="../picture/component/dashboard/yellow.png" alt="">Đang hoạt động</p>
-                    <span>3.799</span>
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(monitorStatus LIKE "Hoạt động") AS sum_monitorStatus FROM monitor');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_monitorStatus = $row['sum_monitorStatus'];
+                    ?>
+                    <span><?php echo $sum_monitorStatus ?></span>
                 </div>
 
                 <div class="bottom">
                     <p><img src="../picture/component/dashboard/gray.png" alt="">Ngưng hoạt động</p>
-                    <span>422</span>
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(monitorStatus LIKE "Ngưng hoạt động") AS sum_monitorStatus FROM monitor');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_monitorStatus = $row['sum_monitorStatus'];
+                    ?>
+                    <span><?php echo $sum_monitorStatus ?></span>
                 </div>
             </div>
 
@@ -221,18 +260,35 @@ if (isset($_SESSION['admin_login'])) {
                         <div class="service-value">100%</div>
                     </div>
                 </div>
+                <?php
+                $result = mysqli_query($conn, 'SELECT SUM(serviceID) AS sum_serviceID FROM service');
+                $row = mysqli_fetch_assoc($result);
+                $sum_serviceID = $row['sum_serviceID'];
+                ?>
+                <h2><?php echo $sum_serviceID ?></h2>
 
-                <h2>276</h2>
                 <h1><img src="../picture/component/dashboard/dashboard_service.png" alt=""> Dịch vụ</h1>
 
                 <div class="top">
                     <p><img src="../picture/component/dashboard/blue.png" alt="">Đang hoạt động</p>
-                    <span>3.799</span>
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(serviceStatus LIKE "Hoạt động") AS sum_serviceStatus FROM service');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_monitorStatus = $row['sum_serviceStatus'];
+                    ?>
+                    <span><?php echo $sum_monitorStatus ?></span>
+
                 </div>
 
                 <div class="bottom">
                     <p><img src="../picture/component/dashboard/gray.png" alt="">Ngưng hoạt động</p>
-                    <span>422</span>
+                    <?php
+                    $result = mysqli_query($conn, 'SELECT SUM(serviceStatus LIKE "Ngưng hoạt động") AS sum_serviceStatus FROM service');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum_serviceStatus = $row['sum_serviceStatus'];
+                    ?>
+                    <span><?php echo $sum_serviceStatus ?></span>
+
                 </div>
 
             </div>
@@ -245,22 +301,22 @@ if (isset($_SESSION['admin_login'])) {
                     </div>
                 </div>
 
-                <h2>4.221</h2>
+                <h2><?php echo $sum_progressID ?></h2>
                 <h1><img src="../picture/component/dashboard/dasboard_progress.png" alt=""> Cấp số</h1>
 
                 <div class="top">
                     <p><img src="../picture/component/dashboard/orange.png" alt="">Đã sử dụng</p>
-                    <span>3.721</span>
+                    <span><?php echo $sum_status_used ?></span>
                 </div>
 
                 <div class="middle">
                     <p><img src="../picture/component/dashboard/gray.png" alt="">Đang chờ</p>
-                    <span>3.721</span>
+                    <span><?php echo $sum_status_wait ?></span>
                 </div>
 
                 <div class="bottom">
                     <p><img src="../picture/component/dashboard/orange.png" alt="">Bỏ qua</p>
-                    <span>3.721</span>
+                    <span><?php echo $sum_status_pass ?></span>
                 </div>
             </div>
 

@@ -37,6 +37,8 @@ if (isset($_SESSION['admin_login'])) {
     $username = "";
     $monitorPassword = "";
     $monitorType = "";
+    $monitorStatus = "Hoạt động";
+    $statusConnect = "Kết nối";
     $serviceID = [];
     $isUpdated = 0;
     if ($uid != "") {
@@ -50,6 +52,8 @@ if (isset($_SESSION['admin_login'])) {
             $username = $data['username'];
             $monitorPassword = $data['monitorPassword'];
             $monitorType = $data['monitorType'];
+            $monitorStatus = $data['monitorStatus'];
+            $statusConnect = $data['statusConnect'];
             $serviceID = $data['serviceID'];
             $nameService = $data['nameService'];
         }
@@ -173,6 +177,30 @@ if (isset($_SESSION['admin_login'])) {
                         ?>
                     </select>
 
+                </div>
+
+                <div class="status">
+                    <label for="status">Trạng thái hoạt động<span class="required">*</span></label>
+                    <select name="status" id="status">
+                        <option value="<?php echo ($monitorStatus == "") ? $monitorStatus : $monitorStatus ?>" class="deco" selected>
+                            <?php echo ($monitorStatus == "") ? $monitorStatus : $monitorStatus ?>
+                        </option>
+
+                        <option value="Hoạt động">Hoạt động</option>
+                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                    </select>
+                </div>
+
+                <div class="status_connect">
+                    <label for="status">Trạng thái kết nối<span class="required">*</span></label>
+                    <select name="status_connect" id="status_connect">
+                        <option value="<?php echo ($statusConnect == "") ? $statusConnect : $statusConnect ?>" class="deco" selected>
+                            <?php echo ($statusConnect == "") ? $statusConnect : $statusConnect ?>
+                        </option>
+
+                        <option value="Kết nối">Kết nối</option>
+                        <option value="Mất kết nối">Mất kết nối</option>
+                    </select>
                 </div>
 
                 <div class="btn">

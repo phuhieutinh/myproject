@@ -84,7 +84,7 @@ main#addrole label.function-group {
 
 main#addrole div.function-group h1.functionA {
     position: absolute;
-    width: 177px;
+    width: 291px;
     height: 30px;
     left: 24px;
     top: 16px;
@@ -106,7 +106,7 @@ main#addrole div.function-group h1.functionA {
 
 main#addrole div.function-group h1.functionB {
     position: absolute;
-    width: 176px;
+    width: 291px;
     height: 30px;
     left: 24px;
     top: 214px;
@@ -402,41 +402,12 @@ form#addrole div.btn a.cancel {
     text-decoration: none;
 }
 
-div.function1 {
-    position: absolute;
-    width: 200px;
-    height: 169px;
-    left: 24px;
-    top: 58px;
-
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-
-    display: flex;
-
-    /* Gray/$-gray-400 Text */
-
-    color: #535261;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 4px;
-}
-
-div.function2 {
-    position: absolute;
+div.function {
+    position: relative;
     width: 119px;
-    height: 24px;
+    height: 41px;
     left: 24px;
-    top: 94px;
+    top: 65px;
 
     font-family: 'Nunito';
     font-style: normal;
@@ -460,159 +431,12 @@ div.function2 {
     margin: 0px 4px;
 }
 
-div.function3 {
-    position: absolute;
+div.function_user {
+    position: relative;
     width: 119px;
-    height: 24px;
+    height: 41px;
     left: 24px;
-    top: 130px;
-
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-
-    display: flex;
-
-    /* Gray/$-gray-400 Text */
-
-    color: #535261;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 4px;
-}
-
-div.function4 {
-    position: absolute;
-    width: 119px;
-    height: 24px;
-    left: 24px;
-    top: 166px;
-
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-
-    display: flex;
-
-    /* Gray/$-gray-400 Text */
-
-    color: #535261;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 4px;
-}
-
-div.function5 {
-    position: absolute;
-    width: 72px;
-    height: 24px;
-    left: 24px;
-    top: 256px;
-
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-
-    display: flex;
-
-    /* Gray/$-gray-400 Text */
-
-    color: #535261;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 4px;
-}
-
-div.function6 {
-    position: absolute;
-    width: 119px;
-    height: 24px;
-    left: 24px;
-    top: 292px;
-
-
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-
-    display: flex;
-
-    /* Gray/$-gray-400 Text */
-
-    color: #535261;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 4px;
-}
-
-div.function7 {
-    position: absolute;
-    width: 119px;
-    height: 24px;
-    left: 24px;
-    top: 328px;
-
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-
-    display: flex;
-
-    /* Gray/$-gray-400 Text */
-
-    color: #535261;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 4px;
-}
-
-div.function8 {
-    position: absolute;
-    width: 119px;
-    height: 24px;
-    left: 24px;
-    top: 364px;
-
+    top: 95px;
 
     font-family: 'Nunito';
     font-style: normal;

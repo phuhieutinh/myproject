@@ -24,6 +24,7 @@ if (isset($_SESSION['admin_login'])) {
             exit;
         }
     }
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -67,9 +68,11 @@ if (isset($_SESSION['admin_login'])) {
 
         <div class="userlog date">
             <p>Chọn thời gian</p>
-            <input type="date" class="userlog datestart">
-            <img src="../picture/component/arrow-right.png" alt="">
-            <input type="date" class="userlog dateend">
+            <form action="" method="POST">
+                <input type="date" class="userlog datestart" name="start_date">
+                <img src="../picture/component/arrow-right.png" alt="">
+                <input type="date" class="userlog dateend" name="end_date" onchange="form.submit()">
+            </form>
         </div>
 
         <a href="" class="add">
@@ -145,7 +148,18 @@ if (isset($_SESSION['admin_login'])) {
                 }
                 $start = ($current_page - 1) * $limit;
 
-                $query = "SELECT * FROM progression LIMIT $start, $limit";
+                if (isset($_POST['start_date']) && isset($_POST['end_date'])) {
+                    $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
+                    $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
+
+                    if (empty($start_date_format && $end_date_format)) {
+                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                    }
+                } else {
+                    $query = "SELECT * FROM progression LIMIT $start, $limit";
+                }
                 $result_list = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result_list) > 0) {

@@ -69,20 +69,24 @@ if (isset($_SESSION['admin_login'])) {
             <p class="managetext">Quản lý dịch vụ</p>
             <div class="activedropdown">
                 <form action="service.php" method="POST">
-                    <select name="search_select" id="activedropdown" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
-                        <option value="Hoạt động">Hoạt động</option>
-                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
-                    </select>
+                    <div class="select_monitor">
+                        <select name="search_select" id="activedropdown" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
+                            <option value="Hoạt động">Hoạt động</option>
+                            <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                        </select>
+                    </div>
                 </form>
             </div>
 
             <div class="dateservice">
                 <p>Chọn thời gian</p>
-                <input type="date" class="dateservice start">
-                <img src="../picture/component/arrow-right.png" alt="">
-                <input type="date" class="dateservice end">
+                <form action="" method="POST">
+                    <input type="date" class="dateservice start" name="start_date">
+                    <img src="../picture/component/arrow-right.png" alt="">
+                    <input type="date" class="dateservice end" name="end_date" onchange="form.submit()">
+                </form>
             </div>
 
             <div class="search">
@@ -187,6 +191,15 @@ if (isset($_SESSION['admin_login'])) {
                         $query = "SELECT * FROM service LIMIT $start, $limit";
                     } else {
                         $query = "SELECT * FROM service WHERE serviceStatus LIKE '$search_select' LIMIT $start, $limit";
+                    }
+                } elseif (isset($_POST['start_date']) && isset($_POST['end_date'])) {
+                    $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
+                    $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
+
+                    if (empty($start_date_format && $end_date_format)) {
+                        echo 'No data';
+                    } else {
+                        $query = "SELECT * FROM `service` WHERE `serviceDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
                     }
                 } else {
                     $query = "SELECT * FROM service LIMIT $start, $limit";

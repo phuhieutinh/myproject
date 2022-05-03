@@ -1,5 +1,6 @@
 <?php
 require_once '../dbconnect.php';
+include '../function/function_userlog.php';
 
 session_start();
 
@@ -40,6 +41,8 @@ if (isset($_SESSION['user_login'])) {
         $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate, status, phone, email, customerName, supply) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date', '$status', '$customerPhone', '$email', '$customerName', '$supply')";
 
         if (mysqli_query($conn, $sql)) {
+            $log = "add progress success progressID";
+            $update_userlog = userlog($log);
 ?>
 
             <body onload="addpopup()">

@@ -72,24 +72,28 @@ if (isset($_SESSION['admin_login'])) {
             <div class="activedropdown">
                 <p>Trạng thái hoạt động</p>
                 <form action="monitor.php" method="POST">
-                    <select name="search_select" id="activedropdown" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
-                        <option value="Hoạt động">Hoạt động</option>
-                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
-                    </select>
+                    <div class="select_monitor">
+                        <select name="search_select" id="activedropdown" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
+                            <option value="Hoạt động">Hoạt động</option>
+                            <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                        </select>
+                    </div>
                 </form>
             </div>
 
             <div class="connectdropdown">
                 <p>Trạng thái kết nối</p>
                 <form action="monitor.php" method="POST">
-                    <select name="search_select" id="connectdropdown" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
-                        <option value="Kết nối">Kết nối</option>
-                        <option value="Mất Kết nối">Mất Kết nối</option>
-                    </select>
+                    <div class="select_monitor">
+                        <select name="search_select" id="connectdropdown" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
+                            <option value="Kết nối">Kết nối</option>
+                            <option value="Mất Kết nối">Mất Kết nối</option>
+                        </select>
+                    </div>
                 </form>
             </div>
 

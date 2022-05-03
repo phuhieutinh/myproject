@@ -1,5 +1,8 @@
 <?php
 require_once '../dbconnect.php';
+include '../function/function_userlog.php';
+
+session_start();
 
 $conn = connect_db();
 
@@ -55,6 +58,9 @@ if (isset($_POST['submit'])) {
 
                 $update = "UPDATE role SET quantity = '$total_quantity 'WHERE roleID = $roleID";
                 mysqli_query($conn, $update);
+
+                $log = "Update account success userName is $username";
+                $update_userlog = userlog($log);
             }
         }
     } else {
@@ -79,13 +85,20 @@ if (isset($_POST['submit'])) {
 
                 $update = "UPDATE role SET quantity = '$total_quantity 'WHERE roleID = $roleID";
                 mysqli_query($conn, $update);
+
+                $log = "Add account success userName is $username";
+                $update_userlog = userlog($log);
             }
         }
     }
 
 
     if (mysqli_query($conn, $sql)) {
-        header('location:../dashboard/submenu/maccount.php');
+        $message = "ADD OR UPDATE SUCCESSFUL !!!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        echo "<script type='text/javascript'>
+        window.location = '../dashboard/submenu/maccount.php';
+        </script>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         header('location:../dashboard/add/addaccount.php');

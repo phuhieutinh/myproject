@@ -159,9 +159,11 @@ if (isset($_SESSION['admin_login'])) {
 
             <div class="dateservice">
                 <p>Chọn thời gian</p>
-                <input type="date" id="start">
-                <img src="../../picture/component/arrow-right.png" alt="">
-                <input type="date" id="end">
+                <form action="" method="POST">
+                    <input type="date" id="start">
+                    <img src="../../picture/component/arrow-right.png" alt="">
+                    <input type="date" id="end" name="end_date" onchange="form.submit()">
+                </form>
             </div>
 
             <form action="" method="POST" class="search">
@@ -211,6 +213,15 @@ if (isset($_SESSION['admin_login'])) {
                             $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
                         } else {
                             $query = "SELECT * FROM progression WHERE serviceID = $serviceID AND status LIKE '$search_select' LIMIT $start, $limit";
+                        }
+                    } elseif (isset($_POST['start_date']) && isset($_POST['end_date'])) {
+                        $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
+                        $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
+
+                        if (empty($start_date_format && $end_date_format)) {
+                            echo 'No data';
+                        } else {
+                            $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
                         }
                     } else {
                         $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";

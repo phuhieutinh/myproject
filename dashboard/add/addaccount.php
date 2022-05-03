@@ -37,7 +37,7 @@ if (isset($_SESSION['admin_login'])) {
     $password = "";
     $email = "";
     $roleName = "";
-    $status = "";
+    $status = "Hoạt động";
     $isUpdated = 0;
     if ($uid != "") {
         $query = "SELECT * FROM user WHERE userID = $uid";
@@ -170,8 +170,12 @@ if (isset($_SESSION['admin_login'])) {
                     <label for="">Tình trạng<span class="required">*</span></label>
 
                     <select name="status" id="">
-                        <option value="Hoạt động" selected="selected">
-                            <?php echo ($status !== "Hoạt động") ? "Hoạt động" : $status ?></option>
+
+                        <option value="<?php echo ($status == "") ? $status : $status ?>" class="deco" selected>
+                            <?php echo ($status == "") ? $status : $status ?>
+                        </option>
+
+                        <option value="Hoạt động">Hoạt động</option>
                         <option value="Ngưng hoạt động">Ngưng hoạt động</option>
                     </select>
 

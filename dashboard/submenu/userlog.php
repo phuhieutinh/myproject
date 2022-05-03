@@ -68,15 +68,19 @@ if (isset($_SESSION['admin_login'])) {
 
         <div class="userlog date">
             <p>Chọn thời gian</p>
-            <input type="date" class="userlog datestart">
-            <img src="../../picture/component/arrow-right.png" alt="">
-            <input type="date" class="userlog dateend">
+            <form action="" method="POST">
+                <input type="date" class="userlog datestart" name="start_date">
+                <img src="../../picture/component/arrow-right.png" alt="">
+                <input type="date" class="userlog dateend" name="end_date" onchange="form.submit()">
+            </form>
         </div>
 
         <div id="mrolesearch" class="search">
             <p>Từ khóa</p>
-            <input type="text" name="search" placeholder="Nhập từ khóa">
-            <img src="../../picture/component/search.png" alt="search">
+            <form action="" method="POST">
+                <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
+                <button type="submit" id="submit" name="submit_search" class=""><img src="../../picture/component/search.png" alt="search"></button>
+            </form>
         </div>
 
         <ul>
@@ -129,14 +133,95 @@ if (isset($_SESSION['admin_login'])) {
                     <th>IP thực hiện</th>
                     <th>Thao tác thực hiện</th>
                 </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                </tr>
+
+                <?php
+                $sql_pagination = 'SELECT count(userlogID) as total from userlog';
+                $result_pagination = mysqli_query($conn, $sql_pagination);
+                $row_pagination = mysqli_fetch_assoc($result_pagination);
+                $total_records = $row_pagination['total'];
+
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $limit = 9;
+
+                $total_page = ceil($total_records / $limit);
+                if ($current_page > $total_page) {
+                    $current_page = $total_page;
+                } else if ($current_page < 1) {
+                    $current_page = 1;
+                }
+                $start = ($current_page - 1) * $limit;
+
+                if (isset($_POST['start_date']) && isset($_POST['end_date'])) {
+                    $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
+                    $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
+
+                    if (empty($start_date_format && $end_date_format)) {
+                        $query = "SELECT * FROM userlog LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM `userlog` WHERE `userlogTime` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                    }
+                } elseif (isset($_POST['submit_search'])) {
+                    $search = addslashes($_POST['search']);
+                    if (empty($search)) {
+                        $query = "SELECT * FROM userlog LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM userlog, user WHERE user.userID = userlog.userID AND username LIKE '%$search%' LIMIT $start, $limit";
+                    }
+                } else {
+                    $query = "SELECT * FROM userlog LIMIT $start, $limit";
+                }
+                $result_list = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result_list) > 0) {
+                    while ($row_userlog = mysqli_fetch_assoc($result_list)) {
+                        $userlogID = $row_userlog['userlogID'];
+                        $IPaddress = $row_userlog['IPaddress'];
+
+                        $userlogTime = date_create($row_userlog['userlogTime']);
+                        $userlogTime_format = date_format($userlogTime, "H:i d/m/Y");
+
+                        $userlogAction = $row_userlog['userlogAction'];
+                        $userID = $row_userlog['userID'];
+
+                        $sql_user = "SELECT username FROM userlog, user WHERE $userID = user.userID AND $userlogID = userlog.userlogID";
+                        $query_user = mysqli_query($conn, $sql_user);
+                        while ($row_user = mysqli_fetch_assoc($query_user)) {
+                            $userlog_username = $row_user['username'];
+                        }
+                ?>
+
+                        <tr>
+                            <td><?php echo $userlog_username; ?></td>
+                            <td><?php echo $userlogTime_format; ?></td>
+                            <td><?php echo $IPaddress; ?></td>
+                            <td><?php echo $userlogAction; ?></td>
+                        </tr>
+
+                <?php }
+                }
+                ?>
             </table>
         </main>
+
+        <div class="pagination">
+            <?php
+            if ($current_page > 1 && $total_page > 1) {
+                echo '<a class="pagination-box" href="userlog.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
+            }
+
+            for ($i = 1; $i <= $total_page; $i++) {
+                if ($i == $current_page) {
+                    echo '<span class="pagination-active">' . $i . '</span> ';
+                } else {
+                    echo '<a class="pagination-box" href="userlog.php?page=' . $i . '">' . $i . '</a> ';
+                }
+            }
+
+            if ($current_page < $total_page && $total_page > 1) {
+                echo '<a class="pagination-box" href="userlog.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';
+            }
+            ?>
+        </div>
 
     <?php
 } else if (isset($_SESSION['user_login'])) {

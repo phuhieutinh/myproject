@@ -72,27 +72,29 @@ if (isset($_SESSION['admin_login'])) {
             <div class="activedropdown">
                 <p>Trạng thái</p>
                 <form action="maccount.php" method="POST">
-                    <select name="search_select" id="activedropdown" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
-                        <option value="Hoạt động">Hoạt động</option>
-                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
-                    </select>
+                    <div class="select_maccount">
+                        <select name="search_select" id="activedropdown" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
+                            <option value="Hoạt động">Hoạt động</option>
+                            <option value="Ngưng hoạt động">Ngưng hoạt động</option>
+                        </select>
                 </form>
             </div>
+        </div>
 
-            <form action="maccount.php" method="POST">
-                <div class=" search">
-                    <p>Từ khóa</p>
-                    <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
-                    <button type="submit" id="submit" name="submit_search" class=""><img src="../../picture/component/search.png" alt="search"></button>
-                </div>
-            </form>
+        <form action="maccount.php" method="POST">
+            <div class=" search">
+                <p>Từ khóa</p>
+                <input type="text" name="search" placeholder="Nhập từ khóa" autocomplete="off">
+                <button type="submit" id="submit" name="submit_search" class=""><img src="../../picture/component/search.png" alt="search"></button>
+            </div>
+        </form>
 
-            <a href="../../dashboard/add/addaccount.php" class="add">
-                <img src="../../picture/component/add-square.png" alt="">
-                <p>Thêm tài khoản</p>
-            </a>
+        <a href="../../dashboard/add/addaccount.php" class="add">
+            <img src="../../picture/component/add-square.png" alt="">
+            <p>Thêm tài khoản</p>
+        </a>
         </div>
 
         <ul>

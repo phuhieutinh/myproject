@@ -1,5 +1,8 @@
 <?php
 require_once '../dbconnect.php';
+include '../function/function_userlog.php';
+
+session_start();
 
 $conn = connect_db();
 
@@ -14,7 +17,12 @@ if (isset($_FILES['fileupload']) && isset($_POST['userid'])) {
 
     if (mysqli_query($conn, $sql)) {
         if (move_uploaded_file($tempname, $folder)) {
-            header('location:../dashboard/info.php');
+            $log = "Upload file success File Name is $filename";
+            $update_userlog = userlog($log);
+
+            $message = "ADD OR UPDATE SUCCESSFUL !!!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            echo "<script type='text/javascript'>window.location = '../dashboard/info.php';</script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }

@@ -71,55 +71,63 @@ if (isset($_SESSION['admin_login'])) {
             <div class="progression servicename">
                 <p>Tên dịch vụ</p>
                 <form action="progression.php" method="POST">
-                    <select name="search_select" class="servicename" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
+                    <div class="select">
+                        <select name="search_select" class="servicename" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
 
-                        <?php
-                        $sql_service = "SELECT * FROM service";
-                        $query_service = mysqli_query($conn, $sql_service);
+                            <?php
+                            $sql_service = "SELECT * FROM service";
+                            $query_service = mysqli_query($conn, $sql_service);
 
-                        while ($row_service = mysqli_fetch_assoc($query_service)) {
-                            $serviceID_select = $row_service['serviceID'];
-                            $serviceName = $row_service['serviceName'];
+                            while ($row_service = mysqli_fetch_assoc($query_service)) {
+                                $serviceID_select = $row_service['serviceID'];
+                                $serviceName = $row_service['serviceName'];
 
-                            echo "<option value='$serviceID_select'>$serviceName</option>";
-                        }
-                        ?>
-                    </select>
+                                echo "<option value='$serviceID_select'>$serviceName</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </form>
             </div>
 
             <div class="progression status">
                 <p>Tình trạng</p>
                 <form action="progression.php" method="POST">
-                    <select name="search_select" class="status" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
-                        <option value="Đang chờ">Đang chờ</option>
-                        <option value="Đã sử dụng">Đã sử dụng</option>
-                        <option value="Bỏ qua">Bỏ qua</option>
-                    </select>
+                    <div class="select">
+                        <select name="search_select" class="status" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
+                            <option value="Đang chờ">Đang chờ</option>
+                            <option value="Đã sử dụng">Đã sử dụng</option>
+                            <option value="Bỏ qua">Bỏ qua</option>
+                        </select>
+                    </div>
                 </form>
             </div>
 
             <div class="progression supply">
                 <p>Nguồn cấp</p>
-                <form action="progression.php" method="POST">
-                    <select name="search_select" class="supply" onchange="form.submit()">
-                        <option value="" disabled selected style="display: none;">Tất cả</option>
-                        <option value="All">Tất cả</option>
-                        <option value="Kiosk">Kiosk</option>
-                        <option value="Hệ thống">Hệ thống</option>
-                    </select>
-                </form>
+                <div class="select">
+                    <form action="progression.php" method="POST">
+                        <select name="search_select" class="supply" onchange="form.submit()">
+                            <option value="" disabled selected style="display: none;">Tất cả</option>
+                            <option value="All">Tất cả</option>
+                            <option value="Kiosk">Kiosk</option>
+                            <option value="Hệ thống">Hệ thống</option>
+                        </select>
+                    </form>
+                </div>
             </div>
 
             <div class="progression date">
                 <p>Chọn thời gian</p>
-                <input type="date" class="progression datestart">
-                <img src="../picture/component/arrow-right.png" alt="">
-                <input type="date" class="progression dateend">
+                <form action="" method="POST">
+                    <input type="date" class="progression datestart" name="start_date">
+                    <img src="../picture/component/arrow-right.png" alt="">
+                    <input type="date" class="progression dateend" name="end_date" onchange="form.submit()">
+                </form>
             </div>
 
             <div class="search">
@@ -227,6 +235,15 @@ if (isset($_SESSION['admin_login'])) {
                         $query = "SELECT * FROM progression LIMIT $start, $limit";
                     } else {
                         $query = "SELECT * FROM progression WHERE status LIKE '$search_select' OR supply LIKE '$search_select' OR serviceID LIKE '$search_select' LIMIT $start, $limit";
+                    }
+                } elseif (isset($_POST['start_date']) && isset($_POST['end_date'])) {
+                    $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
+                    $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
+
+                    if (empty($start_date_format && $end_date_format)) {
+                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    } else {
+                        $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
                     }
                 } else {
                     $query = "SELECT * FROM progression LIMIT $start, $limit";
