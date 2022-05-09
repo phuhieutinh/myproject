@@ -3006,6 +3006,75 @@ a.add img {
     top: 10px;
 }
 
+div.export {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 4px;
+
+    position: absolute;
+    width: 64px;
+    height: 60px;
+    left: 1410px;
+    top: 244px;
+
+    /* Orange/$-Orange-50 */
+
+    background: #FFF2E7;
+    /* down */
+
+    box-shadow: 0px 0px 6px #E7E9F2;
+    border-radius: 8px 0px 0px 8px;
+}
+
+div.export p {
+    position: absolute;
+    width: 72px;
+    height: 38px;
+    left: 0px;
+    top: 38px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+    /* Orange/$-Orange-500 */
+
+    color: #FF7506;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 4px 0px;
+}
+
+div.export img {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    left: 15px;
+    top: 10px;
+}
+
+div.export form.export {
+    width: 64px;
+    height: 60px;
+}
+
+div.export input.export {
+    position: absolute;
+    width: 64px;
+    height: 60px;
+    display: none;
+}
+
 .dateservice {
     position: absolute;
     width: 300px;

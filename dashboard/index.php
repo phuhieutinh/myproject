@@ -135,7 +135,7 @@ if (isset($_SESSION['admin_login'])) {
                     <img src="../picture/component/dashboard/dashboard_id.png" alt="">
 
                     <?php
-                    $result = mysqli_query($conn, 'SELECT SUM(progressID) AS sum_progressID FROM progression');
+                    $result = mysqli_query($conn, 'SELECT COUNT(progressID) AS sum_progressID FROM progression');
                     $row = mysqli_fetch_assoc($result);
                     $sum_progressID = $row['sum_progressID'];
                     ?>
@@ -225,7 +225,7 @@ if (isset($_SESSION['admin_login'])) {
                 </div>
 
                 <?php
-                $result = mysqli_query($conn, 'SELECT SUM(monitorID) AS sum_monitorID FROM monitor');
+                $result = mysqli_query($conn, 'SELECT COUNT(monitorID) AS sum_monitorID FROM monitor');
                 $row = mysqli_fetch_assoc($result);
                 $sum_monitorID = $row['sum_monitorID'];
                 ?>
@@ -261,7 +261,7 @@ if (isset($_SESSION['admin_login'])) {
                     </div>
                 </div>
                 <?php
-                $result = mysqli_query($conn, 'SELECT SUM(serviceID) AS sum_serviceID FROM service');
+                $result = mysqli_query($conn, 'SELECT COUNT(serviceID) AS sum_serviceID FROM service');
                 $row = mysqli_fetch_assoc($result);
                 $sum_serviceID = $row['sum_serviceID'];
                 ?>

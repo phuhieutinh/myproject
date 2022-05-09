@@ -75,10 +75,15 @@ if (isset($_SESSION['admin_login'])) {
             </form>
         </div>
 
-        <a href="" class="add">
-            <img src="../picture/component/document-download.png" alt="">
-            <p>Tải về</p>
-        </a>
+        <div class="export">
+            <label for="export">
+                <img src="../picture/component/document-download.png" alt="">
+                <p>Tải về</p>
+                <form action="../function/download_report.php" class="export" method="POST">
+                    <input type="submit" name="export" class="export" id="export">
+                </form>
+            </label>
+        </div>
 
         <ul>
             <img src="../picture/Logo alta.png" alt="logo" class="logo">

@@ -212,13 +212,15 @@ if (isset($_SESSION['admin_login'])) {
                         $serviceName = $row['serviceName'];
                         $descriptive = $row['descriptive'];
                         $serviceStatus = $row['serviceStatus'];
+                        $prefix = $row['prefix_id'];
+                        $surfix = $row['surfix_id'];
 
                         $active = '<img src="../picture/component/EllipseGreen.png" alt="active">';
 
                         $stopActive = '<img src="../picture/component/EllipseRed.png" alt="active">';
                 ?>
                         <tr>
-                            <td><?php echo $serviceID; ?></td>
+                            <td><?php echo $prefix . $serviceID . $surfix; ?></td>
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $descriptive; ?></td>
                             <td><?php echo ($serviceStatus == "Hoạt động") ? $active . $serviceStatus : $stopActive . $serviceStatus; ?>

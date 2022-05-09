@@ -37,10 +37,9 @@ if (isset($_SESSION['admin_login'])) {
     }
 
     if (isset($_POST['submit'])) {
-        // move the file to the server
         $file_tmp = $_FILES['fileName']['tmp_name'];
         $name_file = $_FILES['fileName']['name'];
-        // move the file to the server
+
         move_uploaded_file($file_tmp, '/user/' . $name_file);
         // header("location:../dashboard/info.php");
     }

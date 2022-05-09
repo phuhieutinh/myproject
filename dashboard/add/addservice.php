@@ -36,6 +36,8 @@ if (isset($_SESSION['admin_login'])) {
     $serviceName = "";
     $descriptive = "";
     $serviceStatus = "Hoạt động";
+    $prefix = "";
+    $surfix = "";
     $isUpdated = 0;
     if ($uid != "") {
         $query = "SELECT * FROM service WHERE serviceID = $uid";
@@ -45,6 +47,8 @@ if (isset($_SESSION['admin_login'])) {
             $serviceName = $data['serviceName'];
             $descriptive = $data['descriptive'];
             $serviceStatus = $data['serviceStatus'];
+            $prefix = $data['prefix_id'];
+            $surfix = $data['surfix_id'];
         }
         $isUpdated = 1;
     }
@@ -121,25 +125,43 @@ if (isset($_SESSION['admin_login'])) {
                 <p class="text-rule">Quy tắc cắp số</p>
 
                 <div class="auto">
-                    <input type="checkbox" id="auto" name="auto" value="">
+                    <input type="checkbox" id="auto" name="auto" value="" <?php
+                                                                            if ($serviceID == "") {
+                                                                            } elseif ($serviceID == "0") {
+                                                                            } else {
+                                                                                echo "checked";
+                                                                            }
+                                                                            ?>>
                     <label for="auto">Tăng tự động từ:</label>
                     <div>
-                        <input type="text" class="start" placeholder="0001" readonly />
+                        <input type="text" class="start" value="<?php echo $serviceID ?>" name="auto_start" />
                         <span>đến</span>
                         <input type="text" class="end" placeholder="9999" />
                     </div>
                 </div>
 
                 <div class="prefix">
-                    <input type="checkbox" id="prefix" name="prefix" value="">
+                    <input type="checkbox" id="prefix" name="prefix_check" value="" <?php
+                                                                                    if ($prefix == "") {
+                                                                                    } elseif ($prefix == "0") {
+                                                                                    } else {
+                                                                                        echo "checked";
+                                                                                    }
+                                                                                    ?>>
                     <label for="prefix">Prefix:</label>
-                    <input type="text" placeholder="0001" readonly>
+                    <input type="text" name="prefix" value="<?php echo $prefix ?>">
                 </div>
 
                 <div class="surfix">
-                    <input type="checkbox" id="surfix" name="surfix" value="">
+                    <input type="checkbox" id="surfix" name="surfix_check" value="" <?php
+                                                                                    if ($surfix == "") {
+                                                                                    } elseif ($surfix == "0") {
+                                                                                    } else {
+                                                                                        echo "checked";
+                                                                                    }
+                                                                                    ?>>
                     <label for="surfix">Surfix:</label>
-                    <input type="text" placeholder="0001" readonly>
+                    <input type="text" name="surfix" value="<?php echo $surfix ?>">
                 </div>
 
                 <div class="reset">
