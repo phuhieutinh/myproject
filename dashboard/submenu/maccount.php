@@ -142,13 +142,14 @@ if (isset($_SESSION['admin_login'])) {
         <main id="mainmonitor" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
-                    <th>Tên đăng Nhập</th>
+                    <th class="start">Tên đăng Nhập</th>
                     <th>Họ tên</th>
                     <th>Số điện thoại</th>
                     <th>Email</th>
                     <th>Vai trò</th>
                     <th>Trạng thái Hoạt động</th>
-                    <th></th>
+                    <th class="end">
+                    </th>
                 </tr>
                 <?php
                 $sql_pagination = 'SELECT count(userID) as total from user';
@@ -211,12 +212,12 @@ if (isset($_SESSION['admin_login'])) {
                 ?>
 
                         <tr>
-                            <td><?php echo $username; ?></td>
+                            <td id="start"><?php echo $username; ?></td>
                             <td><?php echo $Name; ?></td>
                             <td><?php echo $phone; ?></td>
                             <td><?php echo $email; ?></td>
                             <td><?php echo $roleName; ?></td>
-                            <td><?php echo ($status == "Hoạt động") ? $active . $status : $stopActive . $status; ?></td>
+                            <td id="end"><?php echo ($status == "Hoạt động") ? $active . $status : $stopActive . $status; ?></td>
                             <td><a href="../../dashboard/add/addaccount.php?id=<?php echo $userid; ?>">Cập nhật</a></td>
                         </tr>
                 <?php }
@@ -232,13 +233,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="maccount.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="maccount.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="maccount.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="maccount.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';

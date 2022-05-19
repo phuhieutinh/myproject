@@ -70,6 +70,7 @@ if (isset($_SESSION['admin_login'])) {
             <div class="activedropdown">
                 <form action="service.php" method="POST">
                     <div class="select_monitor">
+                        <p>Trạng thái Hoạt động</p>
                         <select name="search_select" id="activedropdown" onchange="form.submit()">
                             <option value="" disabled selected style="display: none;">Tất cả</option>
                             <option value="All">Tất cả</option>
@@ -151,12 +152,12 @@ if (isset($_SESSION['admin_login'])) {
         <main id="mainmonitor" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
-                    <th>Mã dịch vụ</th>
+                    <th class="start">Mã dịch vụ</th>
                     <th>Tên dịch vụ</th>
                     <th>Mô tả</th>
                     <th>Trạng thái Hoạt động</th>
                     <th></th>
-                    <th></th>
+                    <th class="end"></th>
                 </tr>
 
                 <?php
@@ -212,21 +213,19 @@ if (isset($_SESSION['admin_login'])) {
                         $serviceName = $row['serviceName'];
                         $descriptive = $row['descriptive'];
                         $serviceStatus = $row['serviceStatus'];
-                        $prefix = $row['prefix_id'];
-                        $surfix = $row['surfix_id'];
 
                         $active = '<img src="../picture/component/EllipseGreen.png" alt="active">';
 
                         $stopActive = '<img src="../picture/component/EllipseRed.png" alt="active">';
                 ?>
                         <tr>
-                            <td><?php echo $prefix . $serviceID . $surfix; ?></td>
+                            <td id="start"><?php echo $serviceID; ?></td>
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $descriptive; ?></td>
                             <td><?php echo ($serviceStatus == "Hoạt động") ? $active . $serviceStatus : $stopActive . $serviceStatus; ?>
                             </td>
                             <td><a href="../dashboard/detail/serviceDetail.php?id=<?php echo $serviceID ?>">Chi tiết</a></td>
-                            <td><a href="../dashboard/add/addservice.php?id=<?php echo $serviceID; ?>">Cập nhật</a></td>
+                            <td id="end"><a href="../dashboard/add/addservice.php?id=<?php echo $serviceID; ?>">Cập nhật</a></td>
                         </tr>
                 <?php }
                 }
@@ -240,13 +239,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="service.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="service.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="service.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="service.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../picture/component/fi_right.png" alt="right"></a>';

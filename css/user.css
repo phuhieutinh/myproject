@@ -206,9 +206,9 @@ span.popuptext-progress.show h1 {
 
 span.popuptext-progress.show p {
     position: absolute;
-    width: 236px;
+    width: 389px;
     height: 60px;
-    left: 125px;
+    left: 29px;
     top: 75px;
 
     font-family: 'Nunito';

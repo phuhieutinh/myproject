@@ -130,10 +130,10 @@ if (isset($_SESSION['admin_login'])) {
         <main id="mainmrole" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
-                    <th>Tên vai trò</th>
+                    <th class="start">Tên vai trò</th>
                     <th>Số người dùng</th>
                     <th>Mô tả</th>
-                    <th></th>
+                    <th class="end"></th>
                 </tr>
                 <?php
                 $sql_pagination = 'SELECT count(roleID) as total from role';
@@ -171,10 +171,10 @@ if (isset($_SESSION['admin_login'])) {
                         $descriptive = $row['descriptive'];
                 ?>
                         <tr>
-                            <td><?php echo $roleName; ?></td>
+                            <td id="start"><?php echo $roleName; ?></td>
                             <td><?php echo $quantity; ?></td>
                             <td><?php echo $descriptive; ?></td>
-                            <td><a href="../../dashboard/add/addrole.php?id=<?php echo $roleID; ?>">Cập nhật</a></td>
+                            <td class="end"><a href="../../dashboard/add/addrole.php?id=<?php echo $roleID; ?>">Cập nhật</a></td>
                         </tr>
                 <?php }
                 }
@@ -188,13 +188,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="mrole.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="mrole.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="mrole.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="mrole.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';

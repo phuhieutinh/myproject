@@ -36,6 +36,7 @@ if (isset($_SESSION['admin_login'])) {
     $serviceName = "";
     $descriptive = "";
     $serviceStatus = "Hoạt động";
+    $stt = 1;
     $prefix = "";
     $surfix = "";
     $isUpdated = 0;
@@ -49,6 +50,7 @@ if (isset($_SESSION['admin_login'])) {
             $serviceStatus = $data['serviceStatus'];
             $prefix = $data['prefix_id'];
             $surfix = $data['surfix_id'];
+            $stt = $data['stt_service'];
         }
         $isUpdated = 1;
     }
@@ -134,7 +136,7 @@ if (isset($_SESSION['admin_login'])) {
                                                                             ?>>
                     <label for="auto">Tăng tự động từ:</label>
                     <div>
-                        <input type="text" class="start" value="<?php echo $serviceID ?>" name="auto_start" />
+                        <input type="text" class="start" value="<?php echo $stt ?>" name="auto_start" />
                         <span>đến</span>
                         <input type="text" class="end" placeholder="9999" />
                     </div>

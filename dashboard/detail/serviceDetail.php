@@ -24,6 +24,24 @@ if (isset($_SESSION['admin_login'])) {
             exit;
         }
     }
+
+    if (isset($_GET['id'])) {
+        $serviceID = $_GET['id'];
+
+        $sql_service = "SELECT * FROM service where serviceID = '$serviceID'";
+        $result_service = mysqli_query($conn, $sql_service);
+        if (mysqli_num_rows($result_service) > 0) {
+            $row_service = mysqli_fetch_assoc($result_service);
+
+            $serviceName = $row_service['serviceName'];
+            $descriptive = $row_service['descriptive'];
+            $prefix = $row_service['prefix_id'];
+            $surfix = $row_service['surfix_id'];
+            $auto_stt = $row_service['stt_service'];
+        } else {
+            echo "NO DATA";
+        }
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -73,7 +91,7 @@ if (isset($_SESSION['admin_login'])) {
         <div>
             <p class="maccounttext">Quản lý dịch vụ</p>
 
-            <a href="../../dashboard/add/addservice.php" class="edit">
+            <a href="../../dashboard/add/addservice.php?id=<?php echo $serviceID; ?>" class="edit">
                 <img src="../../picture/component/edit-square.png" alt="">
                 <p>Cập nhật Danh sách</p>
             </a>
@@ -86,23 +104,6 @@ if (isset($_SESSION['admin_login'])) {
 
         <main id="serviceDetail">
             <p class="top">Thông tin dịch vụ</p>
-            <?php
-            if (isset($_GET['id'])) {
-                $serviceID = $_GET['id'];
-
-                $sql_service = "SELECT * FROM service where serviceID = '$serviceID'";
-                $result_service = mysqli_query($conn, $sql_service);
-                if (mysqli_num_rows($result_service) > 0) {
-                    $row_service = mysqli_fetch_assoc($result_service);
-
-                    $serviceName = $row_service['serviceName'];
-                    $descriptive = $row_service['descriptive'];
-                } else {
-                    echo "NO DATA";
-                }
-            }
-
-            ?>
             <div class="serviceCode">
                 <h1>Mã dịch vụ: </h1>
                 <p><?php echo $serviceID ?></p>
@@ -125,7 +126,7 @@ if (isset($_SESSION['admin_login'])) {
             <div class="auto">
                 <label for="auto">Tăng tự động</label>
                 <div>
-                    <input type="text" class="start" placeholder="0001" readonly />
+                    <input type="text" class="start" placeholder="<?php echo $auto_stt ?>" readonly />
                     <span>đến</span>
                     <input type="text" class="end" placeholder="9999" readonly />
                 </div>
@@ -133,7 +134,7 @@ if (isset($_SESSION['admin_login'])) {
 
             <div class="prefix">
                 <label for="prefix">Prefix:</label>
-                <input type="text" placeholder="0001" readonly>
+                <input type="text" placeholder="<?php echo $prefix ?>" readonly>
             </div>
 
             <div class="reset">
@@ -201,18 +202,18 @@ if (isset($_SESSION['admin_login'])) {
                     if (isset($_POST['search'])) {
                         $search = addslashes($_POST['search']);
                         if (empty($search)) {
-                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID ORDER BY progressID DESC LIMIT $start, $limit";
                         } else {
-                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID AND progressID LIKE '$search' OR serviceID = $serviceID AND customerName LIKE '%$search%' LIMIT $start, $limit";
+                            $query = "SELECT * FROM progression WHERE stt_progress LIKE '$search' ORDER BY progressID DESC LIMIT $start, $limit";
                         }
                     } elseif (isset($_POST['search_select'])) {
                         $search_select = addslashes($_POST['search_select']);
                         if (empty($search_select)) {
-                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID ORDER BY progressID DESC LIMIT $start, $limit";
                         } elseif ($search_select == "All") {
-                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID ORDER BY progressID DESC LIMIT $start, $limit";
                         } else {
-                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID AND status LIKE '$search_select' LIMIT $start, $limit";
+                            $query = "SELECT * FROM progression WHERE serviceID = $serviceID AND status LIKE '$search_select' ORDER BY progressID DESC LIMIT $start, $limit";
                         }
                     } elseif (isset($_POST['start_date']) && isset($_POST['end_date'])) {
                         $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
@@ -221,10 +222,10 @@ if (isset($_SESSION['admin_login'])) {
                         if (empty($start_date_format && $end_date_format)) {
                             echo 'No data';
                         } else {
-                            $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                            $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' ORDER BY progressID DESC LIMIT $start, $limit";
                         }
                     } else {
-                        $query = "SELECT * FROM progression WHERE serviceID = $serviceID LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression WHERE serviceID = $serviceID ORDER BY progressID DESC LIMIT $start, $limit";
                     }
 
                     $result_list = mysqli_query($conn, $query);
@@ -232,6 +233,7 @@ if (isset($_SESSION['admin_login'])) {
                     if (mysqli_num_rows($result_list) > 0) {
                         while ($row_progress = mysqli_fetch_assoc($result_list)) {
                             $progressID = $row_progress['progressID'];
+                            $stt_progress = $row_progress['stt_progress'];
                             $status = $row_progress['status'];
 
                             $waiting = '<img src="../../picture/component/EllipseBlue.png" alt="active">';
@@ -250,7 +252,7 @@ if (isset($_SESSION['admin_login'])) {
                     ?>
 
                             <tr>
-                                <td><?php echo $progressID; ?></td>
+                                <td><?php echo $prefix . $stt_progress . $surfix; ?></td>
                                 <td><?php echo $status_master ?></td>
                             </tr>
                     <?php }
@@ -258,27 +260,6 @@ if (isset($_SESSION['admin_login'])) {
                     ?>
                 </table>
             </div>
-
-            <div class="pagination">
-                <?php
-                if ($current_page > 1 && $total_page > 1) {
-                    echo '<a class="pagination-box" href="maccount.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
-                }
-
-                for ($i = 1; $i <= $total_page; $i++) {
-                    if ($i == $current_page) {
-                        echo '<span class="pagination-active">' . $i . '</span> ';
-                    } else {
-                        echo '<a class="pagination-box" href="maccount.php?page=' . $i . '">' . $i . '</a> ';
-                    }
-                }
-
-                if ($current_page < $total_page && $total_page > 1) {
-                    echo '<a class="pagination-box" href="maccount.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';
-                }
-                ?>
-            </div>
-
         </div>
 
         <ul>
@@ -333,13 +314,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="serviceDetail.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="serviceDetail.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="serviceDetail.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="serviceDetail.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';

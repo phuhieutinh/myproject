@@ -128,10 +128,10 @@ if (isset($_SESSION['admin_login'])) {
         <main id="userlog" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
-                    <th>Tên đăng nhập</th>
+                    <th class="start">Tên đăng nhập</th>
                     <th>Thời gian tác động</th>
                     <th>IP thực hiện</th>
-                    <th>Thao tác thực hiện</th>
+                    <th class="end">Thao tác thực hiện</th>
                 </tr>
 
                 <?php
@@ -168,7 +168,7 @@ if (isset($_SESSION['admin_login'])) {
                         $query = "SELECT * FROM userlog, user WHERE user.userID = userlog.userID AND username LIKE '%$search%' LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM userlog LIMIT $start, $limit";
+                    $query = "SELECT * FROM userlog ORDER BY userID DESC LIMIT $start, $limit";
                 }
                 $result_list = mysqli_query($conn, $query);
 
@@ -191,10 +191,10 @@ if (isset($_SESSION['admin_login'])) {
                 ?>
 
                         <tr>
-                            <td><?php echo $userlog_username; ?></td>
+                            <td id="start"><?php echo $userlog_username; ?></td>
                             <td><?php echo $userlogTime_format; ?></td>
                             <td><?php echo $IPaddress; ?></td>
-                            <td><?php echo $userlogAction; ?></td>
+                            <td id="end"><?php echo $userlogAction; ?></td>
                         </tr>
 
                 <?php }
@@ -209,13 +209,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="userlog.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="userlog.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="userlog.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="userlog.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';

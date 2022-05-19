@@ -9,6 +9,19 @@ body {
     border-radius: 16px;
 }
 
+/* @media screen and (min-width: 400px) {
+    ul.menu {
+        width: 50%;
+        height: 50%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        background-color: green;
+    }
+} */
+
 div#dashboard_index h1 {
     position: absolute;
     width: 162px;
@@ -2670,6 +2683,23 @@ main#mainmonitor {
 
     filter: drop-shadow(2px 2px 8px rgba(232, 239, 244, 0.8));
     border-radius: 12px;
+
+}
+
+th.start {
+    border-top-left-radius: 12px;
+}
+
+th.end {
+    border-top-right-radius: 12px;
+}
+
+td#start {
+    border-bottom-left-radius: 12px;
+}
+
+td#end {
+    border-bottom-right-radius: 12px;
 }
 
 table.tablemonitor th,
@@ -2682,7 +2712,14 @@ td {
     align-items: center;
     padding: 0px 5px;
     height: 49px;
+}
 
+table tr:nth-child(odd) {
+    background: #FFF2E7;
+}
+
+table tr:nth-child(even) {
+    background-color: white;
 }
 
 main#mainmrole {
@@ -3500,7 +3537,7 @@ div.pagination {
     position: absolute;
     width: 288px;
     height: 32px;
-    left: 1051px;
+    left: 945px;
     top: 791px;
 }
 
@@ -3513,7 +3550,7 @@ div.pagination.mrole {
     position: absolute;
     width: 288px;
     height: 32px;
-    left: 1051px;
+    left: 945px;
     top: 609px;
 }
 
@@ -3564,6 +3601,14 @@ div.pagination span.pagination-active {
     color: #FFFFFF;
 }
 
+a.less {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    left: 9px;
+    top: 9px;
+}
+
 input#upload {
     position: absolute;
     width: 49px;
@@ -3594,13 +3639,13 @@ div.chart_canvas {
     border-radius: 12px;
 }
 
-canvas#myChart {
+/* canvas#myChart {
     position: absolute;
     display: block;
     height: 401px !important;
     width: 791px !important;
     top: 85px;
-}
+} */
 
 div.chart_canvas h1 {
     position: absolute;

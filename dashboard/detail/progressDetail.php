@@ -94,6 +94,7 @@ if (isset($_SESSION['admin_login'])) {
                     $customerName = $row_progress['customerName'];
                     $phone = $row_progress['phone'];
                     $email = $row_progress['email'];
+                    $stt_progress = $row_progress['stt_progress'];
 
                     $sell_date = date_create($row_progress['sellDate']);
                     $sell_date_format = date_format($sell_date, "H:i d/m/Y");
@@ -105,10 +106,12 @@ if (isset($_SESSION['admin_login'])) {
                     $supply = $row_progress['supply'];
 
                     $serviceID = $row_progress['serviceID'];
-                    $sql_service = "SELECT serviceName FROM progression, service WHERE $serviceID = service.serviceID";
+                    $sql_service = "SELECT * FROM progression, service WHERE $serviceID = service.serviceID";
                     $query_service = mysqli_query($conn, $sql_service);
                     while ($row_service = mysqli_fetch_assoc($query_service)) {
                         $serviceName = $row_service['serviceName'];
+                        $prefix = $row_service['prefix_id'];
+                        $surfix = $row_service['surfix_id'];
                     }
                 } else {
                     echo "NO DATA";
@@ -130,7 +133,7 @@ if (isset($_SESSION['admin_login'])) {
 
             <div class="number-order">
                 <h1>Số thứ tự: </h1>
-                <p><?php echo $progressID; ?></p>
+                <p><?php echo $prefix . $stt_progress . $surfix; ?></p>
             </div>
 
             <div class="order-date">

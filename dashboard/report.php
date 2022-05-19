@@ -129,11 +129,11 @@ if (isset($_SESSION['admin_login'])) {
         <main id="report_page" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
-                    <th>Số thứ tự</th>
+                    <th class="start">Số thứ tự</th>
                     <th>Tên dịch vụ</th>
                     <th>Thời gian cấp</th>
                     <th>Tình trạng</th>
-                    <th>Nguồn cấp</th>
+                    <th class="end">Nguồn cấp</th>
                 </tr>
 
                 <?php
@@ -204,11 +204,11 @@ if (isset($_SESSION['admin_login'])) {
                 ?>
 
                         <tr>
-                            <td><?php echo $progressID; ?></td>
+                            <td id="start"><?php echo $progressID; ?></td>
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $sell_date_format; ?></td>
                             <td><?php echo $status_master; ?></td>
-                            <td><?php echo $supply; ?></td>
+                            <td id="end"><?php echo $supply; ?></td>
                         </tr>
 
                 <?php }
@@ -223,13 +223,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="report.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="report.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="report.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="report.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../picture/component/fi_right.png" alt="right"></a>';

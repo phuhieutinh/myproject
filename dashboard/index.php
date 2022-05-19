@@ -24,6 +24,18 @@ if (isset($_SESSION['admin_login'])) {
             exit;
         }
     }
+
+    $query_sum_stt = mysqli_query($conn, "SELECT DATE(`sellDate`) AS 'day',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY DATE(`sellDate`)");
+
+    while ($row_sum_stt = mysqli_fetch_array($query_sum_stt)) {
+        // $sell_date = date_create($row['sellDate']);
+        // $sell_date_format = date_format($sell_date, "d/m/Y");
+        $count_progressID = $row_sum_stt['count_progressID'];
+        $day = $row_sum_stt['day'];
+
+        $chart_data .= "{ years:'" . $day . "', total:" . $count_progressID . "}, ";
+    }
+    $chart_data = substr($chart_data, 0, -2);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -34,7 +46,8 @@ if (isset($_SESSION['admin_login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard</title>
         <link href="../css/dashboard.css" rel="stylesheet">
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard-rtl/">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
         <link href="../css/rome.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
@@ -197,18 +210,22 @@ if (isset($_SESSION['admin_login'])) {
             </div>
 
             <div class="chart_canvas">
-                <h1>Bảng thống kê theo ngày</h1>
-                <p>tháng 11/2021</p>
-                <div class="date_chart">
-                    <p>Xem theo</p>
-                    <select name="" id="date_chart">
-                        <option value="" selected="selected">Ngày</option>
-                        <option value="">Tuần</option>
-                        <option value="">Tháng</option>
-                    </select>
+                <div class="container" style="width: 791px;;">
+                    <h1>Bảng thống kê theo ngày</h1>
+                    <p>tháng 11/2021</p>
+                    <div class="date_chart">
+                        <p>Xem theo</p>
+                        <select name="" id="date_chart">
+                            <option value="" selected="selected">Ngày</option>
+                            <option value="">Tuần</option>
+                            <option value="">Tháng</option>
+                        </select>
+                    </div>
+                    <br /><br />
+                    <br /><br />
+                    <br /><br />
+                    <div id="chart"></div>
                 </div>
-
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
             </div>
 
         </main>
@@ -331,9 +348,21 @@ if (isset($_SESSION['admin_login'])) {
     ?>
     <script src="../js/dashboard.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" integrity="sha384-EbSscX4STvYAC/DxHse8z5gEDaNiKAIGW+EpfzYTfQrgIlHywXXrM9SUIZ0BlyfF" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha384-i+dHPTzZw7YVZOx9lbH5l6lP74sLRtMtwN2XjVqjf3uAGAREAF4LMIUDTWEVs4LI" crossorigin="anonymous"></script>
-    <script src="../js/chart/dashboard.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <script>
+        Morris.Area({
+            element: 'chart',
+            data: [<?php echo $chart_data; ?>],
+            xkey: ['years'],
+            ykeys: ['total'],
+            labels: ['total', 'day'],
+            hideHover: 'auto',
+            stacked: true
+        });
+    </script>
 
     <script src="../js/calendars/jquery-3.3.1.min.js"></script>
     <script src="../js/calendars/rome.js"></script>

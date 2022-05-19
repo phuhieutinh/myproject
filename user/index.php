@@ -37,8 +37,26 @@ if (isset($_SESSION['user_login'])) {
         $email = $_POST['email'];
         $status = "Đang chờ";
         $supply = "Kiosk";
+        $stt_progress = 0;
 
-        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate, status, phone, email, customerName, supply) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date', '$status', '$customerPhone', '$email', '$customerName', '$supply')";
+        if ($stt_progress == 0 || $stt_progress == NULL) {
+            $stt_result_service = mysqli_query($conn, "SELECT stt_service FROM service WHERE $serviceID = serviceID");
+            $row_stt_service = mysqli_fetch_assoc($stt_result_service);
+            $stt_service = $row_stt_service['stt_service'];
+
+            $stt_result_progress = mysqli_query($conn, "SELECT max(stt_progress) as max FROM progression WHERE $serviceID = progression.serviceID");
+            $row_stt_progress = mysqli_fetch_assoc($stt_result_progress);
+            $stt_progress = $row_stt_progress['max'];
+
+            if ($stt_service == $stt_progress || $stt_service < $stt_progress) {
+                $stt_progress += 1;
+            } else {
+                $stt_progress = $stt_service;
+            }
+        } else {
+        }
+
+        $sql = "INSERT INTO progression(progressID ,serviceID, sellDate, useDate, status, phone, email, customerName, supply, stt_progress) VALUES('$progress_ID', '$serviceID', '$sell_date', '$use_date', '$status', '$customerPhone', '$email', '$customerName', '$supply', '$stt_progress')";
 
         if (mysqli_query($conn, $sql)) {
             $log = "add progress success progressID";
@@ -152,6 +170,7 @@ if (isset($_SESSION['user_login'])) {
         while ($row_popup = mysqli_fetch_assoc($query_popup)) {
             $serviceID_popup = $row_popup['serviceID'];
             $progressID_popup = $row_popup['progressID'];
+            $stt = $row_popup['stt_progress'];
 
             $sell_date_popup = date_create($row_popup['sellDate']);
             $sell_date_format = date_format($sell_date_popup, "H:i d/m/Y");
@@ -159,10 +178,12 @@ if (isset($_SESSION['user_login'])) {
             $use_date_popup = date_create($row_popup['useDate']);
             $use_date_format = date_format($use_date_popup, "H:i d/m/Y");
 
-            $sql_service_popup = "SELECT serviceName FROM progression, service WHERE $serviceID_popup = service.serviceID";
+            $sql_service_popup = "SELECT * FROM progression, service WHERE $serviceID_popup = service.serviceID";
             $query_service_popup = mysqli_query($conn, $sql_service_popup);
             while ($row_service_popup = mysqli_fetch_assoc($query_service_popup)) {
                 $serviceName_popup = $row_service_popup['serviceName'];
+                $prefix_id = $row_service_popup['prefix_id'];
+                $surfix_id = $row_service_popup['surfix_id'];
             }
         }
         ?>
@@ -170,7 +191,7 @@ if (isset($_SESSION['user_login'])) {
         <span class="popuptext-progress" id="popupProgress">
             <a href="index.php" class="iconx"><img src="../picture/component/fi_x.png" alt=""></a>
             <h1>Số thứ tự được cấp</h1>
-            <p><?php echo $progressID_popup ?></p>
+            <p><?php echo $prefix_id . $stt . $surfix_id ?></p>
             <h5>DV: <?php echo $serviceName_popup; ?> <h4>(tại quầy số 1)</h4>
             </h5>
             <div class="footer">

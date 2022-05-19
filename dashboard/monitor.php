@@ -34,6 +34,27 @@ if (isset($_SESSION['admin_login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard</title>
         <link href="../css/dashboard.css" rel="stylesheet">
+        <style>
+            .readmore {
+                max-width: 411px;
+                max-height: 49px;
+                /* border: 1px solid #333; */
+                padding: 10px;
+            }
+
+            .readless {
+                position: sticky;
+                padding: 27px 391px 9px 1px;
+            }
+
+            .readmore.less {
+                max-width: 399px !important;
+                max-height: 31px !important;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        </style>
     </head>
 
     <body>
@@ -153,16 +174,16 @@ if (isset($_SESSION['admin_login'])) {
         </ul>
 
         <main id="mainmonitor" class="importance">
-            <table style="width:100%" class="tablemonitor">
+            <table style="width:100%; max-height: 100%" class="tablemonitor">
                 <tr>
-                    <th>Mã thiết bị</th>
+                    <th class="start">Mã thiết bị</th>
                     <th>Tên thiết bị</th>
                     <th>Địa chỉ IP</th>
                     <th>Trạng thái Hoạt động</th>
                     <th>Trạng thái kết nối</th>
                     <th id="activeservice">Dịch vụ sử dụng</th>
                     <th></th>
-                    <th></th>
+                    <th class="end"></th>
                 </tr>
                 <?php
                 $sql_pagination = 'SELECT count(monitorID) as total from monitor';
@@ -171,7 +192,7 @@ if (isset($_SESSION['admin_login'])) {
                 $total_records = $row_pagination['total'];
 
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                $limit = 8;
+                $limit = 7;
 
                 $total_page = ceil($total_records / $limit);
                 if ($current_page > $total_page) {
@@ -218,14 +239,18 @@ if (isset($_SESSION['admin_login'])) {
                         $stopActive = '<img src="../picture/component/EllipseRed.png" alt="active">';
                 ?>
                         <tr>
-                            <td><?php echo $monitorCode; ?></td>
+                            <td id="start"><?php echo $monitorCode; ?></td>
                             <td><?php echo $monitorName; ?></td>
                             <td><?php echo $ipaddress; ?></td>
                             <td><?php echo ($status_active == "Hoạt động") ? $active . $status_active : $stopActive . $status_active; ?></td>
                             <td><?php echo ($status_connect == "Kết nối") ? $active . $status_connect : $stopActive . $status_connect; ?></td>
-                            <td><?php echo $nameService; ?></td>
+                            <td>
+                                <div class='readmore'>
+                                    <?php echo $nameService; ?>
+                                </div>
+                            </td>
                             <td><a href="../dashboard/detail/monitorDetail.php?id=<?php echo $monitorID ?>">Chi tiết</a></td>
-                            <td><a href="../dashboard/add/addMonitor.php?id=<?php echo $monitorID; ?>">Cập nhật</a></td>
+                            <td id="end"><a href="../dashboard/add/addMonitor.php?id=<?php echo $monitorID; ?>">Cập nhật</a></td>
                         </tr>
                 <?php }
                 }
@@ -239,36 +264,18 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="monitor.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="monitor.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="monitor.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="monitor.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../picture/component/fi_right.png" alt="right"></a>';
-            }
-            ?>
-        </div>
-
-        <div class="pagination">
-            <?php
-            if ($current_page > 1 && $total_page > 1) {
-                echo '<a class="pagination-box" href="maccount.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../../picture/component/fi_left.png" alt="left"></a>';
-            }
-
-            for ($i = 1; $i <= $total_page; $i++) {
-                if ($i == $current_page) {
-                    echo '<span class="pagination-active">' . $i . '</span> ';
-                } else {
-                    echo '<a class="pagination-box" href="maccount.php?page=' . $i . '">' . $i . '</a> ';
-                }
-            }
-
-            if ($current_page < $total_page && $total_page > 1) {
-                echo '<a class="pagination-box" href="maccount.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../../picture/component/fi_right.png" alt="right"></a>';
             }
             ?>
         </div>
@@ -281,6 +288,26 @@ if (isset($_SESSION['admin_login'])) {
 }
     ?>
     <script src="../js/dashboard.js"></script>
+    <script>
+        window.onload = function() {
+            let rm = document.querySelectorAll('.readmore');
+            rm.forEach(el => {
+                el.classList.add('less');
+                var div = document.createElement('div');
+                div.innerHTML = "<a href='javascript:void(0);' class='rmlink' onclick='toggleRM(this)'>Xem Thêm</a>";
+                el.append(div);
+
+            })
+        }
+
+        function toggleRM(el) {
+            const cl = el.parentNode.parentNode.classList
+            const is_less = cl.contains('less');
+            el.innerHTML = !is_less ? "Xem Thêm" : "<a href='javascript:void(0);' class='readless' onclick='toggleRM(this)'></a>";
+            if (is_less) cl.remove('less');
+            else cl.add('less');
+        }
+    </script>
     </body>
 
     </html>

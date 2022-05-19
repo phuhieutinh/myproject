@@ -193,14 +193,14 @@ if (isset($_SESSION['admin_login'])) {
         <main id="mainmonitor" class="importance">
             <table style="width:100%" class="tablemonitor">
                 <tr>
-                    <th>STT</th>
+                    <th class="start">STT</th>
                     <th>Tên khách hàng</th>
                     <th>Tên dịch vụ</th>
                     <th>Thời gian cấp</th>
                     <th>Hạn sử dụng</th>
                     <th>Trạng thái</th>
                     <th>Nguồn cấp</th>
-                    <th></th>
+                    <th class="end"></th>
                 </tr>
 
                 <?php
@@ -225,7 +225,7 @@ if (isset($_SESSION['admin_login'])) {
                     if (empty($search)) {
                         $query = "SELECT * FROM progression LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR service.serviceID = progression.serviceID AND serviceName LIKE '%$search%' LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR service.serviceID = progression.serviceID AND prefix_id LIKE '%$search%' OR service.serviceID = progression.serviceID AND surfix_id LIKE '%$search%' OR service.serviceID = progression.serviceID AND serviceName LIKE '%$search%' LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['search_select'])) {
                     $search_select = addslashes($_POST['search_select']);
@@ -255,6 +255,7 @@ if (isset($_SESSION['admin_login'])) {
                     while ($row_progress = mysqli_fetch_assoc($result_list)) {
                         $progressID = $row_progress['progressID'];
                         $customerName = $row_progress['customerName'];
+                        $stt_progress = $row_progress['stt_progress'];
 
                         $sell_date = date_create($row_progress['sellDate']);
                         $sell_date_format = date_format($sell_date, "H:i d/m/Y");
@@ -266,11 +267,12 @@ if (isset($_SESSION['admin_login'])) {
                         $supply = $row_progress['supply'];
                         $serviceID = $row_progress['serviceID'];
 
-                        $sql_service = "SELECT serviceName FROM progression, service WHERE $serviceID = service.serviceID AND $progressID = progression.progressID";
+                        $sql_service = "SELECT * FROM progression, service WHERE $serviceID = service.serviceID AND $progressID = progression.progressID";
                         $query_service = mysqli_query($conn, $sql_service);
                         $row_service = mysqli_fetch_assoc($query_service);
                         $serviceName = $row_service['serviceName'];
-
+                        $prefix = $row_service['prefix_id'];
+                        $surfix = $row_service['surfix_id'];
 
                         $waiting = '<img src="../picture/component/EllipseBlue.png" alt="active">';
 
@@ -288,14 +290,14 @@ if (isset($_SESSION['admin_login'])) {
                 ?>
 
                         <tr>
-                            <td><?php echo $progressID; ?></td>
+                            <td id="start"><?php echo $prefix . $stt_progress . $surfix; ?></td>
                             <td><?php echo $customerName; ?></td>
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $sell_date_format; ?></td>
                             <td><?php echo $use_date_format; ?></td>
                             <td><?php echo $status_master ?></td>
                             <td><?php echo $supply; ?></td>
-                            <td><a href="../dashboard/detail/progressDetail.php?id=<?php echo $progressID ?>">Chi tiết</a></td>
+                            <td id="end"><a href="../dashboard/detail/progressDetail.php?id=<?php echo $progressID ?>">Chi tiết</a></td>
                         </tr>
 
                 <?php }
@@ -310,13 +312,15 @@ if (isset($_SESSION['admin_login'])) {
                 echo '<a class="pagination-box" href="progression.php?page=' . ($current_page - 1) . '"><img class="pagination-img" src="../picture/component/fi_left.png" alt="left"></a>';
             }
 
-            for ($i = 1; $i <= $total_page; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 if ($i == $current_page) {
                     echo '<span class="pagination-active">' . $i . '</span> ';
                 } else {
                     echo '<a class="pagination-box" href="progression.php?page=' . $i . '">' . $i . '</a> ';
                 }
             }
+            echo "<a class='less'> ... </a>";
+            echo '<a class="pagination-box" href="progression.php?page=' . $total_page . '">' . $total_page . '</a> ';
 
             if ($current_page < $total_page && $total_page > 1) {
                 echo '<a class="pagination-box" href="progression.php?page=' . ($current_page + 1) . '"><img class="pagination-img" src="../picture/component/fi_right.png" alt="right"></a>';
