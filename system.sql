@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2022 at 05:13 AM
+-- Generation Time: May 19, 2022 at 01:11 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -46,13 +46,14 @@ CREATE TABLE `monitor` (
 --
 
 INSERT INTO `monitor` (`monitorID`, `monitorCode`, `monitorName`, `monitorType`, `username`, `monitorPassword`, `ipaddress`, `monitorStatus`, `statusConnect`, `serviceID`, `nameService`) VALUES
-(94, '77', 'Kiosk', 'Display counter', 'admin', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 19, 'Khám tai muỗi họng, Khám mắt'),
+(94, '77', 'Kiosk', 'Display counter', 'admin', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 19, 'Khám tim mạch, Khám răng, Khám mắt'),
 (95, '99', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Ngưng hoạt động', 'Mất kết nối', 18, 'Khám tai muỗi họng, Khám răng'),
 (96, '77', 'Kiosk', 'Kiosk', 'CMS', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 17, 'Khám tai muỗi họng'),
 (97, '99', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Hoạt động', 'Mất kết nối', 17, 'Khám tim mạch, Khám tai muỗi họng'),
 (98, '992', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Hoạt động', 'Mất kết nối', 19, 'Khám tim mạch, Khám tai muỗi họng, Khám răng, Khám mắt'),
 (99, '99', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 17, 'Khám tim mạch, Khám tai muỗi họng'),
-(100, '99', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 16, 'Khám tim mạch');
+(100, '99', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 16, 'Khám tim mạch'),
+(101, '99', 'Kiosk', 'Kiosk', 'admin', '123123', '128.172.308', 'Hoạt động', 'Kết nối', 18, 'Khám tim mạch, Khám tai muỗi họng, Khám răng');
 
 -- --------------------------------------------------------
 
@@ -69,33 +70,83 @@ CREATE TABLE `progression` (
   `supply` varchar(50) NOT NULL,
   `phone` int(13) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `serviceID` int(11) NOT NULL
+  `serviceID` int(11) NOT NULL,
+  `stt_progress` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `progression`
 --
 
-INSERT INTO `progression` (`progressID`, `customerName`, `sellDate`, `useDate`, `status`, `supply`, `phone`, `email`, `serviceID`) VALUES
-(213, '', '2022-05-03 16:33:32', '2022-05-03 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17),
-(214, '', '2022-05-03 16:33:32', '2022-05-03 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17),
-(215, '', '2022-05-03 16:33:33', '2022-05-03 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17),
-(216, '', '2022-05-03 16:33:33', '2022-05-03 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17),
-(217, '', '2022-05-03 16:33:33', '2022-05-03 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17),
-(221, 'Phù Hiếu Tinh', '2022-05-03 16:35:05', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'con22441999@gmail.com', 17),
-(222, 'Phù Hiếu Tinh', '2022-05-03 16:35:06', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'con22441999@gmail.com', 17),
-(223, 'Phù Hiếu Tinh', '2022-05-03 16:35:07', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'con22441999@gmail.com', 17),
-(224, 'Phù Hiếu Tinh', '2022-05-03 16:35:07', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'con22441999@gmail.com', 17),
-(225, 'Phù Hiếu Tinh', '2022-05-03 16:35:07', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'con22441999@gmail.com', 17),
-(226, 'Phù Hiếu Tinh', '2022-05-03 16:35:07', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'con22441999@gmail.com', 17),
-(227, 'Phù Hiếu Tinh', '2022-05-03 17:25:09', '2022-05-03 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'toan22442244@gmail.com', 18),
-(229, '', '2022-05-03 17:36:19', '2022-05-03 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19),
-(230, '', '2022-05-09 14:22:06', '2022-05-09 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20),
-(231, '', '2022-05-09 14:22:10', '2022-05-09 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 16),
-(232, 'ProductID', '2022-05-09 14:23:55', '2022-05-09 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'tinhphgcs17226@fpt.edu.vn', 20),
-(233, 'Tinh Hiếu Phù', '2022-05-09 14:24:02', '2022-05-09 17:30:00', 'Đang chờ', 'Kiosk', 834646929, 'tinhphu2244@gmail.com', 16),
-(234, '', '2022-05-09 14:25:34', '2022-05-09 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17),
-(235, '', '2022-05-09 14:28:04', '2022-05-09 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223);
+INSERT INTO `progression` (`progressID`, `customerName`, `sellDate`, `useDate`, `status`, `supply`, `phone`, `email`, `serviceID`, `stt_progress`) VALUES
+(308, '', '2022-05-15 14:19:38', '2022-05-18 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 17, 222),
+(314, '', '2022-05-19 10:50:34', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 200),
+(315, '', '2022-05-19 10:50:35', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 201),
+(316, '', '2022-05-19 10:50:35', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 202),
+(317, '', '2022-05-19 10:50:35', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 203),
+(318, '', '2022-05-19 10:50:36', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 204),
+(319, '', '2022-05-19 10:50:36', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 205),
+(320, '', '2022-05-19 10:50:36', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 206),
+(321, '', '2022-05-19 10:50:36', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 207),
+(322, '', '2022-05-19 10:50:36', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 208),
+(323, '', '2022-05-19 10:50:36', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 209),
+(324, '', '2022-05-19 10:50:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 210),
+(325, '', '2022-05-19 10:50:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 211),
+(326, '', '2022-05-19 10:50:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 212),
+(327, '', '2022-05-19 10:50:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 213),
+(328, '', '2022-05-16 10:50:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 214),
+(329, '', '2022-05-19 10:50:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 215),
+(330, '', '2022-05-19 10:50:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 216),
+(331, '', '2022-05-19 10:50:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 217),
+(332, '', '2022-05-19 10:50:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 218),
+(333, '', '2022-05-19 10:50:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 18, 219),
+(334, '', '2022-05-19 12:14:11', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 333),
+(335, '', '2022-05-19 12:14:13', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 334),
+(336, '', '2022-05-19 12:14:13', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 335),
+(337, '', '2022-05-19 12:14:13', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 336),
+(338, '', '2022-05-19 12:14:13', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 337),
+(339, '', '2022-05-19 12:14:13', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 338),
+(340, '', '2022-05-19 12:14:15', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 339),
+(341, '', '2022-05-19 12:14:15', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 340),
+(342, '', '2022-05-19 12:14:15', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 341),
+(343, '', '2022-05-19 12:14:16', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 342),
+(344, '', '2022-05-19 12:14:16', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 343),
+(345, '', '2022-05-19 12:14:16', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 344),
+(346, '', '2022-05-19 12:14:17', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 345),
+(347, '', '2022-05-19 12:14:17', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 346),
+(348, '', '2022-05-19 12:14:17', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 347),
+(349, '', '2022-05-19 12:14:18', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 348),
+(350, '', '2022-05-19 12:14:18', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 19, 349),
+(351, '', '2022-05-19 12:14:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 444),
+(352, '', '2022-05-19 12:14:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 445),
+(353, '', '2022-05-19 12:14:38', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 446),
+(354, '', '2022-05-19 12:14:39', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 447),
+(355, '', '2022-05-19 12:14:39', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 448),
+(356, '', '2022-05-19 12:14:39', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 449),
+(357, '', '2022-05-19 12:14:40', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 450),
+(358, '', '2022-05-19 12:14:40', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 20, 451),
+(359, '', '2022-05-19 12:18:27', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 555),
+(360, '', '2022-05-19 12:18:28', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 556),
+(361, '', '2022-05-19 12:18:29', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 557),
+(362, '', '2022-05-19 12:18:29', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 558),
+(363, '', '2022-05-19 12:18:29', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 559),
+(364, '', '2022-05-19 12:18:29', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 560),
+(365, '', '2022-05-10 12:18:30', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 561),
+(366, '', '2022-05-10 12:18:30', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 562),
+(367, '', '2022-05-09 12:18:30', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 563),
+(368, '', '2022-05-11 12:18:30', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 564),
+(369, '', '2022-05-19 12:18:30', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 565),
+(370, '', '2022-05-19 12:18:30', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 566),
+(371, '', '2022-05-19 12:18:31', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 567),
+(372, '', '2022-05-19 12:18:31', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 568),
+(373, '', '2022-05-19 12:18:31', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 569),
+(374, '', '2022-05-19 12:18:31', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 570),
+(375, '', '2022-05-19 12:18:31', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 571),
+(376, '', '2022-05-19 12:18:32', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 572),
+(377, '', '2022-05-19 12:18:32', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 573),
+(378, '', '2022-05-19 12:18:32', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 223, 574),
+(388, '', '2022-05-19 17:43:37', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 16, 222),
+(389, '', '2022-05-19 17:58:43', '2022-05-19 17:30:00', 'Đang chờ', 'Hệ thống', 0, '', 16, 223);
 
 -- --------------------------------------------------------
 
@@ -117,11 +168,12 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`roleID`, `roleName`, `quantity`, `descriptive`, `function`) VALUES
 (10, 'Admin', 1, 'Quản lý toàn bộ trang web', 'X,Y,Z'),
-(11, 'Quản lý', 0, 'Hello quản lý', 'X,Y,Z'),
-(12, 'User', 1, 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'A,B,C'),
+(11, 'Quản lý', 1, 'Hello quản lý', 'X,Y,Z'),
+(12, 'User', 2, 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'A,B,C'),
 (13, 'Kế Toán', 1, 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'X,Y,Z'),
 (14, 'Bác sĩ', 1, 'Khám mắt', 'X,Y,Z'),
-(15, 'Quản lý A', 1, 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'X,Y,Z');
+(15, 'Quản lý A', 1, 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'X,Y,Z'),
+(16, 'Bác sĩ A', 1, '', 'X,Y,Z');
 
 -- --------------------------------------------------------
 
@@ -135,21 +187,22 @@ CREATE TABLE `service` (
   `descriptive` varchar(255) NOT NULL,
   `serviceStatus` varchar(50) NOT NULL,
   `serviceDate` datetime NOT NULL,
-  `prefix_id` int(11) NOT NULL,
-  `surfix_id` int(11) NOT NULL
+  `prefix_id` varchar(30) NOT NULL,
+  `surfix_id` varchar(30) NOT NULL,
+  `stt_service` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `service`
 --
 
-INSERT INTO `service` (`serviceID`, `serviceName`, `descriptive`, `serviceStatus`, `serviceDate`, `prefix_id`, `surfix_id`) VALUES
-(16, 'Khám tim mạch', 'kham tim', 'Hoạt động', '2022-05-01 21:17:55', 0, 0),
-(17, 'Khám tai muỗi họng', 'Khám những bệnh liên quan về tai, muỗi, họng', 'Ngưng hoạt động', '2022-05-03 17:26:28', 0, 0),
-(18, 'Khám răng', 'kham rang', 'Hoạt động', '2022-04-29 21:18:30', 0, 0),
-(19, 'Khám mắt', 'Khám mắt', 'Hoạt động', '2022-04-28 21:18:45', 0, 0),
-(20, 'Khám phụ khoa', 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'Hoạt động', '2022-05-09 11:45:40', 22, 0),
-(223, 'Khám tai', 'Khám những bệnh liên quan về tai, muỗi, họng', 'Hoạt động', '2022-05-09 14:27:41', 123, 0);
+INSERT INTO `service` (`serviceID`, `serviceName`, `descriptive`, `serviceStatus`, `serviceDate`, `prefix_id`, `surfix_id`, `stt_service`) VALUES
+(16, 'Khám tim mạch', 'kham tim', 'Hoạt động', '2022-05-19 17:43:29', 'KT_', '_end', 222),
+(17, 'Khám tai muỗi họng', 'Khám những bệnh liên quan về tai, muỗi, họng', 'Ngưng hoạt động', '2022-05-17 12:05:18', '0', '0', 222),
+(18, 'Khám răng', 'kham rang', 'Hoạt động', '2022-05-17 14:57:58', 'KR_', '_REND', 200),
+(19, 'Khám mắt', 'Khám mắt', 'Hoạt động', '2022-05-17 12:05:22', '0', '0', 333),
+(20, 'Khám phụ khoa', 'thực hiện nhiệm vụ thống kê số liệu và tổng hợp dữ liệu', 'Hoạt động', '2022-05-17 12:05:26', '22', '0', 444),
+(223, 'Khám tai', 'Khám những bệnh liên quan về tai, muỗi, họng', 'Hoạt động', '2022-05-17 12:05:30', '123', '0', 555);
 
 -- --------------------------------------------------------
 
@@ -174,11 +227,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `name`, `username`, `phone`, `pw`, `email`, `status`, `picture`, `roleID`) VALUES
-(54, 'Tinh', 'admin', 834646929, '123123', 'tinhphu2244@gmail.com', 'Hoạt động', 'OIP.jfif', 10),
+(54, 'Tinh', 'admin', 834646929, '123123', 'tinhphu2244@gmail.com', 'Hoạt động', '13445244_387048514798774_4483890631897585445_n.jpg', 10),
 (55, 'Phù Hiếu Tinh', 'user', 834646929, '123123', 'con22441999@gmail.com', 'Hoạt động', '', 12),
 (56, 'ProductID', 'admin123', 834646929, '123123', 'tinhphgcs17226@fpt.edu.vn', 'Hoạt động', '', 13),
 (57, 'ProductID', 'admin2222', 834646929, '123123', 'user11@gmail.com', 'Hoạt động', '', 14),
-(58, 'ProductID', 'admin11112222', 834646929, '123123', 'tinhphgcs17226@fpt.edu.vnaaa', 'Hoạt động', '', 15);
+(58, 'ProductID', 'admin11112222', 834646929, '123123', 'tinhphgcs17226@fpt.edu.vnaaa', 'Hoạt động', '', 15),
+(59, 'Phù Hiếu Tinh', 'admin222', 834646929, '123123', 'toan22442244@gmail.com222', 'Hoạt động', '', 16),
+(60, '113 Tinh', 'user113', 834646929, '123123', 'tinhphu2244@gmail.com222', 'Hoạt động', '', 12),
+(61, 'Phù Hiếu Tinh', 'admin123123123', 0, '123123', 'toan22442244@gmail.cossssm', 'Hoạt động', '', 11);
 
 -- --------------------------------------------------------
 
@@ -199,97 +255,101 @@ CREATE TABLE `userlog` (
 --
 
 INSERT INTO `userlog` (`userlogID`, `userID`, `userlogTime`, `IPaddress`, `userlogAction`) VALUES
-(1, 54, '2022-05-03 12:10:27', 0, 'Upload file success File Name is 11111.jfif'),
-(2, 54, '2022-05-03 13:53:11', 0, 'Add role success Role Name is Quản lý'),
-(3, 54, '2022-05-03 14:28:03', 0, 'Update role success Role Name is Quản lý'),
-(4, 54, '2022-05-03 16:33:29', 0, 'add progress success'),
-(5, 54, '2022-05-03 16:33:31', 0, 'add progress success'),
-(6, 54, '2022-05-03 16:33:32', 0, 'add progress success'),
-(7, 54, '2022-05-03 16:33:32', 0, 'add progress success'),
-(8, 54, '2022-05-03 16:33:32', 0, 'add progress success'),
-(9, 54, '2022-05-03 16:33:32', 0, 'add progress success'),
-(10, 54, '2022-05-03 16:33:33', 0, 'add progress success'),
-(11, 54, '2022-05-03 16:33:33', 0, 'add progress success'),
-(12, 54, '2022-05-03 16:33:33', 0, 'add progress success'),
-(13, 54, '2022-05-03 16:33:33', 0, 'add progress success'),
-(14, 54, '2022-05-03 16:33:33', 0, 'add progress success'),
-(15, 54, '2022-05-03 16:33:33', 0, 'add progress success'),
-(16, 54, '2022-05-03 16:34:19', 0, 'Add role success Role Name is User'),
-(17, 54, '2022-05-03 16:34:27', 0, 'Update role success Role Name is User'),
-(18, 54, '2022-05-03 16:34:52', 0, 'Add account success userName is user'),
-(19, 55, '2022-05-03 16:35:05', 0, 'add progress success progressID'),
-(20, 55, '2022-05-03 16:35:07', 0, 'add progress success progressID'),
-(21, 55, '2022-05-03 16:35:07', 0, 'add progress success progressID'),
-(22, 55, '2022-05-03 16:35:07', 0, 'add progress success progressID'),
-(23, 55, '2022-05-03 16:35:07', 0, 'add progress success progressID'),
-(24, 55, '2022-05-03 16:35:07', 0, 'add progress success progressID'),
-(25, 54, '2022-05-03 16:37:06', 0, 'Add monitor Name success monitor Name is Kiosk'),
-(26, 54, '2022-05-03 16:51:15', 0, 'Update role success Role Name is Quản lý'),
-(27, 54, '2022-05-03 16:51:38', 0, 'Update role success Role Name is Quản lý'),
-(28, 54, '2022-05-03 16:52:29', 0, 'Update role success Role Name is Quản lý'),
-(29, 54, '2022-05-03 16:52:55', 0, 'Update role success Role Name is Quản lý'),
-(30, 54, '2022-05-03 16:55:11', 0, 'Update role success Role Name is Quản lý'),
-(31, 54, '2022-05-03 16:56:51', 0, 'Update role success Role Name is Admin'),
-(32, 54, '2022-05-03 16:56:59', 0, 'Update role success Role Name is User'),
-(33, 55, '2022-05-03 17:25:09', 0, 'add progress success progressID'),
-(34, 54, '2022-05-03 17:25:25', 0, 'Upload file success File Name is 10330493_353888028114823_7905851435560148174_n.jpg'),
-(35, 54, '2022-05-03 17:25:54', 0, 'Add monitor Name success monitor Name is Kiosk'),
-(36, 54, '2022-05-03 17:26:04', 0, 'Update monitor Name success monitor Name is Kiosk'),
-(37, 54, '2022-05-03 17:26:28', 0, 'Update service success Service Name is Khám tai muỗi họng'),
-(38, 54, '2022-05-03 17:27:04', 0, 'Add role success Role Name is Kế Toán'),
-(39, 54, '2022-05-03 17:27:13', 0, 'Update role success Role Name is Kế Toán'),
-(40, 54, '2022-05-03 17:27:25', 0, 'Update role success Role Name is Kế Toán'),
-(41, 54, '2022-05-03 17:27:41', 0, 'Update account success userName is user'),
-(42, 54, '2022-05-03 17:27:46', 0, 'Update account success userName is user'),
-(43, 54, '2022-05-03 17:28:02', 0, 'Add account success userName is admin123'),
-(44, 54, '2022-05-03 17:34:07', 0, 'Upload file success File Name is 11111.jfif'),
-(45, 54, '2022-05-03 17:34:28', 0, 'Add role success Role Name is Bác sĩ'),
-(46, 54, '2022-05-03 17:34:58', 0, 'Add account success userName is admin2222'),
-(47, 54, '2022-05-03 17:35:17', 0, 'Add monitor Name success monitor Name is Kiosk'),
-(48, 54, '2022-05-03 17:35:23', 0, 'Update monitor Name success monitor Name is Kiosk'),
-(49, 54, '2022-05-03 17:35:31', 0, 'Update monitor Name success monitor Name is Kiosk'),
-(50, 55, '2022-05-03 17:36:03', 0, 'add progress success progressID'),
-(51, 54, '2022-05-03 17:36:19', 0, 'add progress success'),
-(52, 54, '2022-05-03 17:36:48', 0, 'Upload file success File Name is images.jfif'),
-(53, 54, '2022-05-03 17:37:05', 0, 'Add monitor Name success monitor Name is Kiosk'),
-(54, 54, '2022-05-03 17:37:17', 0, 'Update monitor Name success monitor Name is Kiosk'),
-(55, 54, '2022-05-03 17:37:42', 0, 'Add service success Service Name is Khám phụ khoa'),
-(56, 54, '2022-05-03 17:37:46', 0, 'Update service success Service Name is Khám phụ khoa'),
-(57, 54, '2022-05-09 08:48:27', 0, 'Add monitor Name success monitor Name is Kiosk'),
-(58, 54, '2022-05-09 11:25:34', 0, 'Add service success Service Name is Khám tim mạch'),
-(59, 54, '2022-05-09 11:27:44', 0, 'Add service success Service Name is Khám tim mạch'),
-(60, 54, '2022-05-09 11:27:49', 0, 'Add service success Service Name is Khám tim mạch'),
-(61, 54, '2022-05-09 11:31:23', 0, 'Add service success Service Name is Khám tim mạch'),
-(62, 54, '2022-05-09 11:32:28', 0, 'Add service success Service Name is Khám tim mạch'),
-(63, 54, '2022-05-09 11:32:40', 0, 'Add service success Service Name is Khám tim mạch'),
-(64, 54, '2022-05-09 11:33:17', 0, 'Add service success Service Name is Khám tim mạch'),
-(65, 54, '2022-05-09 11:34:23', 0, 'Add service success Service Name is Khám tim mạch'),
-(66, 54, '2022-05-09 11:34:37', 0, 'Add service success Service Name is Khám tim mạch'),
-(67, 54, '2022-05-09 11:36:15', 0, 'Add service success Service Name is Khám tim mạch'),
-(68, 54, '2022-05-09 11:37:34', 0, 'Add service success Service Name is Khám tai muỗi họng'),
-(69, 54, '2022-05-09 11:38:09', 0, 'Add service success Service Name is Khám răng'),
-(70, 54, '2022-05-09 11:39:29', 0, 'Add service success Service Name is Khám răng'),
-(71, 54, '2022-05-09 11:40:24', 0, 'Add service success Service Name is asd'),
-(72, 54, '2022-05-09 11:41:01', 0, 'Add service success Service Name is '),
-(73, 54, '2022-05-09 11:43:56', 0, 'Add service success Service Name is Khám tim mạch'),
-(74, 54, '2022-05-09 11:44:56', 0, 'Update service success Service Name is Khám phụ khoa'),
-(75, 54, '2022-05-09 11:45:10', 0, 'Update service success Service Name is Khám phụ khoa'),
-(76, 54, '2022-05-09 11:45:30', 0, 'Update service success Service Name is Khám phụ khoa'),
-(77, 54, '2022-05-09 11:45:40', 0, 'Update service success Service Name is Khám phụ khoa'),
-(78, 54, '2022-05-09 14:16:40', 0, 'Add service success Service Name is Khám tim mạch'),
-(79, 54, '2022-05-09 14:22:06', 0, 'add progress success'),
-(80, 54, '2022-05-09 14:22:10', 0, 'add progress success'),
-(81, 55, '2022-05-09 14:23:56', 0, 'add progress success progressID'),
-(82, 55, '2022-05-09 14:24:02', 0, 'add progress success progressID'),
-(83, 54, '2022-05-09 14:24:18', 0, 'Upload file success File Name is OIP.jfif'),
-(84, 54, '2022-05-09 14:24:52', 0, 'Add monitor Name success monitor Name is Kiosk'),
-(85, 54, '2022-05-09 14:25:18', 0, 'Update monitor Name success monitor Name is Kiosk'),
-(86, 54, '2022-05-09 14:25:34', 0, 'add progress success'),
-(87, 54, '2022-05-09 14:25:46', 0, 'Add role success Role Name is Quản lý A'),
-(88, 54, '2022-05-09 14:26:14', 0, 'Add account success userName is admin11112222'),
-(89, 54, '2022-05-09 14:27:28', 0, 'Add service success Service Name is Khám tai'),
-(90, 54, '2022-05-09 14:27:41', 0, 'Update service success Service Name is Khám tai'),
-(91, 54, '2022-05-09 14:28:04', 0, 'add progress success');
+(261, 54, '2022-05-18 14:19:38', 0, 'add progress success'),
+(262, 55, '2022-05-18 14:23:19', 0, 'add progress success progressID'),
+(263, 55, '2022-05-18 14:28:03', 0, 'add progress success progressID'),
+(264, 55, '2022-05-18 14:29:15', 0, 'add progress success progressID'),
+(265, 55, '2022-05-18 14:31:21', 0, 'add progress success progressID'),
+(266, 55, '2022-05-18 14:31:23', 0, 'add progress success progressID'),
+(267, 54, '2022-05-18 20:51:51', 0, 'Update monitor Name success monitor Name is Kiosk'),
+(268, 54, '2022-05-19 09:24:37', 0, 'Upload file success File Name is 13445244_387048514798774_4483890631897585445_n.jpg'),
+(269, 54, '2022-05-19 10:50:34', 0, 'add progress success'),
+(270, 54, '2022-05-19 10:50:35', 0, 'add progress success'),
+(271, 54, '2022-05-19 10:50:35', 0, 'add progress success'),
+(272, 54, '2022-05-19 10:50:35', 0, 'add progress success'),
+(273, 54, '2022-05-19 10:50:36', 0, 'add progress success'),
+(274, 54, '2022-05-19 10:50:36', 0, 'add progress success'),
+(275, 54, '2022-05-19 10:50:36', 0, 'add progress success'),
+(276, 54, '2022-05-19 10:50:36', 0, 'add progress success'),
+(277, 54, '2022-05-19 10:50:36', 0, 'add progress success'),
+(278, 54, '2022-05-19 10:50:36', 0, 'add progress success'),
+(279, 54, '2022-05-19 10:50:37', 0, 'add progress success'),
+(280, 54, '2022-05-19 10:50:37', 0, 'add progress success'),
+(281, 54, '2022-05-19 10:50:37', 0, 'add progress success'),
+(282, 54, '2022-05-19 10:50:37', 0, 'add progress success'),
+(283, 54, '2022-05-19 10:50:37', 0, 'add progress success'),
+(284, 54, '2022-05-19 10:50:38', 0, 'add progress success'),
+(285, 54, '2022-05-19 10:50:38', 0, 'add progress success'),
+(286, 54, '2022-05-19 10:50:38', 0, 'add progress success'),
+(287, 54, '2022-05-19 10:50:38', 0, 'add progress success'),
+(288, 54, '2022-05-19 10:50:38', 0, 'add progress success'),
+(289, 54, '2022-05-19 12:14:12', 0, 'add progress success'),
+(290, 54, '2022-05-19 12:14:13', 0, 'add progress success'),
+(291, 54, '2022-05-19 12:14:13', 0, 'add progress success'),
+(292, 54, '2022-05-19 12:14:13', 0, 'add progress success'),
+(293, 54, '2022-05-19 12:14:13', 0, 'add progress success'),
+(294, 54, '2022-05-19 12:14:13', 0, 'add progress success'),
+(295, 54, '2022-05-19 12:14:15', 0, 'add progress success'),
+(296, 54, '2022-05-19 12:14:15', 0, 'add progress success'),
+(297, 54, '2022-05-19 12:14:15', 0, 'add progress success'),
+(298, 54, '2022-05-19 12:14:16', 0, 'add progress success'),
+(299, 54, '2022-05-19 12:14:16', 0, 'add progress success'),
+(300, 54, '2022-05-19 12:14:17', 0, 'add progress success'),
+(301, 54, '2022-05-19 12:14:17', 0, 'add progress success'),
+(302, 54, '2022-05-19 12:14:17', 0, 'add progress success'),
+(303, 54, '2022-05-19 12:14:17', 0, 'add progress success'),
+(304, 54, '2022-05-19 12:14:18', 0, 'add progress success'),
+(305, 54, '2022-05-19 12:14:18', 0, 'add progress success'),
+(306, 54, '2022-05-19 12:14:37', 0, 'add progress success'),
+(307, 54, '2022-05-19 12:14:38', 0, 'add progress success'),
+(308, 54, '2022-05-19 12:14:38', 0, 'add progress success'),
+(309, 54, '2022-05-19 12:14:39', 0, 'add progress success'),
+(310, 54, '2022-05-19 12:14:39', 0, 'add progress success'),
+(311, 54, '2022-05-19 12:14:39', 0, 'add progress success'),
+(312, 54, '2022-05-19 12:14:40', 0, 'add progress success'),
+(313, 54, '2022-05-19 12:14:40', 0, 'add progress success'),
+(314, 54, '2022-05-19 12:18:27', 0, 'add progress success'),
+(315, 54, '2022-05-19 12:18:29', 0, 'add progress success'),
+(316, 54, '2022-05-19 12:18:29', 0, 'add progress success'),
+(317, 54, '2022-05-19 12:18:29', 0, 'add progress success'),
+(318, 54, '2022-05-19 12:18:29', 0, 'add progress success'),
+(319, 54, '2022-05-19 12:18:29', 0, 'add progress success'),
+(320, 54, '2022-05-19 12:18:30', 0, 'add progress success'),
+(321, 54, '2022-05-19 12:18:30', 0, 'add progress success'),
+(322, 54, '2022-05-19 12:18:30', 0, 'add progress success'),
+(323, 54, '2022-05-19 12:18:30', 0, 'add progress success'),
+(324, 54, '2022-05-19 12:18:30', 0, 'add progress success'),
+(325, 54, '2022-05-19 12:18:31', 0, 'add progress success'),
+(326, 54, '2022-05-19 12:18:31', 0, 'add progress success'),
+(327, 54, '2022-05-19 12:18:31', 0, 'add progress success'),
+(328, 54, '2022-05-19 12:18:31', 0, 'add progress success'),
+(329, 54, '2022-05-19 12:18:31', 0, 'add progress success'),
+(330, 54, '2022-05-19 12:18:31', 0, 'add progress success'),
+(331, 54, '2022-05-19 12:18:32', 0, 'add progress success'),
+(332, 54, '2022-05-19 12:18:32', 0, 'add progress success'),
+(333, 54, '2022-05-19 12:18:32', 0, 'add progress success'),
+(334, 54, '2022-05-19 12:18:37', 0, 'add progress success'),
+(335, 54, '2022-05-19 12:18:37', 0, 'add progress success'),
+(336, 54, '2022-05-19 12:18:37', 0, 'add progress success'),
+(337, 54, '2022-05-19 12:18:38', 0, 'add progress success'),
+(338, 54, '2022-05-19 12:18:38', 0, 'add progress success'),
+(339, 54, '2022-05-19 12:18:38', 0, 'add progress success'),
+(340, 54, '2022-05-19 12:18:38', 0, 'add progress success'),
+(341, 54, '2022-05-19 12:18:38', 0, 'add progress success'),
+(342, 54, '2022-05-19 12:18:39', 0, 'add progress success'),
+(343, 54, '2022-05-19 17:43:29', 0, 'Update service success Service Name is Khám tim mạch'),
+(344, 54, '2022-05-19 17:43:37', 0, 'add progress success'),
+(345, 54, '2022-05-19 17:58:27', 0, 'Update monitor Name success monitor Name is Kiosk'),
+(346, 54, '2022-05-19 17:58:43', 0, 'add progress success'),
+(347, 54, '2022-05-19 17:59:25', 0, 'Add service success Service Name is Kham Đa Khoa'),
+(348, 54, '2022-05-19 18:01:09', 0, 'Add service success Service Name is Kham Đa Khoa'),
+(349, 54, '2022-05-19 18:03:39', 0, 'Add service success Service Name is Khám răng'),
+(350, 54, '2022-05-19 18:04:46', 0, 'Add service success Service Name is Khám răng'),
+(351, 54, '2022-05-19 18:05:26', 0, 'Add service success Service Name is Khám phụ khoaaaa'),
+(352, 54, '2022-05-19 18:07:06', 0, 'Add account success userName is admin123123123'),
+(353, 54, '2022-05-19 18:09:26', 0, 'Add service success Service Name is Khám tim mạch123123'),
+(354, 54, '2022-05-19 18:09:42', 0, 'Add service success Service Name is Khám tim mạch123123'),
+(355, 54, '2022-05-19 18:09:53', 0, 'Add service success Service Name is Khám tim mạch123123');
 
 --
 -- Indexes for dumped tables
@@ -343,19 +403,19 @@ ALTER TABLE `userlog`
 -- AUTO_INCREMENT for table `monitor`
 --
 ALTER TABLE `monitor`
-  MODIFY `monitorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `monitorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `progression`
 --
 ALTER TABLE `progression`
-  MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
+  MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `roleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `service`
@@ -367,13 +427,13 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `userlogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `userlogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=356;
 
 --
 -- Constraints for dumped tables

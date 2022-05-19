@@ -24,7 +24,8 @@ if (isset($_SESSION['admin_login'])) {
             exit;
         }
     }
-    $chart_data .= "";
+    $chart_data = '';
+
     $query_sum_stt = mysqli_query($conn, "SELECT DATE(`sellDate`) AS 'day',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY DATE(`sellDate`)");
 
     while ($row_sum_stt = mysqli_fetch_array($query_sum_stt)) {

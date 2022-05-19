@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
         $log = "Update service success Service Name is $serviceName";
         $update_userlog = userlog($log);
     } else {
-        $sql = "INSERT INTO service(serviceID ,serviceName, descriptive, serviceStatus, serviceDate, prefix_id, surfix_id, stt_service) VALUES('$serviceID', '$serviceName', '$descriptive', '$serviceStatus', '$serviceDate', '$prefix', '$surfix', '$auto_start)";
+        $sql = "INSERT INTO service(serviceID ,serviceName, descriptive, serviceStatus, serviceDate, prefix_id, surfix_id, stt_service) VALUES('$serviceID', '$serviceName', '$descriptive', '$serviceStatus', '$serviceDate', '$prefix', '$surfix', '$auto_start')";
 
         $log = "Add service success Service Name is $serviceName";
         $update_userlog = userlog($log);

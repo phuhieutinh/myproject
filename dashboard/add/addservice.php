@@ -30,8 +30,7 @@ if (isset($_SESSION['admin_login'])) {
     if (isset($_GET['id'])) {
         $uid = $_GET['id'];
     }
-    $lastID = "SELECT max(id) + 1 FROM service";
-    $result_addID = mysqli_query($conn, $lastID);
+    $result_addID = mysqli_query($conn, "SELECT max(id) + 1 FROM service");
     $serviceID = "$result_addID";
     $serviceName = "";
     $descriptive = "";
