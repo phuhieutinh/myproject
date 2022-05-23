@@ -4,7 +4,7 @@ function nofication()
     require_once '../dbconnect.php';
     $conn = connect_db();
 
-    $query = "SELECT * FROM progression";
+    $query = "SELECT * FROM progression ORDER BY progressID DESC";
     $result_list = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result_list) > 0) {
@@ -33,7 +33,7 @@ function nofication_sub()
     require_once '../../dbconnect.php';
     $conn = connect_db();
 
-    $query = "SELECT * FROM progression";
+    $query = "SELECT * FROM progression ORDER BY progressID DESC";
     $result_list = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result_list) > 0) {

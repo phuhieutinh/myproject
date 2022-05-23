@@ -16,8 +16,8 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $monitorPassword = $_POST['monitorPassword'];
     $serviceID = $_POST['states'];
-    $status_active = $_POST['status'];
-    $status_connect = $_POST['status_connect'];
+    $status_active = "Hoạt động";
+    $status_connect = "Kết nối";
 
     $array_data = implode(",", $serviceID);
 

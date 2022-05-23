@@ -36,7 +36,7 @@ if (isset($_SESSION['admin_login'])) {
         <link href="../css/dashboard.css" rel="stylesheet">
         <style>
             .readmore {
-                max-width: 411px;
+                max-width: 371px;
                 max-height: 49px;
                 /* border: 1px solid #333; */
                 padding: 10px;
@@ -48,7 +48,7 @@ if (isset($_SESSION['admin_login'])) {
             }
 
             .readmore.less {
-                max-width: 399px !important;
+                max-width: 371px !important;
                 max-height: 31px !important;
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -137,7 +137,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../dashboard/index.php" class="dashboard"><img src="../picture/component/dashboard.png" alt="dashboard">
                     Dashboard</a>
             </li>
-            <li><a href="" id="monitor"><img src="../picture/component/monitor.png" alt="monitor">Thiết
+            <li><a href="" id="monitor"><img src="../picture/component/menu/monitor.png" alt="monitor">Thiết
                     bị</a></li>
             <li><a href="../dashboard/service.php" class="service"><img src="../picture/component/service.png" alt="service">Dịch vụ</a></li>
             <li><a href="../dashboard/progression.php" class="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
@@ -205,21 +205,21 @@ if (isset($_SESSION['admin_login'])) {
                 if (isset($_POST['submit_search'])) {
                     $search = addslashes($_POST['search']);
                     if (empty($search)) {
-                        $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                        $query = "SELECT * FROM monitor ORDER BY monitorID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM monitor WHERE monitorName LIKE '%$search%' OR nameService LIKE '%$search%' LIMIT $start, $limit";
+                        $query = "SELECT * FROM monitor WHERE monitorName LIKE '%$search%' OR nameService LIKE '%$search%' ORDER BY monitorID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['search_select'])) {
                     $search_select = addslashes($_POST['search_select']);
                     if (empty($search_select)) {
-                        $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                        $query = "SELECT * FROM monitor ORDER BY monitorID DESC LIMIT $start, $limit";
                     } elseif ($search_select == 'All') {
-                        $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                        $query = "SELECT * FROM monitor ORDER BY monitorID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM monitor WHERE monitorStatus LIKE '$search_select' OR statusConnect LIKE '$search_select' LIMIT $start, $limit";
+                        $query = "SELECT * FROM monitor WHERE monitorStatus LIKE '$search_select' OR statusConnect LIKE '$search_select' ORDER BY monitorID DESC LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM monitor LIMIT $start, $limit";
+                    $query = "SELECT * FROM monitor ORDER BY monitorID DESC LIMIT $start, $limit";
                 }
 
                 $result_list = mysqli_query($conn, $query);

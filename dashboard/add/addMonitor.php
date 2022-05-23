@@ -179,30 +179,6 @@ if (isset($_SESSION['admin_login'])) {
 
                 </div>
 
-                <div class="status">
-                    <label for="status">Trạng thái hoạt động<span class="required">*</span></label>
-                    <select name="status" id="status">
-                        <option value="<?php echo ($monitorStatus == "") ? $monitorStatus : $monitorStatus ?>" class="deco" selected>
-                            <?php echo ($monitorStatus == "") ? $monitorStatus : $monitorStatus ?>
-                        </option>
-
-                        <option value="Hoạt động">Hoạt động</option>
-                        <option value="Ngưng hoạt động">Ngưng hoạt động</option>
-                    </select>
-                </div>
-
-                <div class="status_connect">
-                    <label for="status">Trạng thái kết nối<span class="required">*</span></label>
-                    <select name="status_connect" id="status_connect">
-                        <option value="<?php echo ($statusConnect == "") ? $statusConnect : $statusConnect ?>" class="deco" selected>
-                            <?php echo ($statusConnect == "") ? $statusConnect : $statusConnect ?>
-                        </option>
-
-                        <option value="Kết nối">Kết nối</option>
-                        <option value="Mất kết nối">Mất kết nối</option>
-                    </select>
-                </div>
-
                 <div class="btn">
 
                     <input type="submit" class="submit" name="submit" value="<?php echo ($isUpdated !== 1) ? "Thêm thiết bị" : "Cập nhật" ?>">
@@ -223,7 +199,7 @@ if (isset($_SESSION['admin_login'])) {
                     Dashboard</a>
             </li>
 
-            <li><a href="" id="monitor"><img src="../../picture/component/monitor.png" alt="monitor">Thiết
+            <li><a href="" id="monitor"><img src="../../picture/component/menu/monitor.png" alt="monitor">Thiết
                     bị</a></li>
 
             <li><a href="../../dashboard/service.php" class="service"><img src="../../picture/component/service.png" alt="service">Dịch vụ</a></li>

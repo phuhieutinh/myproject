@@ -25,16 +25,33 @@ if (isset($_SESSION['admin_login'])) {
         }
     }
     $chart_data = '';
+    $cur_month = date('m');
+    $cur_year = date('Y');
 
-    $query_sum_stt = mysqli_query($conn, "SELECT DATE(`sellDate`) AS 'day',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY DATE(`sellDate`)");
+    if (isset($_POST['search_select'])) {
+        $search_select = addslashes($_POST['search_select']);
+        if (empty($search_select)) {
+            $query_sum_stt = mysqli_query($conn, "SELECT Day(`sellDate`) AS 'date',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY Day(`sellDate`)");
+        } elseif ($search_select == "day") {
+            $query_sum_stt = mysqli_query($conn, "SELECT Day(`sellDate`) AS 'date',COUNT(*) AS 'count_progressID' FROM `progression` WHERE Month(`sellDate`) = Month(CURDATE()) GROUP BY Day(`sellDate`)");
+        } elseif ($search_select == "week") {
+            $query_sum_stt = mysqli_query($conn, "SELECT WEEK(`sellDate`) AS 'date',COUNT(*) AS 'count_progressID' FROM `progression` WHERE Month(`sellDate`) = Month(CURDATE()) GROUP BY WEEK(`sellDate`)");
+        } elseif ($search_select == "month") {
+            $query_sum_stt = mysqli_query($conn, "SELECT Month(`sellDate`) AS 'date',COUNT(*) AS 'count_progressID' FROM `progression` WHERE Year(`sellDate`) = YEAR(CURDATE()) GROUP BY Month(`sellDate`)");
+        }
+    } else {
+        $query_sum_stt = mysqli_query($conn, "SELECT Day(`sellDate`) AS 'date',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY Day(`sellDate`)");
+    }
+
+    // $query_sum_stt = mysqli_query($conn, "SELECT Day(`sellDate`) AS 'day',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY Day(`sellDate`)");
 
     while ($row_sum_stt = mysqli_fetch_array($query_sum_stt)) {
         // $sell_date = date_create($row['sellDate']);
         // $sell_date_format = date_format($sell_date, "d/m/Y");
         $count_progressID = $row_sum_stt['count_progressID'];
-        $day = $row_sum_stt['day'];
+        $day = $row_sum_stt['date'];
 
-        $chart_data .= "{ years:'" . $day . "', total:" . $count_progressID . "}, ";
+        $chart_data .= "{date: '" . $day . "', total:" . $count_progressID . "}, ";
     }
     $chart_data = substr($chart_data, 0, -2);
 ?>
@@ -101,7 +118,7 @@ if (isset($_SESSION['admin_login'])) {
         <nav>
             <ul>
                 <img src="../picture/Logo alta.png" alt="logo" class="logo">
-                <li><a href="" id="dashboard"><img src="../picture/component/dashboard.png" alt="dashboard">
+                <li><a href="" id="dashboard"><img src="../picture/component/menu/dashboard.png" alt="dashboard">
                         Dashboard</a>
                 </li>
                 <li class="monitor"><a href="../dashboard/monitor.php" class="monitor"><img src="../picture/component/monitor.png" alt="monitor">Thiết
@@ -211,16 +228,34 @@ if (isset($_SESSION['admin_login'])) {
             </div>
 
             <div class="chart_canvas">
-                <div class="container" style="width: 791px;;">
-                    <h1>Bảng thống kê theo ngày</h1>
-                    <p>tháng 11/2021</p>
+                <div class="container" style="width: 791px;">
+                    <?php
+                    if (isset($_POST['search_select'])) {
+                        if ($search_select == "day") {
+                            echo "<h1>Bảng thống kê theo ngày</h1>";
+                            echo "<p>tháng $cur_month/$cur_year</p>";
+                        } elseif ($search_select == "week") {
+                            echo "<h1>Bảng thống kê theo tuần</h1>";
+                            echo "<p>tháng $cur_month/$cur_year</p>";
+                        } elseif ($search_select == "month") {
+                            echo "<h1>Bảng thống kê theo tháng</h1>";
+                            echo "<p>năm $cur_year</p>";
+                        }
+                    } else {
+                        echo "<h1>Bảng thống kê theo ngày</h1>";
+                        echo "<p>tháng $cur_month/$cur_year</p>";
+                    }
+                    ?>
                     <div class="date_chart">
                         <p>Xem theo</p>
-                        <select name="" id="date_chart">
-                            <option value="" selected="selected">Ngày</option>
-                            <option value="">Tuần</option>
-                            <option value="">Tháng</option>
-                        </select>
+                        <form action="" method="POST">
+                            <select name="search_select" id="date_chart" onchange="form.submit()">
+                                <option value="" disabled selected style="display: none;">Ngày</option>
+                                <option value="day">Ngày</option>
+                                <option value="week">Tuần</option>
+                                <option value="month">Tháng</option>
+                            </select>
+                        </form>
                     </div>
                     <br /><br />
                     <br /><br />
@@ -357,11 +392,12 @@ if (isset($_SESSION['admin_login'])) {
         Morris.Area({
             element: 'chart',
             data: [<?php echo $chart_data; ?>],
-            xkey: ['years'],
+            xkey: 'date',
             ykeys: ['total'],
-            labels: ['total', 'day'],
+            labels: ['total', 'date'],
             hideHover: 'auto',
-            stacked: true
+            // stacked: true,
+            parseTime: false,
         });
     </script>
 

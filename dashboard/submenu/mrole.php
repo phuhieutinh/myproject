@@ -99,7 +99,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../../dashboard/report.php" class="report"><img src="../../picture/component/report.png" alt="report">Báo
                     cáo</a></li>
 
-            <li><a href="" class="setting" id="setting"><img src="../../picture/component/setting.png" alt="setting">Cài
+            <li><a href="" class="setting" id="setting"><img src="../../picture/component/menu/setting.png" alt="setting">Cài
                     đặt
                     hệ
                     thống<img src="../../picture/component/dropdown.png" alt="dropdown" class="icondropdown"></a>

@@ -97,7 +97,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../../dashboard/report.php" class="report"><img src="../../picture/component/report.png" alt="report">Báo
                     cáo</a></li>
 
-            <li class="setting"><a href="" class="setting" id="setting"><img src="../../picture/component/setting.png" alt="setting">Cài
+            <li class="setting"><a href="" class="setting" id="setting"><img src="../../picture/component/menu/setting.png" alt="setting">Cài
                     đặt
                     hệ
                     thống<img src="../../picture/component/dropdown.png" alt="dropdown" class="icondropdown"></a>
@@ -156,19 +156,19 @@ if (isset($_SESSION['admin_login'])) {
                     $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
 
                     if (empty($start_date_format && $end_date_format)) {
-                        $query = "SELECT * FROM userlog LIMIT $start, $limit";
+                        $query = "SELECT * FROM userlog ORDER BY userlogID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM `userlog` WHERE `userlogTime` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                        $query = "SELECT * FROM `userlog` WHERE `userlogTime` BETWEEN '$start_date_format' AND '$end_date_format' ORDER BY userlogID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['submit_search'])) {
                     $search = addslashes($_POST['search']);
                     if (empty($search)) {
-                        $query = "SELECT * FROM userlog LIMIT $start, $limit";
+                        $query = "SELECT * FROM userlog ORDER BY userlogID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM userlog, user WHERE user.userID = userlog.userID AND username LIKE '%$search%' LIMIT $start, $limit";
+                        $query = "SELECT * FROM userlog, user WHERE user.userID = userlog.userID AND username LIKE '%$search%' ORDER BY userlogID DESC LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM userlog ORDER BY userID DESC LIMIT $start, $limit";
+                    $query = "SELECT * FROM userlog ORDER BY userlogID DESC LIMIT $start, $limit";
                 }
                 $result_list = mysqli_query($conn, $query);
 

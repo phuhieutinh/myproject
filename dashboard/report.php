@@ -96,7 +96,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../dashboard/progression.php" class="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
                     số</a>
             </li>
-            <li><a href="../dashboard/report.php" id="report"><img src="../picture/component/report.png" alt="report">Báo
+            <li><a href="../dashboard/report.php" id="report"><img src="../picture/component/menu/report.png" alt="report">Báo
                     cáo</a></li>
 
             <li class="setting"><a href="" class="setting"><img src="../picture/component/setting.png" alt="setting">Cài đặt
@@ -158,12 +158,12 @@ if (isset($_SESSION['admin_login'])) {
                     $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
 
                     if (empty($start_date_format && $end_date_format)) {
-                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                        $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' ORDER BY progressID DESC LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                 }
                 $result_list = mysqli_query($conn, $query);
 
@@ -171,6 +171,7 @@ if (isset($_SESSION['admin_login'])) {
                     while ($row_progress = mysqli_fetch_assoc($result_list)) {
                         $progressID = $row_progress['progressID'];
                         $customerName = $row_progress['customerName'];
+                        $stt_progress = $row_progress['stt_progress'];
 
                         $sell_date = date_create($row_progress['sellDate']);
                         $sell_date_format = date_format($sell_date, "H:i d/m/Y");
@@ -182,10 +183,12 @@ if (isset($_SESSION['admin_login'])) {
                         $supply = $row_progress['supply'];
                         $serviceID = $row_progress['serviceID'];
 
-                        $sql_service = "SELECT serviceName FROM progression, service WHERE $serviceID = service.serviceID";
+                        $sql_service = "SELECT * FROM progression, service WHERE $serviceID = service.serviceID";
                         $query_service = mysqli_query($conn, $sql_service);
                         while ($row_service = mysqli_fetch_assoc($query_service)) {
                             $serviceName = $row_service['serviceName'];
+                            $prefix = $row_service['prefix_id'];
+                            $surfix = $row_service['surfix_id'];
                         }
 
                         $waiting = '<img src="../picture/component/EllipseBlue.png" alt="active">';
@@ -204,7 +207,7 @@ if (isset($_SESSION['admin_login'])) {
                 ?>
 
                         <tr>
-                            <td id="start"><?php echo $progressID; ?></td>
+                            <td id="start"><?php echo $prefix . $stt_progress . $surfix; ?></td>
                             <td><?php echo $serviceName; ?></td>
                             <td><?php echo $sell_date_format; ?></td>
                             <td><?php echo $status_master; ?></td>

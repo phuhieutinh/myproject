@@ -111,7 +111,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../../dashboard/report.php" class="report"><img src="../../picture/component/report.png" alt="report">Báo
                     cáo</a></li>
 
-            <li class="setting"><a href="" class="setting" id="setting"><img src="../../picture/component/setting.png" alt="setting">Cài
+            <li class="setting"><a href="" class="setting" id="setting"><img src="../../picture/component/menu/setting.png" alt="setting">Cài
                     đặt
                     hệ
                     thống<img src="../../picture/component/dropdown.png" alt="dropdown" id="icondropdown"></a>
@@ -172,21 +172,21 @@ if (isset($_SESSION['admin_login'])) {
                     $search = addslashes($_POST['search']);
 
                     if (empty($search)) {
-                        $query = "SELECT * FROM user LIMIT $start, $limit";
+                        $query = "SELECT * FROM user ORDER BY userID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM user WHERE name LIKE '$search' OR email LIKE '$search' OR username = '$search'  LIMIT $start, $limit";
+                        $query = "SELECT * FROM user WHERE name LIKE '$search' OR email LIKE '$search' OR username = '$search' ORDER BY userID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['search_select'])) {
                     $search_select = addslashes($_POST['search_select']);
                     if (empty($search_select)) {
-                        $query = "SELECT * FROM user LIMIT $start, $limit";
+                        $query = "SELECT * FROM user ORDER BY userID DESC LIMIT $start, $limit";
                     } elseif ($search_select == 'All') {
-                        $query = "SELECT * FROM user LIMIT $start, $limit";
+                        $query = "SELECT * FROM user ORDER BY userID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM user WHERE status LIKE '$search_select' LIMIT $start, $limit";
+                        $query = "SELECT * FROM user WHERE status LIKE '$search_select' ORDER BY userID DESC LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM user LIMIT $start, $limit";
+                    $query = "SELECT * FROM user ORDER BY userID DESC LIMIT $start, $limit";
                 }
 
                 $result_list = mysqli_query($conn, $query);

@@ -156,7 +156,7 @@ if (isset($_SESSION['admin_login'])) {
 
             <li><a href="../dashboard/service.php" class="service"><img src="../picture/component/service.png" alt="service">Dịch vụ</a></li>
 
-            <li><a href="" id="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
+            <li><a href="" id="progression"><img src="../picture/component/menu/progress.png" alt="progression">Cấp
                     số</a>
             </li>
 
@@ -223,30 +223,30 @@ if (isset($_SESSION['admin_login'])) {
                 if (isset($_POST['submit_search'])) {
                     $search = addslashes($_POST['search']);
                     if (empty($search)) {
-                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR service.serviceID = progression.serviceID AND prefix_id LIKE '%$search%' OR service.serviceID = progression.serviceID AND surfix_id LIKE '%$search%' OR service.serviceID = progression.serviceID AND serviceName LIKE '%$search%' LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression, service WHERE customerName LIKE '%$search%' OR service.serviceID = progression.serviceID AND prefix_id LIKE '%$search%' OR service.serviceID = progression.serviceID AND surfix_id LIKE '%$search%' OR service.serviceID = progression.serviceID AND serviceName LIKE '%$search%' ORDER BY progressID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['search_select'])) {
                     $search_select = addslashes($_POST['search_select']);
                     if (empty($search_select)) {
-                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                     } elseif ($search_select == "All") {
-                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM progression WHERE status LIKE '$search_select' OR supply LIKE '$search_select' OR serviceID LIKE '$search_select' LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression WHERE status LIKE '$search_select' OR supply LIKE '$search_select' OR serviceID LIKE '$search_select' ORDER BY progressID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['start_date']) && isset($_POST['end_date'])) {
                     $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
                     $end_date_format = date("Y-m-d 23:59:00", strtotime($_POST['end_date']));
 
                     if (empty($start_date_format && $end_date_format)) {
-                        $query = "SELECT * FROM progression LIMIT $start, $limit";
+                        $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                        $query = "SELECT * FROM `progression` WHERE `sellDate` BETWEEN '$start_date_format' AND '$end_date_format' ORDER BY progressID DESC LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM progression LIMIT $start, $limit";
+                    $query = "SELECT * FROM progression ORDER BY progressID DESC LIMIT $start, $limit";
                 }
 
                 $result_list = mysqli_query($conn, $query);

@@ -113,7 +113,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../dashboard/monitor.php" class="monitor"><img src="../picture/component/monitor.png" alt="monitor">Thiết
                     bị</a></li>
 
-            <li><a href="" id='service'><img src="../picture/component/service.png" alt="service">Dịch vụ</a></li>
+            <li><a href="" id='service'><img src="../picture/component/menu/service.png" alt="service">Dịch vụ</a></li>
 
             <li><a href="../dashboard/progression.php" class="progression"><img src="../picture/component/progression.png" alt="progression">Cấp
                     số</a>
@@ -180,18 +180,18 @@ if (isset($_SESSION['admin_login'])) {
                 if (isset($_POST['submit_search'])) {
                     $search = addslashes($_POST['search']);
                     if (empty($search)) {
-                        $query = "SELECT * FROM service LIMIT $start, $limit";
+                        $query = "SELECT * FROM service ORDER BY serviceID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM service WHERE serviceName LIKE '%$search%' LIMIT $start, $limit";
+                        $query = "SELECT * FROM service WHERE serviceName LIKE '%$search%' ORDER BY serviceID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['search_select'])) {
                     $search_select = addslashes($_POST['search_select']);
                     if (empty($search_select)) {
-                        $query = "SELECT * FROM service LIMIT $start, $limit";
+                        $query = "SELECT * FROM service ORDER BY serviceID DESC LIMIT $start, $limit";
                     } elseif ($search_select == "All") {
-                        $query = "SELECT * FROM service LIMIT $start, $limit";
+                        $query = "SELECT * FROM service ORDER BY serviceID DESC LIMIT $start, $limit";
                     } else {
-                        $query = "SELECT * FROM service WHERE serviceStatus LIKE '$search_select' LIMIT $start, $limit";
+                        $query = "SELECT * FROM service WHERE serviceStatus LIKE '$search_select' ORDER BY serviceID DESC LIMIT $start, $limit";
                     }
                 } elseif (isset($_POST['start_date']) && isset($_POST['end_date'])) {
                     $start_date_format = date("Y-m-d 00:00:00", strtotime($_POST['start_date']));
@@ -200,10 +200,10 @@ if (isset($_SESSION['admin_login'])) {
                     if (empty($start_date_format && $end_date_format)) {
                         echo 'No data';
                     } else {
-                        $query = "SELECT * FROM `service` WHERE `serviceDate` BETWEEN '$start_date_format' AND '$end_date_format' LIMIT $start, $limit";
+                        $query = "SELECT * FROM `service` WHERE `serviceDate` BETWEEN '$start_date_format' AND '$end_date_format' ORDER BY serviceID DESC LIMIT $start, $limit";
                     }
                 } else {
-                    $query = "SELECT * FROM service LIMIT $start, $limit";
+                    $query = "SELECT * FROM service ORDER BY serviceID DESC LIMIT $start, $limit";
                 }
 
                 $result_list = mysqli_query($conn, $query);

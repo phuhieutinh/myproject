@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $serviceID = $_POST['serviceID'];
     $serviceName = $_POST['servicename'];
     $descriptive = $_POST['descriptive'];
-    $serviceStatus = $_POST['status'];
+    $serviceStatus = "Hoạt động";
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $serviceDate = date('Y-m-d H:i:s');
     $auto_start = $_POST['auto_start'];

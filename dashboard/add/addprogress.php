@@ -169,7 +169,7 @@ if (isset($_SESSION['admin_login'])) {
 
                 <li><a href="../../dashboard/service.php" class="service"><img src="../../picture/component/service.png" alt="service">Dịch vụ</a></li>
 
-                <li><a href="" id="progression"><img src="../../picture/component/progression.png" alt="progression">Cấp
+                <li><a href="" id="progression"><img src="../../picture/component/menu/progress.png" alt="progression">Cấp
                         số</a>
                 </li>
 

@@ -271,7 +271,7 @@ if (isset($_SESSION['admin_login'])) {
             <li><a href="../../dashboard/monitor.php" class="monitor"><img src="../../picture/component/monitor.png" alt="monitor">Thiết
                     bị</a></li>
 
-            <li><a href="" id='service'><img src="../../picture/component/service.png" alt="service">Dịch vụ</a></li>
+            <li><a href="" id='service'><img src="../../picture/component/menu/service.png" alt="service">Dịch vụ</a></li>
 
             <li><a href="../../dashboard/progression.php" class="progression"><img src="../../picture/component/progression.png" alt="progression">Cấp
                     số</a>

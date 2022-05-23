@@ -3454,6 +3454,39 @@ div.userlog.date input.userlog.datestart {
     width: 150px;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url(../picture/component/calendar.png) no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+input[type="date"],
+label[type="date"] {
+    width: 86px;
+    height: 24px;
+
+    /* 16/16 Reg */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-200 placeholder */
+
+    color: #A9A9B0;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
 div.userlog img {
     position: absolute;
     left: 50%;
@@ -4046,4 +4079,27 @@ div.circle_progress {
     order: 1;
     flex-grow: 0;
     margin: 0px 24px;
+}
+
+td {
+    /* 14/14 Reg */
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height, or 150% */
+
+
+    /* Gray/$-gray-400 Text */
+
+    color: #535261;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
 }
