@@ -2694,11 +2694,11 @@ th.end {
     border-top-right-radius: 12px;
 }
 
-td#start {
+tr:last-child td:first-child {
     border-bottom-left-radius: 12px;
 }
 
-td#end {
+tr:last-child td:last-child {
     border-bottom-right-radius: 12px;
 }
 
@@ -2710,7 +2710,7 @@ td {
     text-align: left;
 
     align-items: center;
-    padding: 0px 5px;
+    padding: 0px 0px;
     height: 49px;
 }
 
@@ -4102,4 +4102,8 @@ td {
     flex: none;
     order: 0;
     flex-grow: 0;
+}
+
+hr {
+    border: 1px solid #DCDDFD;
 }

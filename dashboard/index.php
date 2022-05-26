@@ -43,11 +43,7 @@ if (isset($_SESSION['admin_login'])) {
         $query_sum_stt = mysqli_query($conn, "SELECT Day(`sellDate`) AS 'date',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY Day(`sellDate`)");
     }
 
-    // $query_sum_stt = mysqli_query($conn, "SELECT Day(`sellDate`) AS 'day',COUNT(*) AS 'count_progressID' FROM `progression` GROUP BY Day(`sellDate`)");
-
     while ($row_sum_stt = mysqli_fetch_array($query_sum_stt)) {
-        // $sell_date = date_create($row['sellDate']);
-        // $sell_date_format = date_format($sell_date, "d/m/Y");
         $count_progressID = $row_sum_stt['count_progressID'];
         $day = $row_sum_stt['date'];
 
@@ -250,7 +246,19 @@ if (isset($_SESSION['admin_login'])) {
                         <p>Xem theo</p>
                         <form action="" method="POST">
                             <select name="search_select" id="date_chart" onchange="form.submit()">
-                                <option value="" disabled selected style="display: none;">Ngày</option>
+                                <?php
+                                if (isset($_POST['search_select'])) {
+                                    if ($search_select == "day") {
+                                        echo '<option value="" disabled selected style="display: none;">Ngày</option>';
+                                    } elseif ($search_select == "week") {
+                                        echo '<option value="" disabled selected style="display: none;">Tuần</option>';
+                                    } elseif ($search_select == "month") {
+                                        echo '<option value="" disabled selected style="display: none;">Tháng</option>';
+                                    }
+                                } else {
+                                    echo '<option value="" disabled selected style="display: none;">Ngày</option>';
+                                }
+                                ?>
                                 <option value="day">Ngày</option>
                                 <option value="week">Tuần</option>
                                 <option value="month">Tháng</option>
@@ -373,7 +381,76 @@ if (isset($_SESSION['admin_login'])) {
                 </div>
             </div>
 
-            <div id="inline_cal"></div>
+            <div id="inline_cal">
+                <div class="rd-container" style="display: inline-block; z-index: 99;">
+                    <div class="rd-date">
+                        <div class="rd-month"><button class="rd-back" type="button"></button><button class="rd-next" type="button"></button>
+                            <div class="rd-month-label">May 2022</div>
+                            <hr>
+                            <table class="rd-days">
+                                <thead class="rd-days-head">
+                                    <tr class="rd-days-row">
+                                        <th class="rd-day-head">Su</th>
+                                        <th class="rd-day-head">Mo</th>
+                                        <th class="rd-day-head">Tu</th>
+                                        <th class="rd-day-head">We</th>
+                                        <th class="rd-day-head">Th</th>
+                                        <th class="rd-day-head">Fr</th>
+                                        <th class="rd-day-head">Sa</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="rd-days-body" data-rome-offset="0">
+                                    <tr class="rd-days-row">
+                                        <td class="rd-day-body">01</td>
+                                        <td class="rd-day-body">02</td>
+                                        <td class="rd-day-body">03</td>
+                                        <td class="rd-day-body">04</td>
+                                        <td class="rd-day-body">05</td>
+                                        <td class="rd-day-body">06</td>
+                                        <td class="rd-day-body">07</td>
+                                    </tr>
+                                    <tr class="rd-days-row">
+                                        <td class="rd-day-body">08</td>
+                                        <td class="rd-day-body">09</td>
+                                        <td class="rd-day-body">10</td>
+                                        <td class="rd-day-body">11</td>
+                                        <td class="rd-day-body">12</td>
+                                        <td class="rd-day-body">13</td>
+                                        <td class="rd-day-body">14</td>
+                                    </tr>
+                                    <tr class="rd-days-row">
+                                        <td class="rd-day-body">15</td>
+                                        <td class="rd-day-body">16</td>
+                                        <td class="rd-day-body">17</td>
+                                        <td class="rd-day-body">18</td>
+                                        <td class="rd-day-body">19</td>
+                                        <td class="rd-day-body">20</td>
+                                        <td class="rd-day-body">21</td>
+                                    </tr>
+                                    <tr class="rd-days-row">
+                                        <td class="rd-day-body">22</td>
+                                        <td class="rd-day-body">23</td>
+                                        <td class="rd-day-body rd-day-selected">24</td>
+                                        <td class="rd-day-body">25</td>
+                                        <td class="rd-day-body">26</td>
+                                        <td class="rd-day-body">27</td>
+                                        <td class="rd-day-body">28</td>
+                                    </tr>
+                                    <tr class="rd-days-row">
+                                        <td class="rd-day-body">29</td>
+                                        <td class="rd-day-body">30</td>
+                                        <td class="rd-day-body">31</td>
+                                        <td class="rd-day-body rd-day-next-month">01</td>
+                                        <td class="rd-day-body rd-day-next-month">02</td>
+                                        <td class="rd-day-body rd-day-next-month">03</td>
+                                        <td class="rd-day-body rd-day-next-month">04</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     <?php
 } else if (isset($_SESSION['user_login'])) {
